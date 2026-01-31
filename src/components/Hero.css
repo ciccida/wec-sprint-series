@@ -1,0 +1,192 @@
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.8) 70%, #050505 100%),
+        radial-gradient(circle at center, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+    letter-spacing: 0.3em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeInDown 1s ease forwards 0.5s;
+}
+
+.title {
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    animation: zoomIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.title .wec {
+    color: #fff;
+    /* Metallic styling could be applied here */
+    font-style: italic;
+}
+
+.title .series {
+    color: var(--color-primary);
+    text-shadow: 0 0 15px var(--color-primary-glow);
+}
+
+.description {
+    font-size: 1.2rem;
+    color: var(--color-text-dim);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 0.8s;
+    line-height: 1.8;
+}
+
+.join-text {
+    display: inline-block;
+    /* Changed to inline-block to respect text flow but allow padding if needed */
+    margin-top: 1rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 1.1em;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.join-text:hover {
+    text-shadow: 0 0 10px var(--color-primary-glow);
+    border-bottom-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.cta-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards 1s;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #fff;
+    color: var(--color-primary);
+    box-shadow: 0 0 20px var(--color-primary-glow);
+    transform: scale(1.05);
+    /* Added scale for better feedback */
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+}

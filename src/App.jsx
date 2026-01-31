@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import LatestVideos from './components/LatestVideos';
 import TwitterFeed from './components/TwitterFeed';
+import Calculator from './components/Calculator';
 import About from './components/About';
 import Sponsors from './components/Sponsors';
 import Footer from './components/Footer';
@@ -14,6 +15,9 @@ function App() {
             <Hero />
             <TwitterFeed />
             <LatestVideos />
+            <section id="calculator">
+                <Calculator />
+            </section>
             <About />
             <Sponsors />
             <Footer />

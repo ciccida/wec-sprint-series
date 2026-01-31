@@ -20,8 +20,8 @@ const Navbar = () => {
                 </a>
                 <ul className="nav-links">
                     <li><a href="#news">最新ニュース</a></li>
-                    <li><a href="#about">概要</a></li>
                     <li><a href="#latest">最新の配信</a></li>
+                    <li><a href="#about">概要</a></li>
                     <li className="header-sponsors">
                         <span className="supported-by">SUPPORTED BY:</span>
                         <a href="https://www.endless-sport.co.jp/" target="_blank" rel="noopener noreferrer">

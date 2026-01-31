@@ -12,7 +12,7 @@ const About = () => {
                         <div className="about-divider"></div>
                         <p>WEC Sprint Seriesは、レースシミュレーター<span className="nowrap">「Le Mans Ultimate」</span>を使用した日本国内のシリーズ戦およびコミュニティ</p>
                         <p>初心者から上級者まで、モータースポーツを愛する全てのドライバーが公平かつ熱いバトルを楽しめる環境を提供</p>
-                        <p>HypercarやLMGT3など、複数クラス混走による、WEC世界耐久選手権さながらの戦略的かつダイナミックなレース体験。<br />全戦YouTubeでの実況・解説付き生配信を実施し、バーチャルモータースポーツの新たな熱狂を創造します。</p>
+                        <p>HypercarやLMGT3など、最新マシンを駆る、WEC世界耐久選手権さながらの戦略的かつダイナミックなレース体験。<br />全戦YouTubeでの実況・解説付き生配信を実施し、バーチャルモータースポーツの新たな熱狂を創造します。</p>
                     </div>
                 </div>
             </div>

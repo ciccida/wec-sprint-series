@@ -11,28 +11,36 @@
 }
 
 .ranking-header h2 {
+    font-family: var(--font-display);
     font-size: 3rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, #ff3e3e, #ff8c00);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--color-primary);
 }
 
 .ranking-header p {
-    color: #a0a0a0;
+    color: var(--color-text-dim);
     font-size: 1.1rem;
+    font-family: var(--font-display);
 }
 
 .table-responsive {
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 600px;
     background: rgba(20, 20, 20, 0.8);
     border-radius: 12px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Make header sticky during vertical scroll */
+.ranking-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .ranking-table {
@@ -44,7 +52,7 @@
 
 .ranking-table th,
 .ranking-table td {
-    padding: 1.2rem 1rem;
+    padding: 1rem 1rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -76,11 +84,6 @@
 .driver-name {
     font-weight: 600;
     min-width: 150px;
-}
-
-.team-name {
-    color: #a0a0a0;
-    min-width: 120px;
 }
 
 .round-col {

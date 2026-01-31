@@ -24,7 +24,7 @@ const LatestVideos = () => {
                         <a href="https://www.youtube.com/@WECSS81/videos" target="_blank" className="video-card full-height">
                             <div className="card-content">
                                 <h3>動画一覧</h3>
-                                <p>過去のレースや企画動画はこちら</p>
+                                <p>過去のレースハイライトなどはこちら</p>
                             </div>
                             <div className="card-bg" style={{ background: 'linear-gradient(45deg, #eee, #999)' }}></div>
                         </a>

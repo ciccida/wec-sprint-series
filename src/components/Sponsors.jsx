@@ -13,7 +13,7 @@ const Sponsors = () => {
                         <img src="/assets/sponsor-endless.png" alt="ENDLESS" />
                     </div>
                     <div className="sponsor-card huge">
-                        <img src="/assets/sponsor-logo2.png" alt="Partner" />
+                        <img src="/assets/sponsor-partner.png" alt="Partner" />
                     </div>
                 </div>
             </div>

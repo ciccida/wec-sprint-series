@@ -17,7 +17,7 @@ const Hero = () => {
                     </h1>
                     <p className="description">
                         日本国内最大の「Le Mans Ultimate」コミュニティが贈る、<br />最高峰の耐久スプリントシリーズ。<br />
-                        HypercarやLMGT3など、最新のWECマシンによる熱きバトルがここに。
+                        HypercarやLMGT3など、WEC公式マシンによる熱きバトルがここに。
                     </p>
                     <div className="cta-group">
                         <a href="https://www.youtube.com/@WECSS81" target="_blank" rel="noopener noreferrer" className="btn-primary">

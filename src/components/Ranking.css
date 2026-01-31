@@ -1,0 +1,157 @@
+.ranking-container {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+.ranking-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.ranking-header h2 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #ff3e3e, #ff8c00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ranking-header p {
+    color: #a0a0a0;
+    font-size: 1.1rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.ranking-table th,
+.ranking-table td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ranking-table th {
+    background: rgba(30, 30, 30, 0.9);
+    color: #ff3e3e;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.ranking-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.sticky-col {
+    position: sticky;
+    left: 0;
+    background: inherit;
+    z-index: 1;
+}
+
+.pos {
+    font-weight: 800;
+    width: 50px;
+    text-align: center;
+}
+
+.driver-name {
+    font-weight: 600;
+    min-width: 150px;
+}
+
+.team-name {
+    color: #a0a0a0;
+    min-width: 120px;
+}
+
+.round-col {
+    text-align: center;
+    min-width: 60px;
+}
+
+.point-val {
+    text-align: center;
+    color: #d1d1d1;
+}
+
+.total-col {
+    text-align: center;
+    background: rgba(40, 40, 40, 0.5) !important;
+}
+
+.total-val {
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #ffffff;
+    background: rgba(40, 40, 40, 0.5);
+}
+
+/* Podium Styles */
+.top-1 .pos {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+/* Gold */
+.top-2 .pos {
+    color: #c0c0c0;
+    font-size: 1.1rem;
+}
+
+/* Silver */
+.top-3 .pos {
+    color: #cd7f32;
+    font-size: 1.1rem;
+}
+
+/* Bronze */
+
+.top-1 {
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.top-2 {
+    background: rgba(192, 192, 192, 0.05);
+}
+
+.top-3 {
+    background: rgba(205, 127, 50, 0.05);
+}
+
+.ranking-footer {
+    margin-top: 1.5rem;
+    text-align: right;
+    color: #666;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .ranking-table {
+        font-size: 0.85rem;
+    }
+
+    .ranking-header h2 {
+        font-size: 2rem;
+    }
+}

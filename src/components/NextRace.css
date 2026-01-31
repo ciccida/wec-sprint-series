@@ -95,6 +95,7 @@
     line-height: 1.6;
     margin-bottom: 2rem;
     color: #ccc;
+    white-space: pre-line;
 }
 
 .btn-broadcast {

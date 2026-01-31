@@ -53,9 +53,10 @@ const TwitterFeed = () => {
                     </a>
 
                     {/* Fallback link if script fails heavily (e.g. adblock) */}
-                    <div className="fallback-link" style={{ marginTop: '1rem' }}>
-                        <a href="https://twitter.com/series27228" target="_blank" rel="noopener noreferrer" style={{ color: '#888', fontSize: '0.8rem' }}>
-                            表示されない場合はこちら
+                    <div className="fallback-link">
+                        <p className="fallback-text">タイムラインが表示されない場合</p>
+                        <a href="https://twitter.com/series27228" target="_blank" rel="noopener noreferrer" className="btn-twitter-fallback">
+                            公式X (Twitter) を開く
                         </a>
                     </div>
                 </div>

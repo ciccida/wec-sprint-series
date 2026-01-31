@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './TwitterFeed.css';
+import NextRace from './NextRace';
 
 const TwitterFeed = () => {
     const wrapperRef = useRef(null);
@@ -41,6 +42,10 @@ const TwitterFeed = () => {
         <section id="news" className="section twitter-feed">
             <div className="container">
                 <h2 className="section-title">最新ニュース</h2>
+
+                {/* Next Race Information Section */}
+                <NextRace />
+
                 <div className="twitter-embed-wrapper" ref={wrapperRef} style={{ minHeight: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
                     {/* The anchor tag that Twitter's script converts into a widget */}

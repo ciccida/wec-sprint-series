@@ -16,8 +16,8 @@ const Hero = () => {
                         <span className="wec">WEC</span> Sprint <span className="series">Series</span>
                     </h1>
                     <p className="description">
-                        日本国内最大の「Le Mans Ultimate」コミュニティが贈る、最高峰の耐久スプリントシリーズ。<br />
-                        Hypercar、LMP2、GTEの3クラス混走による熱きバトルがここに。
+                        日本国内最大の「Le Mans Ultimate」コミュニティが贈る、<br />最高峰の耐久スプリントシリーズ。<br />
+                        HypercarやLMGT3など、複数クラス混走による熱きバトルがここに。
                     </p>
                     <div className="cta-group">
                         <a href="https://www.youtube.com/@WECSS81" target="_blank" rel="noopener noreferrer" className="btn-primary">

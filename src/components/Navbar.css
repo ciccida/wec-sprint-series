@@ -82,20 +82,18 @@
     display: flex;
     align-items: center;
     height: 30px;
-    opacity: 0.8;
-    transition: opacity 0.3s;
+    transition: transform 0.3s;
 }
 
 .header-sponsors a:hover {
-    opacity: 1;
+    transform: scale(1.05);
 }
 
 .header-sponsors img {
     height: 100%;
     width: auto;
     object-fit: contain;
-    filter: brightness(0) invert(1);
-    /* Make logos white for header */
+    /* Full color - no filter */
 }
 
 @media (max-width: 1024px) {

@@ -20,9 +20,17 @@ const Navbar = () => {
                 </a>
                 <ul className="nav-links">
                     <li><a href="#about">概要</a></li>
-                    <li><a href="#partner">パートナー</a></li>
                     <li><a href="#latest">最新の配信</a></li>
                     <li><a href="#news">最新ニュース</a></li>
+                    <li className="header-sponsors">
+                        <span className="supported-by">SUPPORTED BY:</span>
+                        <a href="https://www.endless-sport.co.jp/" target="_blank" rel="noopener noreferrer">
+                            <img src="/assets/sponsor-endless.png" alt="ENDLESS" />
+                        </a>
+                        <a href="https://jp.pimax.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="/assets/sponsor-partner.png" alt="Pimax" />
+                        </a>
+                    </li>
                     <li>
                         <a href="https://www.youtube.com/@WECSS81" target="_blank" rel="noopener noreferrer" className="btn-social">
                             YouTube

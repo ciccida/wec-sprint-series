@@ -61,3 +61,46 @@
     transform: translateY(-2px);
     box-shadow: 0 0 15px var(--color-primary-glow);
 }
+
+.header-sponsors {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.supported-by {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.header-sponsors a {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.header-sponsors a:hover {
+    opacity: 1;
+}
+
+.header-sponsors img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    /* Make logos white for header */
+}
+
+@media (max-width: 1024px) {
+    .header-sponsors {
+        display: none;
+        /* Hide on mobile/tablet to save space */
+    }
+}

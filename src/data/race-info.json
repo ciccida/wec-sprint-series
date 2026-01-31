@@ -1,9 +1,9 @@
 {
-    "round": "Round 1",
-    "circuit": "Sebring International Raceway",
-    "date": "2026.02.15 (Sun)",
-    "time": "21:00 JST Start",
-    "description": "2026年シリーズ開幕戦。伝統のセブリングで新たなシーズンの幕が開ける。",
-    "image": "/assets/hero-bg.png",
-    "broadcastLink": "https://youtube.com/live/placeholder"
+    "round": "Round 2",
+    "circuit": "IMOLA",
+    "date": "2026.01.31 (SAT)",
+    "time": "22:00 (JST)-",
+    "description": "WEC Sprint Series Vol.2 Round 2。高速と技巧が求められるイモラ・サーキットでの激戦。",
+    "image": "/assets/next-race.jpg",
+    "broadcastLink": "https://youtube.com/live/Qvt1B0t0Q9M"
 }

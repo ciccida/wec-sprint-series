@@ -13,8 +13,8 @@ function App() {
             <Navbar />
             <Hero />
             <TwitterFeed />
-            <About />
             <LatestVideos />
+            <About />
             <Sponsors />
             <Footer />
         </>

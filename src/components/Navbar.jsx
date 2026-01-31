@@ -20,6 +20,7 @@ const Navbar = () => {
                 </a>
                 <ul className="nav-links">
                     <li><a href="#about">概要</a></li>
+                    <li><a href="#partner">パートナー</a></li>
                     <li><a href="#latest">最新の配信</a></li>
                     <li><a href="#news">最新ニュース</a></li>
                     <li>

@@ -13,9 +13,9 @@ function App() {
             <Navbar />
             <Hero />
             <About />
-            <Sponsors />
             <LatestVideos />
             <TwitterFeed />
+            <Sponsors />
             <Footer />
         </>
     );

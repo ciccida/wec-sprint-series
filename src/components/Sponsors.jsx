@@ -3,7 +3,7 @@ import './Sponsors.css';
 
 const Sponsors = () => {
     return (
-        <section className="section sponsors-section">
+        <section id="partner" className="section sponsors-section">
             <div className="container">
                 <h2 className="section-title">Partner</h2>
                 <p className="sponsors-subtitle">シリーズを支える公認パートナー</p>

@@ -1,143 +1,65 @@
 .twitter-feed {
     padding: var(--spacing-xl) 0;
-    background-color: var(--color-bg);
-    background-image: radial-gradient(circle at top right, rgba(255, 0, 60, 0.05) 0%, transparent 40%);
 }
 
-.twitter-embed-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.02);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+.twitter-cta-wrapper {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: rgba(29, 155, 240, 0.05);
+    border-radius: 20px;
+    border: 1px dashed rgba(29, 155, 240, 0.3);
+    margin-top: 1rem;
     position: relative;
     overflow: hidden;
 }
 
-.loading-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    color: var(--color-text-dim);
-}
-
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    border-top-color: var(--color-primary);
-    animation: spin 1s ease-in-out infinite;
-    margin-bottom: 1rem;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.fallback-overlay {
+.twitter-cta-wrapper::before {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    animation: fadeIn 0.5s ease;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: var(--color-primary);
+    filter: blur(80px);
+    opacity: 0.1;
+    z-index: -1;
 }
 
-.fallback-overlay p {
-    margin-bottom: 1.5rem;
-    color: #fff;
+.cta-description {
+    color: var(--color-text-dim);
+    margin-bottom: 2rem;
     font-size: 1.1rem;
-}
-
-.btn-social-fallback {
-    background: var(--color-text);
-    color: #000;
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    font-weight: 700;
-    transition: all 0.3s;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-.btn-social-fallback:hover {
-    background: var(--color-primary);
+.btn-twitter-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #1d9bf0;
     color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px var(--color-primary-glow);
-}
-
-.twitter-direct-link {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: var(--color-text-dim);
-    border-bottom: 1px solid transparent;
-    transition: all 0.3s;
-}
-
-.twitter-direct-link:hover {
-    color: var(--color-primary);
-    border-bottom-color: var(--color-primary);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.fallback-link {
-    margin-top: 2rem;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
-
-.fallback-text {
-    color: var(--color-text-dim);
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-.btn-twitter-fallback {
-    display: inline-block;
-    background: transparent;
-    border: 1px solid var(--color-text);
-    color: var(--color-text);
-    padding: 0.8rem 2rem;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    padding: 1.2rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.2rem;
     text-decoration: none;
-    font-size: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(29, 155, 240, 0.3);
 }
 
-.btn-twitter-fallback:hover {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px var(--color-primary-glow);
+.btn-twitter-primary:hover {
+    background: #fff;
+    color: #1d9bf0;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(29, 155, 240, 0.5);
+}
+
+@media (max-width: 768px) {
+    .btn-twitter-primary {
+        width: 100%;
+        justify-content: center;
+        font-size: 1.1rem;
+    }
 }

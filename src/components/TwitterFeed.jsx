@@ -25,5 +25,3 @@ const TwitterFeed = () => {
 };
 
 export default TwitterFeed;
-
-export default TwitterFeed;

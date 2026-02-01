@@ -1,0 +1,150 @@
+.schedule-container {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+    color: #e0e0e0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.schedule-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+/* Schedule Table - BLUE GRID DESIGN */
+.schedule-table {
+    flex: 2;
+    min-width: 400px;
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    table-layout: fixed;
+    /* STRICT alignment */
+}
+
+/* Headers */
+.schedule-table th {
+    background: rgba(0, 0, 0, 0.5);
+    /* Dark transparent header */
+    color: #4facfe;
+    /* Blue accent text */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Stronger border */
+    border-bottom: 2px solid #4facfe;
+    /* Blue accent bottom border */
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Cells */
+.schedule-table td {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Stronger grid borders */
+    color: #e0e0e0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 700;
+    /* BOLD TEXT */
+}
+
+/* Strict widths matching the image feel */
+/* Round: Slightly wider to accommodate "Round1" */
+.schedule-table th:nth-child(1),
+.schedule-table td:nth-child(1) {
+    width: 25%;
+    text-align: center;
+}
+
+/* Date: Narrow */
+.schedule-table th:nth-child(2),
+.schedule-table td:nth-child(2) {
+    width: 20%;
+    text-align: center;
+}
+
+/* Venue: Wide */
+.schedule-table th:nth-child(3),
+.schedule-table td:nth-child(3) {
+    width: 55%;
+    text-align: left;
+    padding-left: 1.5rem;
+}
+
+/* Points System */
+.points-system-container {
+    flex: 1;
+    min-width: 250px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.points-system-container h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #4facfe;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    background: transparent;
+    padding: 0;
+}
+
+.points-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.points-table th {
+    background: rgba(0, 0, 0, 0.2);
+    color: #4facfe;
+    border-bottom: 2px solid #4facfe;
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.points-table td {
+    padding: 0.8rem;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    text-align: center;
+    font-weight: 700;
+    /* BOLD TEXT */
+}
+
+.points-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Uniform Row Styling */
+.schedule-row:hover,
+.points-table tbody tr:hover {
+    background: rgba(79, 172, 254, 0.15);
+    /* Blue hover tint */
+}
+
+@media (max-width: 768px) {
+    .schedule-content {
+        flex-direction: column;
+    }
+}

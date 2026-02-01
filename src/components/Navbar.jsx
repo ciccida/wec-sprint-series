@@ -21,6 +21,8 @@ const Navbar = () => {
                 <ul className="nav-links">
                     <li><a href="#news">最新ニュース</a></li>
                     <li><a href="#latest">最新の配信</a></li>
+                    <li><a href="#schedule">スケジュール & ポイント</a></li>
+                    <li><a href="#results">レース結果</a></li>
                     <li><a href="#ranking">ランキング</a></li>
                     <li><a href="#about">概要</a></li>
                     <li><a href="#calculator" className="accent" style={{ fontWeight: 'bold' }}>PIT CALC (TRIAL)</a></li>

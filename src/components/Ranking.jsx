@@ -7,9 +7,19 @@ const Ranking = () => {
     const sortedRanking = rankingData
         .map(driver => ({
             ...driver,
-            totalPoints: driver.points.reduce((sum, p) => sum + p, 0)
+            totalPoints: driver.points.reduce((sum, p) => sum + (p || 0), 0)
         }))
         .sort((a, b) => b.totalPoints - a.totalPoints);
+
+    // Identify which rounds are "finished" (i.e., have at least one valid point entry)
+    const finishedRounds = new Set();
+    rankingData.forEach(driver => {
+        driver.points.forEach((p, index) => {
+            if (p !== null) {
+                finishedRounds.add(index);
+            }
+        });
+    });
 
     return (
         <div className="ranking-container">
@@ -37,11 +47,15 @@ const Ranking = () => {
                             <tr key={driver.id} className={index < 3 ? `top-${index + 1}` : ''}>
                                 <td className="sticky-col pos">{index + 1}</td>
                                 <td className="sticky-col driver-name">{driver.name}</td>
-                                {driver.points.map((p, i) => (
-                                    <td key={i} className="point-val">
-                                        {p > 0 ? p : '-'}
-                                    </td>
-                                ))}
+                                {driver.points.map((p, i) => {
+                                    // If round is finished but points are null, show 0
+                                    const displayValue = p !== null ? p : (finishedRounds.has(i) ? 0 : '-');
+                                    return (
+                                        <td key={i} className="point-val">
+                                            {displayValue}
+                                        </td>
+                                    );
+                                })}
                                 <td className="total-val">{driver.totalPoints}</td>
                             </tr>
                         ))}

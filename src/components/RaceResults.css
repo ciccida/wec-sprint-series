@@ -1,0 +1,62 @@
+.race-results-container {
+    padding: 2rem 0;
+}
+
+.category-section {
+    margin-bottom: 3rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.category-title.hypercar {
+    border-color: #ff3e3e;
+    background: linear-gradient(90deg, rgba(255, 62, 62, 0.1) 0%, transparent 100%);
+}
+
+.category-title.lmgt3 {
+    border-color: #3e93ff;
+    background: linear-gradient(90deg, rgba(62, 147, 255, 0.1) 0%, transparent 100%);
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.results-table th,
+.results-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.results-table th {
+    background: rgba(255, 255, 255, 0.07);
+    color: #aaa;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.results-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.results-table td {
+    font-size: 0.95rem;
+}
+
+.results-table td:first-child {
+    font-weight: bold;
+    color: #fff;
+}

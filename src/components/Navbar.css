@@ -20,6 +20,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
+    white-space: nowrap;
+    /* Force 1 line */
 }
 
 .logo img {
@@ -30,17 +34,23 @@
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.2rem;
+    /* Reduced gap to fit more items */
     align-items: center;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
 }
 
 .nav-links a {
     font-family: var(--font-display);
-    font-size: 0.9rem;
+    font-size: clamp(0.7rem, 1vw, 0.9rem);
+    /* Dynamic font size to prevent wrap */
     font-weight: 600;
     text-transform: uppercase;
     color: var(--color-text);
     position: relative;
+    white-space: nowrap;
+    /* Force 1 line text */
 }
 
 .nav-links a:hover {

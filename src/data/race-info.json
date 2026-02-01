@@ -1,9 +1,9 @@
 {
-    "round": "Round 2",
-    "circuit": "IMOLA",
-    "date": "2026.01.31 (SAT)",
+    "round": "Round 3",
+    "circuit": "Spa-Francorchamps",
+    "date": "2026.02.14 (SAT)",
     "time": "22:00 (JST)-",
-    "description": "WEC Sprint Series Vol.2 Round 2。\n高速と技巧が求められるイモラ・サーキットでの激戦。",
-    "image": "/assets/next-race.jpg",
-    "broadcastLink": "https://youtube.com/live/Qvt1B0t0Q9M"
+    "description": "WEC Sprint Series Vol.2 Round 3。\n世界屈指の高速サーキット、スパ・フランコルシャン。\nオールージュを駆け上がるLMGT3とハイパーカーの混走バトルは必見！",
+    "image": "/assets/round3-spa.jpg",
+    "broadcastLink": "https://www.youtube.com/@WECSS81"
 }

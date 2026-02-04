@@ -1,6 +1,5 @@
 import React from 'react';
 import './LatestVideos.css';
-import { Youtube } from 'lucide-react';
 
 const LatestVideos = () => {
     return (
@@ -8,16 +7,19 @@ const LatestVideos = () => {
             <div className="container">
                 <h2 className="section-title">最新の配信</h2>
                 <div className="video-grid">
-                    {/* Main card linking to the Live/Streams tab */}
-                    <a href="https://www.youtube.com/@WECSS81/streams" target="_blank" rel="noopener noreferrer" className="video-main-link">
-                        <div className="video-main-content">
-                            <Youtube size={64} color="#ff003c" />
-                            <h3>最新の配信をチェック</h3>
-                            <p>WEC Sprint Seriesの熱戦をリアルタイム・アーカイブで視聴</p>
-                            <span className="visit-btn">配信ページへ移動</span>
+                    {/* Main card with Embedded Player */}
+                    <div className="video-main">
+                        <div className="video-embed-container">
+                            <iframe
+                                src="https://www.youtube.com/embed/4rNMHaPTm9o?si=q8z8-Z4U4-0"
+                                title="WEC Sprint Series Round 1 Highlights"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
                         </div>
-                        <div className="video-main-bg"></div>
-                    </a>
+                        <h3>ハイライト - Round 1 Lusail</h3>
+                    </div>
 
                     <div className="video-links">
                         {/* Secondary card for general video list */}

@@ -32,7 +32,7 @@ const TwitterFeed = () => {
                         time="22:00 (JST)-"
                         image="/assets/weather-setting-stream.jpg"
                         description={"次戦スパの天候と路面コンジションを決める運命の抽選会。\n雨か晴れか、それとも嵐か？レースの行方を左右する瞬間を見逃すな！"}
-                        link="https://youtube.com/live/05KBEwDr8pY?feature=share"
+                        link="https://www.youtube.com/live/lD7h33xK08A"
                         linkText="配信リマインダーを設定"
                     />
                 </div>

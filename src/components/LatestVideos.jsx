@@ -19,7 +19,7 @@ const LatestVideos = () => {
                                 allowFullScreen
                             ></iframe>
                         </div>
-                        <h3>最新ハイライト</h3>
+                        <h3>ハイライト - Round 2 IMOLA</h3>
                     </div>
 
                     <div className="video-links">

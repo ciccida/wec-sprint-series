@@ -256,7 +256,7 @@ export const rankingData = [
         "name": "KH-KMS",
         "points": [
             null,
-            null,
+            4,
             null,
             null,
             null,

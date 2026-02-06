@@ -45,7 +45,7 @@ export const rankingData = [
         "id": 4,
         "name": "TOMOYA ONODERA",
         "points": [
-            18,
+            10,
             8,
             null,
             null,
@@ -185,7 +185,7 @@ export const rankingData = [
         "id": 14,
         "name": "momigi tetuo",
         "points": [
-            null,
+            6,
             8,
             null,
             null,
@@ -213,7 +213,7 @@ export const rankingData = [
         "id": 16,
         "name": "S Shippou",
         "points": [
-            null,
+            2,
             null,
             null,
             null,
@@ -227,7 +227,7 @@ export const rankingData = [
         "id": 17,
         "name": "kaeru uenchu",
         "points": [
-            null,
+            1,
             2,
             null,
             null,

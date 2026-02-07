@@ -14,10 +14,17 @@
 }
 
 .news-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: center;
     gap: 2rem;
     margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.news-grid>* {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
 }
 
 @media (max-width: 768px) {

@@ -25,6 +25,7 @@ const TwitterFeed = () => {
                     />
 
                     {/* Card 2: Environment Setting Stream */}
+                    {/*
                     <GenericNewsCard
                         label="SPECIAL STREAM"
                         title="天候環境設定配信 Round 3 Spa"
@@ -35,6 +36,7 @@ const TwitterFeed = () => {
                         link="https://www.youtube.com/live/lD7h33xK08A"
                         linkText="配信リマインダーを設定"
                     />
+                    */}
                 </div>
 
                 <div className="twitter-cta-wrapper">

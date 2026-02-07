@@ -45,7 +45,7 @@ export const rankingData = [
         "id": 4,
         "name": "TOMOYA ONODERA",
         "points": [
-            10,
+            18,
             8,
             null,
             null,

@@ -5,7 +5,7 @@ export const rankingData = [
         "points": [
             25,
             25,
-            null,
+            18,
             null,
             null,
             null,
@@ -19,7 +19,7 @@ export const rankingData = [
         "points": [
             25,
             25,
-            null,
+            2,
             null,
             null,
             null,
@@ -33,7 +33,7 @@ export const rankingData = [
         "points": [
             18,
             null,
-            null,
+            15,
             null,
             null,
             null,
@@ -47,7 +47,7 @@ export const rankingData = [
         "points": [
             18,
             8,
-            null,
+            6,
             null,
             null,
             null,
@@ -75,7 +75,7 @@ export const rankingData = [
         "points": [
             15,
             12,
-            null,
+            0,
             null,
             null,
             null,
@@ -89,7 +89,7 @@ export const rankingData = [
         "points": [
             12,
             null,
-            null,
+            12,
             null,
             null,
             null,
@@ -103,7 +103,7 @@ export const rankingData = [
         "points": [
             12,
             6,
-            null,
+            8,
             null,
             null,
             null,
@@ -131,7 +131,7 @@ export const rankingData = [
         "points": [
             10,
             6,
-            null,
+            4,
             null,
             null,
             null,
@@ -145,7 +145,7 @@ export const rankingData = [
         "points": [
             8,
             null,
-            null,
+            12,
             null,
             null,
             null,
@@ -159,7 +159,7 @@ export const rankingData = [
         "points": [
             8,
             null,
-            null,
+            0,
             null,
             null,
             null,
@@ -201,7 +201,7 @@ export const rankingData = [
         "points": [
             4,
             null,
-            null,
+            1,
             null,
             null,
             null,
@@ -229,7 +229,7 @@ export const rankingData = [
         "points": [
             1,
             2,
-            null,
+            0,
             null,
             null,
             null,
@@ -257,7 +257,7 @@ export const rankingData = [
         "points": [
             null,
             4,
-            null,
+            6,
             null,
             null,
             null,
@@ -271,7 +271,7 @@ export const rankingData = [
         "points": [
             null,
             null,
-            null,
+            0,
             null,
             null,
             null,
@@ -285,7 +285,7 @@ export const rankingData = [
         "points": [
             null,
             18,
-            null,
+            1,
             null,
             null,
             null,
@@ -327,7 +327,7 @@ export const rankingData = [
         "points": [
             null,
             15,
-            null,
+            25,
             null,
             null,
             null,
@@ -341,7 +341,7 @@ export const rankingData = [
         "points": [
             null,
             12,
-            null,
+            15,
             null,
             null,
             null,
@@ -355,7 +355,7 @@ export const rankingData = [
         "points": [
             null,
             15,
-            null,
+            25,
             null,
             null,
             null,
@@ -369,7 +369,7 @@ export const rankingData = [
         "points": [
             null,
             null,
-            null,
+            10,
             null,
             null,
             null,
@@ -411,7 +411,7 @@ export const rankingData = [
         "points": [
             null,
             null,
-            null,
+            10,
             null,
             null,
             null,
@@ -425,7 +425,7 @@ export const rankingData = [
         "points": [
             null,
             1,
-            null,
+            4,
             null,
             null,
             null,
@@ -439,7 +439,7 @@ export const rankingData = [
         "points": [
             null,
             4,
-            null,
+            8,
             null,
             null,
             null,
@@ -453,7 +453,7 @@ export const rankingData = [
         "points": [
             null,
             null,
-            null,
+            2,
             null,
             null,
             null,
@@ -467,7 +467,7 @@ export const rankingData = [
         "points": [
             null,
             null,
-            null,
+            0,
             null,
             null,
             null,
@@ -481,7 +481,7 @@ export const rankingData = [
         "points": [
             null,
             10,
-            null,
+            18,
             null,
             null,
             null,
@@ -495,7 +495,7 @@ export const rankingData = [
         "points": [
             null,
             10,
-            null,
+            0,
             null,
             null,
             null,

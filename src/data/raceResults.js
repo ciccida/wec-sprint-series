@@ -660,7 +660,7 @@ export const raceResults = {
             "team": "KH-AE KMS",
             "car": "#86 Porsche 963",
             "category": "Hypercar",
-            "time": "Fuel",
+            "time": "DNF",
             "gap": "-",
             "best": "2:20.649"
         },
@@ -670,7 +670,7 @@ export const raceResults = {
             "team": "Shingen Mochi",
             "car": "#3 Ferrari 499P",
             "category": "Hypercar",
-            "time": "Accident",
+            "time": "DNF",
             "gap": "-",
             "best": "2:25.396"
         },
@@ -680,7 +680,7 @@ export const raceResults = {
             "team": "Touya Sougetsu",
             "car": "#753 Porsche 963",
             "category": "Hypercar",
-            "time": "Accident",
+            "time": "DNF",
             "gap": "-",
             "best": "2:36.490"
         },
@@ -690,7 +690,7 @@ export const raceResults = {
             "team": "Masa Matsumura",
             "car": "#25 Porsche 963",
             "category": "Hypercar",
-            "time": "Suspension",
+            "time": "DNF",
             "gap": "-",
             "best": "-"
         },

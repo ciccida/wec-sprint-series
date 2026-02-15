@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import NextRace from './components/NextRace';
 import LatestVideos from './components/LatestVideos';
 import TwitterFeed from './components/TwitterFeed';
 import Schedule from './components/Schedule';
@@ -27,6 +28,7 @@ function App() {
         <>
             <Navbar />
             <Hero />
+            <NextRace />
             <TwitterFeed />
             <LatestVideos />
             <section id="schedule">

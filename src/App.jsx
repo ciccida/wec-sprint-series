@@ -13,13 +13,14 @@ import Sponsors from './components/Sponsors';
 import Footer from './components/Footer';
 
 function App() {
-    // Default to the latest round (2)
-    const [selectedRound, setSelectedRound] = useState(2);
+    // Default to the latest round (3)
+    const [selectedRound, setSelectedRound] = useState(3);
 
     // Mapping for display names
     const roundNames = {
         1: "Rd.1 Lusail",
-        2: "Rd.2 Imola"
+        2: "Rd.2 Imola",
+        3: "Rd.3 Spa"
     };
 
     return (
@@ -35,19 +36,16 @@ function App() {
                 <div className="ranking-container">
                     <div className="ranking-header">
                         <h2>Race Results</h2>
-                        <div className="round-selector" style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center' }}>
-                            <button
-                                onClick={() => setSelectedRound(1)}
-                                className={`uk-button ${selectedRound === 1 ? 'uk-button-primary' : 'uk-button-default'}`}
-                            >
-                                Rd.1 Lusail
-                            </button>
-                            <button
-                                onClick={() => setSelectedRound(2)}
-                                className={`uk-button ${selectedRound === 2 ? 'uk-button-primary' : 'uk-button-default'}`}
-                            >
-                                Rd.2 Imola
-                            </button>
+                        <div className="round-selector" style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                            {Object.entries(roundNames).map(([round, name]) => (
+                                <button
+                                    key={round}
+                                    onClick={() => setSelectedRound(Number(round))}
+                                    className={`uk-button ${selectedRound === Number(round) ? 'uk-button-primary' : 'uk-button-default'}`}
+                                >
+                                    {name}
+                                </button>
+                            ))}
                         </div>
                     </div>
                     <RaceResults results={raceResults[selectedRound]} roundName={roundNames[selectedRound]} />

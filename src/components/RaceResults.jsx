@@ -27,7 +27,13 @@ const RaceResults = ({ results, roundName }) => {
                         </thead>
                         <tbody>
                             {hypercars.map((r, i) => {
-                                const isDNF = r.time && (r.time.includes('DNF') || r.time.includes('Accident'));
+                                const isDNF = r.time && (
+                                    r.time.includes('DNF') ||
+                                    r.time.includes('Accident') ||
+                                    r.time.includes('Fuel') ||
+                                    r.time.includes('Suspension') ||
+                                    r.time.includes('Retired')
+                                );
                                 return (
                                     <tr key={i}>
                                         <td>{i + 1}</td>
@@ -64,7 +70,13 @@ const RaceResults = ({ results, roundName }) => {
                         </thead>
                         <tbody>
                             {lmgt3s.map((r, i) => {
-                                const isDNF = r.time && (r.time.includes('DNF') || r.time.includes('Accident'));
+                                const isDNF = r.time && (
+                                    r.time.includes('DNF') ||
+                                    r.time.includes('Accident') ||
+                                    r.time.includes('Fuel') ||
+                                    r.time.includes('Suspension') ||
+                                    r.time.includes('Retired')
+                                );
                                 return (
                                     <tr key={i}>
                                         <td>{i + 1}</td>

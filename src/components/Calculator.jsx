@@ -68,10 +68,7 @@ const Calculator = () => {
 
     return (
         <div className="calculator-wrapper">
-            <div className="calculator-header">
-                <h1 className="title">LeMans Ultimate <span className="accent">Pit Calculator</span></h1>
-                <p className="description">Race Strategy Planner <span className="trial-tag">(試作版 / Trial)</span></p>
-            </div>
+
 
             <TimeConverter />
 

@@ -8,3 +8,5 @@ export default defineConfig({
     host: true
   }
 })
+
+// Restart server after tailwind removal

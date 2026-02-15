@@ -1,68 +1,33 @@
-import { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import NextRace from './components/NextRace';
-import LatestVideos from './components/LatestVideos';
-import TwitterFeed from './components/TwitterFeed';
-import Schedule from './components/Schedule';
-import Ranking from './components/Ranking';
-import Calculator from './components/Calculator';
-import RaceResults from './components/RaceResults';
-import { raceResults } from './data/raceResults';
-import About from './components/About';
-import Sponsors from './components/Sponsors';
+import Home from './pages/Home';
+import WeatherCheck from './pages/WeatherCheck';
+import PitCalculator from './pages/PitCalculator';
 import Footer from './components/Footer';
 
-function App() {
-    // Default to the latest round (3)
-    const [selectedRound, setSelectedRound] = useState(3);
-
-    // Mapping for display names
-    const roundNames = {
-        1: "Rd.1 Lusail",
-        2: "Rd.2 Imola",
-        3: "Rd.3 Spa"
-    };
-
+// Wrapper to conditionally show footer or handle layout specific logic if needed
+const Layout = ({ children }) => {
     return (
-        <>
+        <div className="app-container">
             <Navbar />
-            <Hero />
-            <NextRace />
-            <TwitterFeed />
-            <LatestVideos />
-            <section id="schedule">
-                <Schedule />
-            </section>
-            <section id="results">
-                <div className="ranking-container">
-                    <div className="ranking-header">
-                        <h2>Race Results</h2>
-                        <div className="round-selector" style={{ display: 'flex', gap: '10px', marginTop: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                            {Object.entries(roundNames).map(([round, name]) => (
-                                <button
-                                    key={round}
-                                    onClick={() => setSelectedRound(Number(round))}
-                                    className={`uk-button ${selectedRound === Number(round) ? 'uk-button-primary' : 'uk-button-default'}`}
-                                >
-                                    {name}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
-                    <RaceResults results={raceResults[selectedRound]} roundName={roundNames[selectedRound]} />
-                </div>
-            </section>
-            <section id="ranking">
-                <Ranking />
-            </section>
-            <section id="calculator">
-                <Calculator />
-            </section>
-            <About />
-            <Sponsors />
+            <main>{children}</main>
             <Footer />
-        </>
+        </div>
+    );
+};
+
+function App() {
+    return (
+        <Router>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/weather" element={<WeatherCheck />} />
+                    <Route path="/calculator" element={<PitCalculator />} />
+                </Routes>
+            </Layout>
+        </Router>
     );
 }
 

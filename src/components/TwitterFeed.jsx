@@ -6,38 +6,9 @@ import { Twitter } from 'lucide-react';
 
 const TwitterFeed = () => {
     return (
-        <section id="news" className="section twitter-feed">
+        <section id="twitter" className="section twitter-feed">
             <div className="container">
-                <h2 className="section-title">最新ニュース</h2>
-
-                {/* News Grid */}
-                <div className="news-grid">
-                    {/* Card 1: Next Race */}
-                    <GenericNewsCard
-                        label="NEXT RACE"
-                        title={`${raceInfo.round} ${raceInfo.circuit}`}
-                        date={raceInfo.date}
-                        time={raceInfo.time}
-                        image={raceInfo.image}
-                        description={raceInfo.description}
-                        link={raceInfo.broadcastLink}
-                        linkText="配信リマインダーを設定"
-                    />
-
-                    {/* Card 2: Environment Setting Stream */}
-                    {/*
-                    <GenericNewsCard
-                        label="SPECIAL STREAM"
-                        title="天候環境設定配信 Round 3 Spa"
-                        date="2026.02.05 (THU)"
-                        time="22:00 (JST)-"
-                        image="/assets/weather-setting-stream.jpg"
-                        description={"次戦スパの天候と路面コンジションを決める運命の抽選会。\n雨か晴れか、それとも嵐か？レースの行方を左右する瞬間を見逃すな！"}
-                        link="https://www.youtube.com/live/lD7h33xK08A"
-                        linkText="配信リマインダーを設定"
-                    />
-                    */}
-                </div>
+                {/* Twitter CTA - News section moved to NextRace component */}
 
                 <div className="twitter-cta-wrapper">
                     <p className="cta-description">最新情報は公式X（旧Twitter）にて随時発信中</p>

@@ -6,7 +6,7 @@ import { Calendar, MapPin, Clock, Youtube } from 'lucide-react';
 const NextRace = () => {
     return (
         <div className="next-race-container">
-            <h3 className="section-title">EVENTS</h3>
+            <h3 className="section-title">LATEST NEWS</h3>
 
             <div className="events-grid">
                 {/* Special Stream Card */}

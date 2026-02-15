@@ -5,39 +5,50 @@ import { Calendar, MapPin, Clock, Youtube } from 'lucide-react';
 
 const NextRace = () => {
     return (
-        <div className="next-race-card">
-            <h3 className="next-race-label">NEXT RACE</h3>
+        <div className="next-race-container">
+            <h3 className="section-title">EVENTS</h3>
 
-            <div className="next-race-content">
-                <div className="next-race-image">
-                    <img src={raceInfo.image} alt="Next Race" />
-                </div>
-
-                <div className="next-race-details">
-                    <div className="race-header">
-                        <span className="race-round">{raceInfo.round}</span>
-                        <h4 className="race-circuit">{raceInfo.circuit}</h4>
-                    </div>
-
-                    <div className="race-info-grid">
-                        <div className="info-item">
-                            <Calendar size={18} className="icon" />
-                            <span>{raceInfo.date}</span>
+            <div className="events-grid">
+                {/* Special Stream Card */}
+                {raceInfo.specialStream && (
+                    <div className="event-card special-stream">
+                        <div className="event-label">SPECIAL STREAM</div>
+                        <div className="event-image">
+                            <img src={raceInfo.specialStream.image} alt={raceInfo.specialStream.title} />
                         </div>
-                        <div className="info-item">
-                            <Clock size={18} className="icon" />
-                            <span>{raceInfo.time}</span>
+                        <div className="event-details">
+                            <h4 className="event-title">{raceInfo.specialStream.title}</h4>
+                            <div className="event-info">
+                                <span className="info-badge date"><Calendar size={14} /> {raceInfo.specialStream.date}</span>
+                                <span className="info-badge time"><Clock size={14} /> {raceInfo.specialStream.time}</span>
+                            </div>
+                            <p className="event-desc">{raceInfo.specialStream.description}</p>
+                            <a href={raceInfo.specialStream.link} target="_blank" rel="noopener noreferrer" className="btn-event">
+                                <Youtube size={18} /> Watch Stream
+                            </a>
                         </div>
                     </div>
+                )}
 
-                    <p className="race-description">{raceInfo.description}</p>
-
-                    {raceInfo.broadcastLink && (
-                        <a href={raceInfo.broadcastLink} target="_blank" rel="noopener noreferrer" className="btn-broadcast">
-                            <Youtube size={20} />
-                            配信リマインダーを設定
-                        </a>
-                    )}
+                {/* Next Race Card */}
+                <div className="event-card next-race">
+                    <div className="event-label">NEXT RACE</div>
+                    <div className="event-image">
+                        <img src={raceInfo.image} alt="Next Race" />
+                    </div>
+                    <div className="event-details">
+                        <h4 className="event-title">{raceInfo.round} - {raceInfo.circuit}</h4>
+                        <div className="event-info">
+                            <span className="info-badge date"><Calendar size={14} /> {raceInfo.date}</span>
+                            <span className="info-badge time"><Clock size={14} /> {raceInfo.time}</span>
+                        </div>
+                        <p className="event-desc">{raceInfo.description}</p>
+                        {raceInfo.broadcastLink && (
+                            <a href={raceInfo.broadcastLink} target="_blank" rel="noopener noreferrer" className="btn-event primary">
+                                <Youtube size={18} /> Watch Live
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

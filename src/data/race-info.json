@@ -2,8 +2,16 @@
     "round": "Round 4",
     "circuit": "Circuit de la Sarthe",
     "date": "2026.02.28 (SAT)",
-    "time": "21:50 (配信開始) / 22:00 (Practiceスタート)",
-    "description": "WEC Sprint Series Vol.2 Round 4。\n伝統のル・マン24時間サーキットでのスプリント決戦！\n世界最高峰の耐久レースの舞台で、真の速さを証明するのは誰だ？",
+    "time": "21:50〜",
+    "description": "WEC Sprint Series Vol.2 Round 4。\n伝統のル・マン24時間サーキットでのスプリント決戦！",
     "image": "/assets/round4-lemans.jpg",
-    "broadcastLink": "https://www.youtube.com/@WECSS81/streams"
+    "broadcastLink": "https://www.youtube.com/watch?v=WEBMuMyw3CU",
+    "specialStream": {
+        "title": "環境設定配信",
+        "date": "2026.02.19 (THU)",
+        "time": "22:00〜",
+        "description": "Round 4 Le Mansに向けた「レース環境設定」をリアルタイムで決定する運命の配信。",
+        "image": "/assets/round4-weather-stream.jpg",
+        "link": "https://youtube.com/live/puYPrNeOZJg"
+    }
 }

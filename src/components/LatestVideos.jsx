@@ -12,14 +12,14 @@ const LatestVideos = () => {
                     <div className="video-main">
                         <div className="video-embed-container">
                             <iframe
-                                src="https://www.youtube.com/embed/oysGqga5BTo?si=FzzvW1j2aMekk-o8"
+                                src="https://www.youtube.com/embed/okZ31jMgef0?si=sJKdw5VdZi8dmZIb"
                                 title="WEC Sprint Series Highlights"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowFullScreen
                             ></iframe>
                         </div>
-                        <h3>ハイライト - Round 2 IMOLA</h3>
+                        <h3>ハイライト - Round 3 SPA</h3>
                     </div>
 
                     <div className="video-links">

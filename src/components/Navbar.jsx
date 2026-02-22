@@ -19,7 +19,7 @@ const Navbar = () => {
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container navbar-content">
-                <Link to="/" className="logo">
+                <Link to="/" className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <img src="/assets/logo.png" alt="WEC Sprint Series" />
                 </Link>
                 <ul className="nav-links">

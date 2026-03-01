@@ -1,17 +1,18 @@
 {
-    "round": "Round 4",
-    "circuit": "Circuit de la Sarthe",
-    "date": "2026.02.28 (SAT)",
+    "round": "Round 5",
+    "circuit": "Interlagos",
+    "date": "2026.03.14 (SAT)",
     "time": "21:50〜",
-    "description": "WEC Sprint Series Vol.2 Round 4。\n伝統のル・マン24時間サーキットでのスプリント決戦！",
-    "image": "/assets/round4-lemans.jpg",
-    "broadcastLink": "https://www.youtube.com/watch?v=WEBMuMyw3CU",
+    "description": "WEC Sprint Series Vol.2 Round 5。\nブラジルのインテルラゴス・サーキットでの激戦！",
+    "image": "/assets/round5-interlagos.png",
+    "broadcastLink": "https://youtube.com/live/4jqXIId_tm4?feature=share",
+    "title": "【LeMans Ultimate】WEC Sprint Series Vol.2 Round 5 Interlagos 実況生中継",
     "specialStream": {
-        "title": "環境設定配信",
-        "date": "2026.02.19 (THU)",
+        "title": "【天候環境設定配信】WEC Sprint Series Vol.2 Round 5 Interlagos｜公式公開練習",
+        "date": "2026.03.14 (SAT)",
         "time": "22:00〜",
-        "description": "Round 4 Le Mansに向けた「レース環境設定」をリアルタイムで決定する運命の配信。",
-        "image": "/assets/round4-weather-stream.jpg",
-        "link": "https://youtube.com/live/puYPrNeOZJg"
+        "description": "Round 5 Interlagosに向けた「天候環境設定」をリアルタイムで決定する運命の配信。",
+        "image": "/assets/special-stream-weather.png",
+        "link": "https://youtube.com/live/S-1pEGNs09A?feature=share"
     }
 }

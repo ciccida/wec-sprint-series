@@ -37,7 +37,7 @@ const NextRace = () => {
                         <img src={raceInfo.image} alt="Next Race" />
                     </div>
                     <div className="event-details">
-                        <h4 className="event-title">{raceInfo.round} - {raceInfo.circuit}</h4>
+                        <h4 className="event-title">{raceInfo.title || `${raceInfo.round} - ${raceInfo.circuit}`}</h4>
                         <div className="event-info">
                             <span className="info-badge date"><Calendar size={14} /> {raceInfo.date}</span>
                             <span className="info-badge time"><Clock size={14} /> {raceInfo.time}</span>

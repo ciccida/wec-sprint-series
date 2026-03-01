@@ -1,12 +1,13 @@
 export const rankingData = [
     {
         "id": 1,
+        "rank": 1,
         "name": "Koki Yamamoto",
         "points": [
             25,
             25,
             18,
-            null,
+            25,
             null,
             null,
             null,
@@ -15,12 +16,13 @@ export const rankingData = [
     },
     {
         "id": 2,
+        "rank": 2,
         "name": "MUHI TAMAKI",
         "points": [
             25,
             25,
             2,
-            null,
+            18,
             null,
             null,
             null,
@@ -29,12 +31,13 @@ export const rankingData = [
     },
     {
         "id": 3,
+        "rank": 3,
         "name": "A Plasma",
         "points": [
             18,
             null,
             15,
-            null,
+            15,
             null,
             null,
             null,
@@ -43,12 +46,13 @@ export const rankingData = [
     },
     {
         "id": 4,
+        "rank": 4,
         "name": "TOMOYA ONODERA",
         "points": [
             18,
             8,
             6,
-            null,
+            15,
             null,
             null,
             null,
@@ -57,12 +61,13 @@ export const rankingData = [
     },
     {
         "id": 5,
-        "name": "satou naoto",
+        "rank": 5,
+        "name": "Macky Takagi",
         "points": [
-            15,
+            12,
             null,
-            null,
-            null,
+            12,
+            18,
             null,
             null,
             null,
@@ -71,12 +76,13 @@ export const rankingData = [
     },
     {
         "id": 6,
-        "name": "Fniku Neko",
+        "rank": 6,
+        "name": "SARA MAYO",
         "points": [
-            15,
-            12,
-            0,
             null,
+            15,
+            25,
+            1,
             null,
             null,
             null,
@@ -85,244 +91,7 @@ export const rankingData = [
     },
     {
         "id": 7,
-        "name": "Macky Takagi",
-        "points": [
-            12,
-            null,
-            12,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 8,
-        "name": "Ryoma Miyamoto",
-        "points": [
-            12,
-            6,
-            8,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 9,
-        "name": "SOTA ITO",
-        "points": [
-            10,
-            18,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 10,
-        "name": "Shingen Mochi",
-        "points": [
-            10,
-            6,
-            4,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 11,
-        "name": "ziggy Katsuya",
-        "points": [
-            8,
-            null,
-            12,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 12,
-        "name": "KEI SAGAWA",
-        "points": [
-            8,
-            null,
-            0,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 13,
-        "name": "TOITOI TOYS",
-        "points": [
-            6,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 14,
-        "name": "momigi tetuo",
-        "points": [
-            6,
-            8,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 15,
-        "name": "Brendon Hatasan",
-        "points": [
-            4,
-            null,
-            1,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 16,
-        "name": "S Shippou",
-        "points": [
-            2,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 17,
-        "name": "kaeru uenchu",
-        "points": [
-            1,
-            2,
-            0,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 18,
-        "name": "GT YUKI",
-        "points": [
-            null,
-            1,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 19,
-        "name": "KH-KMS",
-        "points": [
-            null,
-            4,
-            6,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 20,
-        "name": "H.MOS",
-        "points": [
-            null,
-            null,
-            0,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 21,
-        "name": "MASA MATSUMURA",
-        "points": [
-            null,
-            18,
-            1,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 22,
-        "name": "Yoshinori Tokunou",
-        "points": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 23,
-        "name": "Seth Koganeya",
-        "points": [
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        ]
-    },
-    {
-        "id": 24,
+        "rank": 7,
         "name": "Hayata Asaga",
         "points": [
             null,
@@ -336,7 +105,98 @@ export const rankingData = [
         ]
     },
     {
-        "id": 25,
+        "id": 8,
+        "rank": 7,
+        "name": "Nobasan",
+        "points": [
+            null,
+            10,
+            18,
+            12,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 9,
+        "rank": 9,
+        "name": "SOTA ITO",
+        "points": [
+            10,
+            18,
+            null,
+            8,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 10,
+        "rank": 10,
+        "name": "Shingo Koyabu",
+        "points": [
+            null,
+            10,
+            null,
+            25,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 11,
+        "rank": 11,
+        "name": "Shingen Mochi",
+        "points": [
+            10,
+            6,
+            4,
+            12,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 12,
+        "rank": 12,
+        "name": "ziggy Katsuya",
+        "points": [
+            8,
+            null,
+            12,
+            8,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 13,
+        "rank": 13,
+        "name": "Fniku Neko",
+        "points": [
+            15,
+            12,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 14,
+        "rank": 13,
         "name": "Daitou Hatsune",
         "points": [
             null,
@@ -350,12 +210,13 @@ export const rankingData = [
         ]
     },
     {
-        "id": 26,
-        "name": "SARA MAYO",
+        "id": 15,
+        "rank": 15,
+        "name": "R.MIYAMOTO",
         "points": [
-            null,
-            15,
-            25,
+            12,
+            6,
+            8,
             null,
             null,
             null,
@@ -364,24 +225,41 @@ export const rankingData = [
         ]
     },
     {
-        "id": 27,
-        "name": "Hikone Joe",
+        "id": 16,
+        "rank": 16,
+        "name": "momigi tetuo",
         "points": [
-            null,
+            6,
+            8,
             null,
             10,
             null,
             null,
             null,
+            null
+        ]
+    },
+    {
+        "id": 17,
+        "rank": 17,
+        "name": "MASA MATSUMURA",
+        "points": [
+            null,
+            18,
+            1,
+            null,
+            null,
+            null,
             null,
             null
         ]
     },
     {
-        "id": 28,
-        "name": "K.Kishimoto",
+        "id": 18,
+        "rank": 18,
+        "name": "satou naoto",
         "points": [
-            null,
+            15,
             null,
             null,
             null,
@@ -392,21 +270,83 @@ export const rankingData = [
         ]
     },
     {
-        "id": 29,
-        "name": "RAPID TUYOPON",
+        "id": 19,
+        "rank": 19,
+        "name": "KH-KMS",
         "points": [
             null,
+            4,
+            6,
+            4,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 20,
+        "rank": 19,
+        "name": "Hikone Joe",
+        "points": [
+            null,
+            null,
+            10,
+            4,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 21,
+        "rank": 19,
+        "name": "simzo hunt",
+        "points": [
+            null,
+            4,
+            8,
             2,
             null,
             null,
             null,
+            null
+        ]
+    },
+    {
+        "id": 22,
+        "rank": 22,
+        "name": "TOITOI TOYS",
+        "points": [
+            6,
+            null,
+            null,
+            6,
+            null,
             null,
             null,
             null
         ]
     },
     {
-        "id": 30,
+        "id": 23,
+        "rank": 23,
+        "name": "Brendon Hatasan",
+        "points": [
+            4,
+            null,
+            1,
+            6,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 24,
+        "rank": 24,
         "name": "Milfoil Strike",
         "points": [
             null,
@@ -420,7 +360,38 @@ export const rankingData = [
         ]
     },
     {
-        "id": 31,
+        "id": 25,
+        "rank": 24,
+        "name": "Naofumi Ishida",
+        "points": [
+            null,
+            null,
+            null,
+            10,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 26,
+        "rank": 26,
+        "name": "KEI SAGAWA",
+        "points": [
+            8,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 27,
+        "rank": 27,
         "name": "aJ fault",
         "points": [
             null,
@@ -434,12 +405,13 @@ export const rankingData = [
         ]
     },
     {
-        "id": 32,
-        "name": "simzo hunt",
+        "id": 28,
+        "rank": 28,
+        "name": "kaeru uenchu",
         "points": [
+            1,
+            2,
             null,
-            4,
-            8,
             null,
             null,
             null,
@@ -448,7 +420,53 @@ export const rankingData = [
         ]
     },
     {
-        "id": 33,
+        "id": 29,
+        "rank": 29,
+        "name": "S Shippou",
+        "points": [
+            2,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 30,
+        "rank": 29,
+        "name": "H.MOS",
+        "points": [
+            null,
+            null,
+            null,
+            2,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 31,
+        "rank": 29,
+        "name": "RAPID TUYOPON",
+        "points": [
+            null,
+            2,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 32,
+        "rank": 29,
         "name": "Touya Sougetsu",
         "points": [
             null,
@@ -462,12 +480,13 @@ export const rankingData = [
         ]
     },
     {
-        "id": 34,
-        "name": "Naofumi Ishida",
+        "id": 33,
+        "rank": 33,
+        "name": "YUKI GT",
         "points": [
             null,
+            1,
             null,
-            0,
             null,
             null,
             null,
@@ -476,12 +495,28 @@ export const rankingData = [
         ]
     },
     {
-        "id": 35,
-        "name": "Nobasan",
+        "id": 34,
+        "rank": 33,
+        "name": "YRK",
         "points": [
             null,
-            10,
-            18,
+            null,
+            null,
+            1,
+            null,
+            null,
+            null,
+            null
+        ]
+    },
+    {
+        "id": 35,
+        "rank": 35,
+        "name": "Yoshinori Tokunou",
+        "points": [
+            null,
+            null,
+            null,
             null,
             null,
             null,
@@ -491,11 +526,12 @@ export const rankingData = [
     },
     {
         "id": 36,
-        "name": "Shingo Koyabu",
+        "rank": 35,
+        "name": "Seth Koganeya",
         "points": [
             null,
-            10,
-            0,
+            null,
+            null,
             null,
             null,
             null,
@@ -505,7 +541,8 @@ export const rankingData = [
     },
     {
         "id": 37,
-        "name": "YRK",
+        "rank": 35,
+        "name": "K.Kishimoto",
         "points": [
             null,
             null,
@@ -520,12 +557,12 @@ export const rankingData = [
 ];
 
 export const rounds = [
-    { id: 1, name: "Rd.1", venue: "Lusail", date: "1/17" },
-    { id: 2, name: "Rd.2", venue: "Imola", date: "1/31" },
-    { id: 3, name: "Rd.3", venue: "Spa", date: "2/14" },
-    { id: 4, name: "Rd.4", venue: "Le Mans", date: "2/28" },
-    { id: 5, name: "Rd.5", venue: "Interlagos", date: "3/14" },
-    { id: 6, name: "Rd.6", venue: "COTA", date: "3/28" },
-    { id: 7, name: "Rd.7", venue: "Fuji", date: "4/11" },
-    { id: 8, name: "Rd.8", venue: "Bahrain", date: "4/25" },
+    { "id": 1, "name": "Rd.1", "venue": "Lusail", "date": "1/17" },
+    { "id": 2, "name": "Rd.2", "venue": "Imola", "date": "1/31" },
+    { "id": 3, "name": "Rd.3", "venue": "Spa", "date": "2/14" },
+    { "id": 4, "name": "Rd.4", "venue": "Le Mans", "date": "2/28" },
+    { "id": 5, "name": "Rd.5", "venue": "Interlagos", "date": "3/14" },
+    { "id": 6, "name": "Rd.6", "venue": "COTA", "date": "3/28" },
+    { "id": 7, "name": "Rd.7", "venue": "Fuji", "date": "4/11" },
+    { "id": 8, "name": "Rd.8", "venue": "Bahrain", "date": "4/25" }
 ];

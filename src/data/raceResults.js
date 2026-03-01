@@ -704,5 +704,257 @@ export const raceResults = {
             "gap": "-",
             "best": "-"
         }
+    ],
+    "4": [
+        {
+            "pos": "1",
+            "driver": "Shingo Koyabu",
+            "team": "Shingo Koyabu",
+            "car": "#42 Ferrari 499P",
+            "category": "Hypercar",
+            "time": "31:34.458",
+            "gap": "-",
+            "best": "3:28.272"
+        },
+        {
+            "pos": "2",
+            "driver": "Macky Takagi",
+            "team": "Macky Takagi",
+            "car": "#55 Alpine A424",
+            "category": "Hypercar",
+            "time": "+6.560",
+            "gap": "6.560",
+            "best": "3:28.720"
+        },
+        {
+            "pos": "3",
+            "driver": "Tomoya Onodera",
+            "team": "Tomoya Onodera",
+            "car": "#95 Peugeot 9x8",
+            "category": "Hypercar",
+            "time": "+13.680",
+            "gap": "13.680",
+            "best": "3:30.383"
+        },
+        {
+            "pos": "4",
+            "driver": "Shingen Mochi",
+            "team": "Shingen Mochi",
+            "car": "#3 Ferrari 499P",
+            "category": "Hypercar",
+            "time": "+22.844",
+            "gap": "22.844",
+            "best": "3:30.264"
+        },
+        {
+            "pos": "5",
+            "driver": "momigi tetuo",
+            "team": "momigi tetuo",
+            "car": "#61 Cadillac V-Series.R",
+            "category": "Hypercar",
+            "time": "+31.260",
+            "gap": "31.260",
+            "best": "3:32.169"
+        },
+        {
+            "pos": "6",
+            "driver": "ziggy Katsuya",
+            "team": "ziggy Katsuya",
+            "car": "#117 Ferrari 499P",
+            "category": "Hypercar",
+            "time": "+1:20.600",
+            "gap": "1:20.600",
+            "best": "3:33.829"
+        },
+        {
+            "pos": "7",
+            "driver": "ToiToi Toys",
+            "team": "ToiToi Toys",
+            "car": "#333 Porsche 963",
+            "category": "Hypercar",
+            "time": "+1:51.920",
+            "gap": "1:51.920",
+            "best": "3:38.837"
+        },
+        {
+            "pos": "8",
+            "driver": "Hikone Joe",
+            "team": "Hikone Joe",
+            "car": "#11 Isotta Fraschini TIPO6",
+            "category": "Hypercar",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "3:35.807"
+        },
+        {
+            "pos": "9",
+            "driver": "Koki Yamamoto",
+            "team": "Koki Yamamoto",
+            "car": "#4 Porsche 911 GT3 R LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "3:59.138"
+        },
+        {
+            "pos": "10",
+            "driver": "Muhi Tamaki",
+            "team": "Muhi Tamaki",
+            "car": "#33 Porsche 911 GT3 R LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "3:59.063"
+        },
+        {
+            "pos": "11",
+            "driver": "A Plasma",
+            "team": "A Plasma",
+            "car": "#12 Ferrari 296 LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:01.043"
+        },
+        {
+            "pos": "12",
+            "driver": "Noba San",
+            "team": "Noba San",
+            "car": "#765 McLaren 720S LMGT3 Evo",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:01.902"
+        },
+        {
+            "pos": "13",
+            "driver": "Naofumi Ishida",
+            "team": "Naofumi Ishida",
+            "car": "#70 Lexus RCF LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:01.227"
+        },
+        {
+            "pos": "14",
+            "driver": "Sota Ito",
+            "team": "Sota Ito",
+            "car": "#14 Ford Mustang LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:02.491"
+        },
+        {
+            "pos": "15",
+            "driver": "Brendon Hatasan",
+            "team": "Brendon Hatasan",
+            "car": "#28 McLaren 720S LMGT3 Evo",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:04.675"
+        },
+        {
+            "pos": "16",
+            "driver": "KH-AE KMS",
+            "team": "KH-AE KMS",
+            "car": "#86 Porsche 911 GT3 R LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:04.152"
+        },
+        {
+            "pos": "17",
+            "driver": "simzo hunt",
+            "team": "simzo hunt",
+            "car": "#23 McLaren 720S LMGT3 Evo",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:05.004"
+        },
+        {
+            "pos": "18",
+            "driver": "R YRK",
+            "team": "R YRK",
+            "car": "#46 BMW M4 LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:02.847"
+        },
+        {
+            "pos": "19",
+            "driver": "Fniku Neko",
+            "team": "Fniku Neko",
+            "car": "#29 Lamborghini Huracan LMGT3 Evo2",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:04.301"
+        },
+        {
+            "pos": "20",
+            "driver": "Masa Matsumura",
+            "team": "Masa Matsumura",
+            "car": "#25 Porsche 911 GT3 R LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:00.970"
+        },
+        {
+            "pos": "21",
+            "driver": "aJ fault",
+            "team": "aJ fault",
+            "car": "#555 Ferrari 296 LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:05.396"
+        },
+        {
+            "pos": "22",
+            "driver": "GT YUKI",
+            "team": "GT YUKI",
+            "car": "#2 Ferrari 296 LMGT3",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:04.410"
+        },
+        {
+            "pos": "23",
+            "driver": "H MOS",
+            "team": "H MOS",
+            "car": "#27 Peugeot 9x8",
+            "category": "Hypercar",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "3:32.668"
+        },
+        {
+            "pos": "24",
+            "driver": "milfoil strike",
+            "team": "milfoil strike",
+            "car": "#91 McLaren 720S LMGT3 Evo",
+            "category": "LMGT3",
+            "time": "+1 lap",
+            "gap": "1 Lap",
+            "best": "4:11.927"
+        },
+        {
+            "pos": "25",
+            "driver": "Sara Mayo",
+            "team": "Sara Mayo",
+            "car": "#79 Alpine A424",
+            "category": "Hypercar",
+            "time": "DNF",
+            "gap": "DNF",
+            "best": "3:39.981"
+        }
     ]
 };

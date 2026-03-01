@@ -45,7 +45,7 @@ const Ranking = () => {
                     <tbody>
                         {sortedRanking.map((driver, index) => (
                             <tr key={driver.id} className={index < 3 ? `top-${index + 1}` : ''}>
-                                <td className="sticky-col pos">{index + 1}</td>
+                                <td className="sticky-col pos">{driver.rank}</td>
                                 <td className="sticky-col driver-name">{driver.name}</td>
                                 {driver.points.map((p, i) => {
                                     // If round is finished but points are null, show 0

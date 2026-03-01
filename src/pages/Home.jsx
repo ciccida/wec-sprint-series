@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import NextRace from '../components/NextRace';
 import LatestVideos from '../components/LatestVideos';
@@ -11,12 +12,26 @@ import About from '../components/About';
 import Sponsors from '../components/Sponsors';
 
 const Home = () => {
-    const [selectedRound, setSelectedRound] = useState(3);
+    const [selectedRound, setSelectedRound] = useState(4);
+    const { hash } = useLocation();
+
+    useEffect(() => {
+        if (hash) {
+            setTimeout(() => {
+                const id = hash.replace('#', '');
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+    }, [hash]);
 
     const roundNames = {
         1: "Rd.1 Lusail",
         2: "Rd.2 Imola",
-        3: "Rd.3 Spa"
+        3: "Rd.3 Spa",
+        4: "Rd.4 Le Mans"
     };
 
     return (

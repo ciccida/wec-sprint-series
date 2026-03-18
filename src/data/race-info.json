@@ -1,18 +1,18 @@
 {
-    "round": "Round 5",
-    "circuit": "Interlagos",
-    "date": "2026.03.14 (SAT)",
+    "round": "Round 6",
+    "circuit": "COTA",
+    "date": "2026.03.28 (SAT)",
     "time": "21:50〜",
-    "description": "WEC Sprint Series Vol.2 Round 5。\nブラジルのインテルラゴス・サーキットでの激戦！",
-    "image": "/assets/round5-interlagos.png",
-    "broadcastLink": "https://youtube.com/live/4jqXIId_tm4?feature=share",
-    "title": "【LeMans Ultimate】WEC Sprint Series Vol.2 Round 5 Interlagos 実況生中継",
+    "description": "WEC Sprint Series Vol.2 Round 6。\nアメリカのCOTA（サーキット・オブ・ジ・アメリカズ）での激戦！",
+    "image": "/assets/round6-cota.jpg",
+    "broadcastLink": "https://youtube.com/live/8eF8gN8he7U",
+    "title": "【LeMans Ultimate】WEC Sprint Series Vol.2 Round 6 COTA 実況生中継",
     "specialStream": {
-        "title": "【天候環境設定配信】WEC Sprint Series Vol.2 Round 5 Interlagos｜公式公開練習",
-        "date": "2026.03.05 (THU)",
+        "title": "【天候環境設定配信】WEC Sprint Series Vol.2 Round 6 COTA｜公式公開練習",
+        "date": "2026.03.19 (THU)",
         "time": "22:00〜",
-        "description": "Round 5 Interlagosに向けた「天候環境設定」をリアルタイムで決定する運命の配信。",
-        "image": "/assets/special-stream-weather.png",
-        "link": "https://youtube.com/live/S-1pEGNs09A?feature=share"
+        "description": "Round 6 COTAに向けた「天候環境設定」をリアルタイムで決定する運命の配信。",
+        "image": "/assets/round6-weather-stream.jpg",
+        "link": "https://youtube.com/live/8Njm26ku5VQ"
     }
 }

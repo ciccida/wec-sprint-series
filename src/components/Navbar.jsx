@@ -31,7 +31,7 @@ const Navbar = () => {
 
                     {/* New Tool Links */}
                     <li>
-                        <a href="https://ciccida.github.io/lmu-weather-randomizer/" className="nav-tool-link" target="_blank" rel="noopener noreferrer">
+                        <a href="/weather/" className="nav-tool-link">
                             WEATHER RANDOMIZER
                         </a>
                     </li>

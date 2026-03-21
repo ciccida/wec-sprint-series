@@ -31,16 +31,15 @@ const Navbar = () => {
 
                     {/* New Tool Links */}
                     <li>
-                        <Link to="/weather" className="nav-tool-link">
+                        <a href="https://ciccida.github.io/lmu-weather-randomizer/" className="nav-tool-link" target="_blank" rel="noopener noreferrer">
                             WEATHER RANDOMIZER
-                        </Link>
+                        </a>
                     </li>
                     <li>
                         <Link to="/calculator" className="accent" style={{ fontWeight: 'bold' }}>
                             PIT CALC (TRIAL)
                         </Link>
                     </li>
-
                     <li className="header-sponsors">
                         <span className="supported-by">SUPPORTED BY:</span>
                         <a href="https://www.endless-sport.co.jp/" target="_blank" rel="noopener noreferrer">

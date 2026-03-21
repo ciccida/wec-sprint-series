@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/weather(.*)",
+      "destination": "https://ciccida.github.io/lmu-weather-randomizer/$1"
+    }
+  ]
+}

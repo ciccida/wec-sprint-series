@@ -1,8 +1,19 @@
 {
+  "redirects": [
+    {
+      "source": "/weather",
+      "destination": "/weather/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
-      "source": "/weather(.*)",
+      "source": "/weather/(.*)",
       "destination": "https://ciccida.github.io/lmu-weather-randomizer/$1"
+    },
+    {
+      "source": "/weather",
+      "destination": "https://ciccida.github.io/lmu-weather-randomizer/"
     }
   ]
 }

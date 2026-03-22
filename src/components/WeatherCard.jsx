@@ -10,8 +10,12 @@ export const WeatherCard = ({ weather, isSelected = false }) => {
     const isRaining = weather.precipitation_sum > 0.5;
     const isCloudy = weather.cloudcover_mean > 50;
 
+    let conditionClass = 'condition-sun';
+    if (isRaining) conditionClass = 'condition-rain';
+    else if (isCloudy) conditionClass = 'condition-cloud';
+
     return (
-        <div className={`weather-card ${isSelected ? 'selected' : 'unselected'}`}>
+        <div className={`weather-card ${isSelected ? 'selected' : 'unselected'} ${conditionClass}`}>
             <div className="weather-card-date">{dateStr}</div>
 
             <div className="weather-icon-container">

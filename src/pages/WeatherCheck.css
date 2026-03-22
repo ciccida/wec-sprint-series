@@ -66,7 +66,7 @@
 }
 
 .weather-title span {
-    background: linear-gradient(90deg, #fff, #94a3b8);
+    background: linear-gradient(90deg, #fff, var(--color-secondary));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -102,11 +102,11 @@
 
 /* About Section */
 .info-card {
-    background: rgba(30, 41, 59, 0.8);
+    background: var(--color-surface-transparent);
     backdrop-filter: blur(8px);
     padding: 1.5rem;
     border-radius: 0.75rem;
-    border: 1px solid rgba(51, 65, 85, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: left;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     height: 100%;
@@ -157,10 +157,10 @@
     gap: 0.75rem;
     color: var(--color-text-dim);
     font-size: 0.8rem;
-    background: rgba(15, 23, 42, 0.4);
+    background: rgba(0, 0, 0, 0.4);
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
-    border: 1px solid rgba(51, 65, 85, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .info-icon {
@@ -169,11 +169,11 @@
 
 /* Controls Section */
 .controls-card {
-    background: rgba(15, 23, 42, 0.9);
+    background: var(--color-surface-transparent);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(51, 65, 85, 0.5);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
     height: 100%;
@@ -188,7 +188,7 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--color-secondary), #3b82f6);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
 }
 
 .controls-container {
@@ -214,8 +214,8 @@
 
 .track-select {
     width: 100%;
-    background-color: #1e293b;
-    border: 1px solid #475569;
+    background-color: var(--color-surface);
+    border: 1px solid #333;
     border-radius: 0.5rem;
     padding: 1rem;
     color: #fff;
@@ -251,7 +251,7 @@
 
 .spin-button {
     width: 100%;
-    background: linear-gradient(90deg, var(--color-secondary), #2563eb);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     color: #fff;
     font-weight: 900;
     padding: 1rem;
@@ -270,7 +270,7 @@
 }
 
 .spin-button:hover:not(:disabled) {
-    background: linear-gradient(90deg, #7dd3fc, #3b82f6);
+    background: linear-gradient(90deg, #ff3366, #33f8ff);
     transform: scale(1.02);
 }
 

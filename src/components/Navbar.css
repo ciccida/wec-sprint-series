@@ -112,3 +112,25 @@
         /* Hide on mobile/tablet to save space */
     }
 }
+
+@media (max-width: 768px) {
+    .navbar-content {
+        gap: 1rem;
+    }
+    .logo {
+        flex-shrink: 0; /* Prevent logo from squishing */
+    }
+    .nav-links {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        width: 100%;
+        padding-right: 1rem;
+        /* Smooth fade out on the right edge */
+        mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    }
+    .nav-links::-webkit-scrollbar {
+        display: none; /* Safari and Chrome */
+    }
+}

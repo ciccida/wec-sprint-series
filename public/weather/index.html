@@ -104,10 +104,10 @@
             border: 1px solid #444; border-radius: 4px; box-sizing: border-box; font-size: 1em;
         }
         select:focus, input:focus { outline: none; border-color: var(--primary); }
-        .flex-row { display: flex; gap: 10px; align-items: center; }
+        .flex-row { display: flex; gap: 6px; align-items: center; }
         
         /* 並んだ入力枠が縮みすぎないように最小幅を設定 */
-        .flex-row input { flex: 1; min-width: 70px; }
+        .flex-row input { flex: 1; min-width: 35px; }
         
         /* セッションカード */
         .session-card { background: #181818; border: 1px solid #333; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
@@ -239,7 +239,7 @@
             <input type="number" class="st-m" placeholder="MM" disabled min="0" max="55" step="5">
         </div>
         <div class="flex-row form-group">
-            <label style="min-width: 170px;">Duration (Max 2h45m)</label>
+            <label style="min-width: 150px;">Duration (Max 2h45m)</label>
             <input type="number" class="dur-h" value="0" min="0" max="2"> h
             <input type="number" class="dur-m" value="5" min="0" max="55" step="5"> m
         </div>
@@ -254,7 +254,7 @@
             <input type="number" class="st-m" placeholder="MM" disabled min="0" max="55" step="5">
         </div>
         <div class="flex-row form-group">
-            <label style="min-width: 170px;">Duration (Max 2h45m)</label>
+            <label style="min-width: 150px;">Duration (Max 2h45m)</label>
             <input type="number" class="dur-h" value="0" min="0" max="2"> h
             <input type="number" class="dur-m" value="5" min="0" max="55" step="5"> m
         </div>
@@ -269,7 +269,7 @@
             <input type="number" class="st-m" placeholder="MM" disabled min="0" max="55" step="5">
         </div>
         <div class="flex-row form-group">
-            <label style="min-width: 170px;">Duration (Max 24h0m)</label>
+            <label style="min-width: 150px;">Duration (Max 24h0m)</label>
             <input type="number" class="dur-h" value="6" min="0" max="24"> h
             <input type="number" class="dur-m" value="0" min="0" max="55" step="5"> m
         </div>

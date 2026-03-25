@@ -5,6 +5,14 @@ import Home from './pages/Home';
 import PitCalculator from './pages/PitCalculator';
 import Footer from './components/Footer';
 
+function ScrollToTop() {
+    const { pathname } = useLocation();
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+    return null;
+}
+
 // Wrapper to conditionally show footer or handle layout specific logic if needed
 const Layout = ({ children }) => {
     return (
@@ -19,6 +27,7 @@ const Layout = ({ children }) => {
 function App() {
     return (
         <Router>
+            <ScrollToTop />
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />

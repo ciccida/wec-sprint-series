@@ -10,15 +10,21 @@ function ScrollToTop() {
     React.useLayoutEffect(() => {
         if (!hash) {
             // Temporarily remove smooth scrolling to force an instant jump
-            const originalStyle = document.documentElement.style.scrollBehavior;
-            document.documentElement.style.scrollBehavior = 'auto';
-            window.scrollTo(0, 0);
-            // Restore original smooth behavior if it existed
-            if (originalStyle) {
-                document.documentElement.style.scrollBehavior = originalStyle;
-            } else {
-                document.documentElement.style.removeProperty('scroll-behavior');
-            }
+            const html = document.documentElement;
+            const originalStyle = html.style.scrollBehavior;
+            html.style.scrollBehavior = 'auto';
+            window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            
+            // Restore original smooth behavior after browser has painted
+            const timeoutId = setTimeout(() => {
+                if (originalStyle) {
+                    html.style.scrollBehavior = originalStyle;
+                } else {
+                    html.style.removeProperty('scroll-behavior');
+                }
+            }, 50);
+            
+            return () => clearTimeout(timeoutId);
         }
     }, [pathname, hash]);
     return null;

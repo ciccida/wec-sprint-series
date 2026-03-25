@@ -6,10 +6,21 @@ import PitCalculator from './pages/PitCalculator';
 import Footer from './components/Footer';
 
 function ScrollToTop() {
-    const { pathname } = useLocation();
-    React.useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+    const { pathname, hash } = useLocation();
+    React.useLayoutEffect(() => {
+        if (!hash) {
+            // Temporarily remove smooth scrolling to force an instant jump
+            const originalStyle = document.documentElement.style.scrollBehavior;
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.scrollTo(0, 0);
+            // Restore original smooth behavior if it existed
+            if (originalStyle) {
+                document.documentElement.style.scrollBehavior = originalStyle;
+            } else {
+                document.documentElement.style.removeProperty('scroll-behavior');
+            }
+        }
+    }, [pathname, hash]);
     return null;
 }
 

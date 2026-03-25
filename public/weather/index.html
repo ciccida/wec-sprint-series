@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>LMU Dynamic Weather Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00d2ff; --bg: #111; --panel: #1e1e1e; --accent: #ff0055; }
         body {
@@ -44,6 +47,7 @@
             display: flex; gap: 1.2rem; align-items: center; list-style: none; margin: 0; padding: 0;
         }
         .nav-links a {
+            font-family: var(--font-display);
             font-size: clamp(0.7rem, 1vw, 0.9rem); font-weight: 600; text-transform: uppercase;
             color: var(--color-text-nav); text-decoration: none; transition: color 0.3s ease;
         }

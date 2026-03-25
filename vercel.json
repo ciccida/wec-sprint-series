@@ -8,12 +8,8 @@
   ],
   "rewrites": [
     {
-      "source": "/weather/(.*)",
-      "destination": "https://ciccida.github.io/lmu-weather-randomizer/$1"
-    },
-    {
-      "source": "/weather",
-      "destination": "https://ciccida.github.io/lmu-weather-randomizer/"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

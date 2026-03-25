@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import WeatherCheck from './pages/WeatherCheck';
 import PitCalculator from './pages/PitCalculator';
 import Footer from './components/Footer';
 
@@ -23,7 +22,6 @@ function App() {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/weather" element={<WeatherCheck />} />
                     <Route path="/calculator" element={<PitCalculator />} />
                 </Routes>
             </Layout>

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
+    console.log("--- NAVBAR RENDERED v3.2 ---");
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
@@ -19,9 +20,6 @@ const Navbar = () => {
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container navbar-content">
-                <Link to="/" className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                    <img src="/assets/logo.png" alt="WEC Sprint Series" />
-                </Link>
                 <ul className="nav-links">
                     {/* Only show scroll links on Home page, otherwise link to Home */}
                     <li>{isHome ? <a href="#news">最新ニュース</a> : <Link to="/#news">最新ニュース</Link>}</li>
@@ -34,6 +32,11 @@ const Navbar = () => {
                         <a href="/weather/" className="nav-tool-link">
                             WEATHER RANDOMIZER
                         </a>
+                    </li>
+                    <li>
+                        <Link to="/setup-tool" className="nav-tool-link" style={{ borderLeft: '2px solid var(--color-primary)', paddingLeft: '10px' }}>
+                            AI SETUP ENGINEER
+                        </Link>
                     </li>
                     <li>
                         <Link to="/calculator" className="accent" style={{ fontWeight: 'bold' }}>

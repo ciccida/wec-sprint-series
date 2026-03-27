@@ -26,19 +26,12 @@
     /* Force 1 line */
 }
 
-.logo img {
-    height: 48px;
-    width: auto;
-    object-fit: contain;
-}
-
 .nav-links {
     display: flex;
     gap: 1.2rem;
-    /* Reduced gap to fit more items */
     align-items: center;
     flex-wrap: nowrap;
-    /* Prevent wrapping */
+    width: 100%;
 }
 
 .nav-links a {

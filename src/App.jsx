@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PitCalculator from './pages/PitCalculator';
+import SetupTool from './pages/SetupTool';
 import Footer from './components/Footer';
 
 function ScrollToTop() {
@@ -49,6 +50,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/calculator" element={<PitCalculator />} />
+                    <Route path="/setup-tool" element={<SetupTool />} />
                 </Routes>
             </Layout>
         </Router>

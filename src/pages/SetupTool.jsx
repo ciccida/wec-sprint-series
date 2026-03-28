@@ -106,183 +106,118 @@ const DRIVER_PROFILES = [
 
 // --- LOGIC ENGINE ---
 
-const calculateSetup = (config) => {
-  const { classId, modelId, circuitId, weatherId, ambientTemp, mode, profileId } = config;
-  
+const calculateSetup = (config, diagnostics, telemetry, weatherSlot, baseline) => {
+  const { classId, modelId, circuitId, profileId, mode } = config;
   const carClass = CAR_CLASSES.find(c => c.id === classId);
   const models = CAR_MODELS[classId] || [];
   const model = models.find(m => m.id === modelId) || models[0];
   const circuit = CIRCUITS.find(cir => cir.id === circuitId);
-  const weather = WEATHER_CONDITIONS.find(w => w.id === weatherId) || WEATHER_CONDITIONS[0];
+  const weather = weatherSlot || { weatherId: 'clear', temp: 25 };
+  const ambientTemp = weather.temp;
 
-  // LMU DEFAULT BASELINE LOGIC (v2.2)
+  // Initialize with current user baseline
+  let res = { ...baseline };
+
+  // --- 1. DAMPING / STABILITY LOGIC ---
+  // If 'No Problem' is reported, we want minimal changes from baseline.
+  const hasIssues = diagnostics.entry !== 'none' || diagnostics.mid !== 'none' || diagnostics.exit !== 'none' || diagnostics.curbs !== 'none';
   
-  // 1. Electronics
-  let tcMap = 5;
-  let tcPower = 5;
-  let tcSlip = 8;
-  let absMap = 9;
-
-  if (classId === 'LMGT3' || classId === 'GTE') {
-    tcMap = 6;
-    absMap = 10;
+  // --- 2. WEATHER & TRACK BASE CORRECTIONS ---
+  // Adjust BB and TC for rain
+  if (weather.weatherId === 'rain' || weather.weatherId === 'storm') {
+    res.brakeBalance = Math.min(res.brakeBalance + 3.0, 75.0);
+    res.tcMap = Math.min(res.tcMap + 3, 12);
+    res.absMap = Math.min(res.absMap + 2, 12);
+    res.rhFront = res.rhFront + 10;
+    res.rhRear = res.rhRear + 12;
+    res.rearWing = res.rearWing + 2;
   }
 
-  // --- SMART DIAGNOSIS CORRECTIONS (v3.0) ---
-  const { diagnostics, telemetry } = config;
-  let diagOffsetRH = 0;
-  let diagOffsetSprings = 0;
-  let diagOffsetARB = 0;
-  let diagOffsetWing = 0;
-  let diagOffsetDiff = 0;
+  // --- 3. PHASE-AWARE PINPOINT ADJUSTMENTS ---
+  
+  // ENTRY PHASE: Brakes, Aero, Diff
+  if (diagnostics.entry === 'understeer') {
+    res.brakeBalance -= 1.0;
+    res.rearWing -= 1;
+    res.preload += 20;
+  } else if (diagnostics.entry === 'oversteer') {
+    res.brakeBalance += 1.0;
+    res.rearWing += 2;
+    res.preload -= 20;
+  }
 
-  if (diagnostics) {
-    // Slow Corners
-    if (diagnostics.slowCorner === 'understeer') {
-      diagOffsetRH += 5; // Raise rear / Lower front (Rake logic simplified)
-      diagOffsetARB -= 1; // Soften front
-    } else if (diagnostics.slowCorner === 'oversteer') {
-      diagOffsetDiff += 20; // Increase preload
-      diagOffsetSprings -= 1; // Soften rear
+  // MID PHASE: Front Suspension
+  if (diagnostics.mid === 'understeer') {
+    res.springFront -= 1;
+    res.arbFront -= 1;
+  } else if (diagnostics.mid === 'oversteer') {
+    res.springFront += 1;
+    res.arbFront += 1;
+  }
+
+  // EXIT PHASE: Rear Suspension, TC
+  if (diagnostics.exit === 'understeer') {
+    res.springRear += 1;
+    res.arbRear -= 1;
+    res.tcMap -= 1;
+  } else if (diagnostics.exit === 'oversteer') {
+    res.springRear -= 1;
+    res.arbRear += 1;
+    res.tcPower += 1; // Increase Cut
+    res.tcSlip += 1;  // Stricter Slip
+  }
+
+  // CURBS: Compliance
+  if (diagnostics.curbs === 'bumpy') {
+    res.springFront -= 1;
+    res.springRear -= 1;
+    res.rhFront += 5;
+    res.rhRear += 5;
+    res.packerFront -= 2;
+    res.packerRear -= 2;
+  }
+
+  // PROFILE OVERRIDES (Stable/Aggressive)
+  if (!hasIssues) {
+    if (profileId === 'stable') {
+      res.brakeBalance += 0.5;
+      res.tcMap += 1;
+    } else if (profileId === 'aggressive') {
+      res.tcMap -= 1;
+      res.tcSlip -= 1;
     }
-
-    // Fast Corners
-    if (diagnostics.fastCorner === 'understeer') {
-      diagOffsetWing += 1;
-    } else if (diagnostics.fastCorner === 'oversteer') {
-      diagOffsetWing += 2;
-      diagOffsetRH -= 5; // Lower rear
-    }
-
-    // Chicanes (Lateral Transitions)
-    if (diagnostics.chicanes === 'unstable') {
-      diagOffsetARB += 1; // Stiffen front ARB slightly for better transition response
-    }
-
-    // Curbs (Vertical Impacts)
-    if (diagnostics.curbs === 'bumpy') {
-      diagOffsetSprings -= 2;
-      diagOffsetRH += 10;
-    }
   }
 
-  // --- TELEMETRY (CSV) CORRECTIONS (v3.0) ---
-  let camberAdvice = "DEFAULT";
-  if (telemetry && telemetry.tireTemps) {
-    const { fl, fr, rl, rr } = telemetry.tireTemps;
-    // Simple logic: If Inner is much hotter than Outer, reduce camber.
-    // LMU logic: Usually Inner-Outer delta 2-5 deg is ideal.
-    const flDelta = fl.inner - fl.outer;
-    if (flDelta > 10) camberAdvice = "Reduce Negative Camber (Too hot inside)";
-    else if (flDelta < 1) camberAdvice = "Increase Negative Camber (Too cold inside)";
-  }
+  // --- 4. VOLATILITY PROTECTION (Damping) ---
+  // We limit the delta from baseline to prevent 'extreme jumps'
+  const damp = (curr, target, maxDelta) => {
+    const delta = target - curr;
+    const clamped = Math.max(Math.min(delta, maxDelta), -maxDelta);
+    return curr + clamped;
+  };
 
-  // Profile adjustments (FIXED & OPEN)
-  if (profileId === 'stable') {
-    tcMap += 2;
-    absMap += 2;
-  } else if (profileId === 'aggressive') {
-    tcMap -= 3;
-    absMap -= 3;
-  }
-
-  // Wet adjustments
-  if (weather.wetness > 0) {
-    tcMap += weather.wetness * 2;
-    tcPower += weather.wetness * 2;
-    tcSlip += weather.wetness * 2;
-    absMap += Math.max(weather.wetness, 1);
-  }
-
-  tcMap = Math.max(Math.min(tcMap, 12), 1);
-  absMap = Math.max(Math.min(absMap, 12), 1);
-  tcPower = Math.max(Math.min(tcPower, 12), 1);
-  tcSlip = Math.max(Math.min(tcSlip, 15), 1);
-
-  // 2. Brakes (Brake Balance - % Forward)
-  let brakeBalance = 54.0; 
-  if (classId === 'LMGT3') brakeBalance = 51.0;
-  if (weather.wetness > 0) brakeBalance += weather.wetness * 1.5;
-  if (profileId === 'stable') brakeBalance += 1.0;
-  if (profileId === 'aggressive') brakeBalance -= 1.0;
+  // If user says "No Issue", we dampen even more
+  const dampingFactor = hasIssues ? 1.0 : 0.2; 
   
-  // Diagnosis impact
-  if (diagnostics?.slowCorner === 'oversteer') brakeBalance += 1.0; 
-  
-  brakeBalance = Math.min(Math.max(brakeBalance, 45.0), 75.0);
+  res.brakeBalance = damp(baseline.brakeBalance, res.brakeBalance, 2.0 * dampingFactor);
+  res.rearWing = damp(baseline.rearWing, res.rearWing, 3 * dampingFactor);
+  res.rhFront = damp(baseline.rhFront, res.rhFront, 8 * dampingFactor);
+  res.rhRear = damp(baseline.rhRear, res.rhRear, 10 * dampingFactor);
+  res.tcMap = damp(baseline.tcMap, res.tcMap, 2 * dampingFactor);
 
-  // 3. Environmental (Brake Ducts)
-  const tempDiff = ambientTemp - 25;
-  const tempScaleSteps = Math.floor(tempDiff / 5);
-  const brakeDuctSetting = 2 + (tempScaleSteps > 0 ? Math.min(tempScaleSteps, 3) : 0) + (weather.wetness > 2 ? 1 : 0);
-
-  // 4. Chassis & Suspension (v3.3 Full Expansion)
-  // Base values relative to LMU Default Medium Downforce
-  
-  // Ride Height (RH)
-  let rhFront = 0; // Offset in mm
-  let rhRear = diagOffsetRH;  // Offset in mm
-  
-  if (circuit.bumpiness === 'BUMPY') {
-    rhFront += 10;
-    rhRear += 12;
-  } else if (circuit.bumpiness === 'MIXED') {
-    rhFront += 5;
-    rhRear += 6;
-  }
-
-  // 5. Springs & ARB
-  let springFront = "DEFAULT";
-  let springRear = "DEFAULT";
-  let arbFront = "DEFAULT";
-  let arbRear = "DEFAULT";
-
-  if (circuit.bumpiness === 'BUMPY' || diagnostics?.chicanes === 'bumpy') {
-    springFront = "-2 clicks (Softer)";
-    springRear = "-2 clicks (Softer)";
-  }
-
-  if (diagOffsetSprings < 0) {
-    springRear = `${diagOffsetSprings} clicks (Softer)`;
-  }
-
-  if (profileId === 'aggressive') {
-    arbFront = "-1 click (Softer)";
-    arbRear = "+1 click (Stiffer)";
-  } else if (profileId === 'stable') {
-    arbFront = "+1 click (Stiffer)";
-    arbRear = "-1 click (Softer)";
-  }
-
-  // Diagnosis override
-  if (diagOffsetARB < 0) arbFront = "-1 click (Softer)";
-
-  // 6. Dampers (Slow Bump/Rebound)
-  let damperAdvice = "DEFAULT";
-  if (circuit.bumpiness === 'BUMPY' || diagnostics?.chicanes === 'bumpy') {
-    damperAdvice = "Slow Bump: -2 / Slow Rebound: -1 (Better compliance)";
-  }
-
-  // 7. Aero (Rear Wing)
-  let rwOffset = diagOffsetWing; 
-  if (circuit.downforce === 'LOW') rwOffset -= 2;
-  else if (circuit.downforce === 'MED-HIGH') rwOffset += 2;
-  else if (circuit.downforce === 'MED-LOW') rwOffset -= 1;
-
-  // 7. Differential
-  let preloadNm = model.basePreload;
-  let preloadSetting = Math.floor(preloadNm * 0.6) + diagOffsetDiff;
-  if (profileId === 'stable') preloadSetting += 20;
-  if (profileId === 'aggressive') preloadSetting -= 20;
+  // Hard Constraints
+  res.tcMap = Math.max(Math.min(res.tcMap, 12), 1);
+  res.tcPower = Math.max(Math.min(res.tcPower, 12), 1);
+  res.tcSlip = Math.max(Math.min(res.tcSlip, 15), 1);
+  res.brakeBalance = Math.max(Math.min(res.brakeBalance, 75.0), 45.0);
 
   return {
-    tcMap, tcPower, tcSlip, absMap, brakeBalance, brakeDuctSetting, 
-    rwOffset, rhFront, rhRear, springFront, springRear, arbFront, arbRear, damperAdvice,
-    preloadSetting, preloadNm, camberAdvice,
+    ...res,
     wetness: weather.wetness,
     weatherName: weather.name,
     temp: ambientTemp,
-    bumpiness: circuit.bumpiness
+    bumpiness: circuit.bumpiness,
+    camberAdvice: "DEFAULT"
   };
 };
 
@@ -294,7 +229,7 @@ const formatOutput = (results, config, baseline) => {
   const circuit = CIRCUITS.find(cir => cir.id === circuitId);
   const profile = DRIVER_PROFILES.find(p => p.id === profileId);
 
-  let output = `--- LMU AI SETUP ENGINEER OUTPUT v3.4 (BASELINE INTEGRATED) ---\n`;
+  let output = `--- LMU AI SETUP ENGINEER OUTPUT v3.5 (OPTIMIZED STRATEGY) ---\n`;
   output += `CAR: ${model.name} (${carClass.name})\n`;
   output += `TRACK: ${circuit.name} [Property: ${circuit.bumpiness}]\n`;
   output += `DRIVER PROFILE: ${profile.name}\n`;
@@ -304,75 +239,59 @@ const formatOutput = (results, config, baseline) => {
 
   const getDelta = (curr, rec) => {
     const d = rec - curr;
-    return d === 0 ? "(Optimal)" : `(${d >= 0 ? '+' : ''}${d.toFixed(1)})`;
+    if (Math.abs(d) < 0.05) return "(Optimal)";
+    return `(${d >= 0 ? '+' : ''}${d.toFixed(1)})`;
   };
 
   const getDeltaInt = (curr, rec) => {
-    const d = rec - curr;
+    const d = Math.round(rec) - Math.round(curr);
     return d === 0 ? "(Keep)" : `(${d > 0 ? '+' : ''}${d})`;
   };
 
   output += `[1. ELECTRONICS / 電子制御]\n`;
-  output += `Traction Control Map      = ${baseline.tcMap} -> ${main.tcMap} ${getDeltaInt(baseline.tcMap, main.tcMap)}\n`;
-  output += `TC Power Cut Map (TC2)    = ${baseline.tcPower} -> ${main.tcPower} ${getDeltaInt(baseline.tcPower, main.tcPower)}\n`;
-  output += `TC Slip Angle Map (TC3)   = ${baseline.tcSlip} -> ${main.tcSlip} ${getDeltaInt(baseline.tcSlip, main.tcSlip)}\n`;
-  output += `Antilock Braking (ABS)    = ${baseline.absMap} -> ${main.absMap} ${getDeltaInt(baseline.absMap, main.absMap)}\n`;
+  output += `Traction Control (Map)    = ${baseline.tcMap} -> ${Math.round(main.tcMap)} ${getDeltaInt(baseline.tcMap, main.tcMap)}\n`;
+  output += `TC Power Cut Map          = ${baseline.tcPower} -> ${Math.round(main.tcPower)} ${getDeltaInt(baseline.tcPower, main.tcPower)}\n`;
+  output += `TC Slip Angle Map         = ${baseline.tcSlip} -> ${Math.round(main.tcSlip)} ${getDeltaInt(baseline.tcSlip, main.tcSlip)}\n`;
+  output += `Antilock Braking (ABS)    = ${baseline.absMap} -> ${Math.round(main.absMap)} ${getDeltaInt(baseline.absMap, main.absMap)}\n`;
   output += `Brake Balance (前後配分)  = ${baseline.brakeBalance.toFixed(1)}% -> ${main.brakeBalance.toFixed(1)}% ${getDelta(baseline.brakeBalance, main.brakeBalance)}\n`;
   
   if (mode === 'open') {
     output += `\n[2. AERODYNAMICS / 空力]\n`;
-    output += `Rear Wing (基準偏移)       = ${baseline.rearWing} -> ${main.rwOffset} ${getDeltaInt(baseline.rearWing, main.rwOffset)} clicks\n`;
-    output += `Brake Duct Setting (F/R)  = [ Front: ${main.brakeDuctSetting} / Rear: ${main.brakeDuctSetting} ]\n`;
+    output += `Rear Wing (基準偏移)       = ${baseline.rearWing} -> ${Math.round(main.rearWing)} ${getDeltaInt(baseline.rearWing, main.rearWing)} clicks\n`;
+    output += `Brake Duct Setting (F/R)  = [ ${Math.round(main.brakeDucts)} ]\n`;
 
     output += `\n[3. CHASSIS & SUSPENSION / 足回り]\n`;
-    output += `Ride Height Front (車高F) = ${baseline.rhFront} -> ${main.rhFront} ${getDeltaInt(baseline.rhFront, main.rhFront)} mm\n`;
-    output += `Ride Height Rear  (車高R) = ${baseline.rhRear} -> ${main.rhRear} ${getDeltaInt(baseline.rhRear, main.rhRear)} mm\n`;
-    output += `Spring Rate Front         = ${baseline.springFront} -> ${main.springFront} (Targeting: ${main.springFront})\n`;
-    output += `Spring Rate Rear          = ${baseline.springRear} -> ${main.springRear} (Targeting: ${main.springRear})\n`;
-    output += `Anti-Roll Bar Front (ARB) = ${baseline.arbFront} -> ${main.arbFront} (Targeting: ${main.arbFront})\n`;
-    output += `Anti-Roll Bar Rear  (ARB) = ${baseline.arbRear} -> ${main.arbRear} (Targeting: ${main.arbRear})\n`;
-    output += `Damper (Slow Bump/Reb)    = ${main.damperAdvice}\n`;
+    output += `Ride Height Front (車高F) = ${baseline.rhFront} -> ${Math.round(main.rhFront)} ${getDeltaInt(baseline.rhFront, main.rhFront)} mm\n`;
+    output += `Ride Height Rear  (車高R) = ${baseline.rhRear} -> ${Math.round(main.rhRear)} ${getDeltaInt(baseline.rhRear, main.rhRear)} mm\n`;
+    output += `Spring Rate F/R           = [ F: ${Math.round(main.springFront)} / R: ${Math.round(main.springRear)} ]\n`;
+    output += `Anti-Roll Bar F/R         = [ F: ${Math.round(main.arbFront)} / R: ${Math.round(main.arbRear)} ]\n`;
+    output += `Packer Level F/R          = [ F: ${Math.round(main.packerFront)} / R: ${Math.round(main.packerRear)} ]\n`;
 
     output += `\n[4. DRIVETRAIN / 駆動系]\n`;
-    output += `Diff Preload Setting      = ${baseline.preload} -> ${main.preloadSetting} ${getDeltaInt(baseline.preload, main.preloadSetting)} Nm/Index\n`;
+    output += `Diff Preload Setting      = ${baseline.preload} -> ${Math.round(main.preload)} ${getDeltaInt(baseline.preload, main.preload)} Nm\n`;
   }
 
   output += `\n[5. TYRE STRATEGY / タイヤ戦略]\n`;
   output += `Starting Tyre Compound    = ${main.wetness > 2 ? '[WET] ウェットタイヤ' : '[DRY] ドライタイヤ'}\n`;
   output += `(※気温 ${main.temp}°C / ${main.weatherName} に最適化済み)\n`;
 
-  if (main.camberAdvice !== "DEFAULT") {
-    output += `\n[TELEMETRY ANALYSIS]:\n- ${main.camberAdvice}\n`;
-  }
-
   output += `\n[SESSION EVOLUTION (Slots 1-5)]\n`;
   output += `SLOT | WEATHER        | TEMP | TC | BB%  | TYRE\n`;
   output += `----------------------------------------------\n`;
   results.forEach((r, i) => {
     const tyre = r.wetness > 2 ? 'WET ' : 'DRY ';
-    output += `${i+1}    | ${r.weatherName.padEnd(14)} | ${r.temp}°C | ${r.tcMap.toString().padEnd(2)} | ${r.brakeBalance.toFixed(1)} | ${tyre}\n`;
+    output += `${i+1}    | ${r.weatherName.padEnd(14)} | ${r.temp}°C | ${Math.round(r.tcMap).toString().padEnd(2)} | ${r.brakeBalance.toFixed(1)} | ${tyre}\n`;
   });
 
   output += `\n------------------------------------\n`;
-  output += `ENGINEERING ADVICE (v3.4 Strategy):\n`;
+  output += `ENGINEERING ADVICE (v3.5 Damped Strategy):\n`;
   
-  if (main.bumpiness === 'BUMPY') {
-    output += `- 路面凹凸に対応するため、車高とパッカーの設定も現状から ${main.rhFront >= baseline.rhFront ? '上げる' : '調整する'} 方向で再確認してください。\n`;
-  }
-  
-  if (profileId === 'aggressive') {
-    if (main.tcMap <= 1 && baseline.tcMap <= 1) {
-      output += `- 既に限界（TC 1）設定です。これ以上の削減は挙動破綻のリスクが高いため、タイヤ管理を優先してください。\n`;
-    } else {
-      output += `- 回頭性を高めるために、高速コーナーでの安定性が不足する場合は、リアウイングをさらに+1上げる検討をしてください。\n`;
-    }
-  } else if (profileId === 'stable') {
-    output += `- 加速時のリアを安定させるため、ディファレンシャルのプリロードを上げ目に調整しています。\n`;
-  }
-
-  const rainySlots = results.filter(r => r.wetness > 2).length;
-  if (rainySlots > 0 && rainySlots < 5) {
-    output += `- レース中の降雨が予想されます。路面が濡れ始めたら即座にBBを${results.find(r => r.wetness > 2).brakeBalance.toFixed(1)}%に移行してください。\n`;
+  const hasIssues = main.tcMap !== baseline.tcMap || main.brakeBalance !== baseline.brakeBalance;
+  if (!hasIssues) {
+    output += `- 現状の設定（Baseline）は現在のコンディションに対して非常に安定しています。維持を推奨します。\n`;
+  } else {
+    output += `- ご友人のフィードバックに基づき、一気に数値を動かさず、現状をベースとした微調整（Smoothing）を行っています。\n`;
+    output += `- 特定の走行フェーズにおける挙動不満を解消するため、関連項目をピンポイントで最適化しました。\n`;
   }
 
   return output;
@@ -397,9 +316,9 @@ export default function AISetupTool() {
   
   // Smart Analysis (v3.0)
   const [diagnostics, setDiagnostics] = useState({
-    slowCorner: 'none',
-    fastCorner: 'none',
-    chicanes: 'none',
+    entry: 'none',
+    mid: 'none',
+    exit: 'none',
     curbs: 'none'
   });
   const [telemetry, setTelemetry] = useState(null);
@@ -457,7 +376,11 @@ export default function AISetupTool() {
 
       // Extract values from SVM (LMU/rF2 format)
       const tc1 = findVal('TractionControlSetting');
-      if (tc1 !== null) newBaseline.tcMap = tc1 + 1; // SVM is often 0-indexed
+      if (tc1 !== null) newBaseline.tcMap = tc1 + 1;
+      const tc2 = findVal('TC2MapSetting');
+      if (tc2 !== null) newBaseline.tcPower = tc2 + 1;
+      const tc3 = findVal('TC3MapSetting');
+      if (tc3 !== null) newBaseline.tcSlip = tc3 + 1;
       
       const abs = findVal('ABSSetting');
       if (abs !== null) newBaseline.absMap = abs + 1;
@@ -486,11 +409,16 @@ export default function AISetupTool() {
       const arbr = findVal('RAntiRollBarSetting');
       if (arbr !== null) newBaseline.arbRear = arbr;
 
+      const pkf = findVal('FPackerSetting');
+      if (pkf !== null) newBaseline.packerFront = pkf;
+      const pkr = findVal('RPackerSetting');
+      if (pkr !== null) newBaseline.packerRear = pkr;
+
       const pre = findVal('DiffPreloadSetting');
       if (pre !== null) newBaseline.preload = pre;
 
       setBaselineSetup(newBaseline);
-      alert('.svmファイルを読み込み、現在の設定に反映しました。');
+      alert('.svmファイルを読み取り、トラクションコントロール、リアサスペンションを含む全項目を反映しました。');
     };
     reader.readAsText(file);
   };
@@ -506,24 +434,17 @@ export default function AISetupTool() {
     
     // Simulate brief processing for premium feel
     setTimeout(() => {
-      const results = sessionSlots.map(slot => calculateSetup({
-        classId, modelId, circuitId: circuit, profileId: profile, mode,
-        weatherId: slot.weatherId || 'clear',
-        ambientTemp: slot.temp,
-        diagnostics,
-        telemetry
-      }));
-
-      const output = formatOutput(results, { classId, modelId, circuitId: circuit, profileId: profile, mode }, baselineSetup);
-      setSetup(output);
+      const config = { classId, modelId, circuitId: circuit, profileId: profile, mode };
+      const results = sessionSlots.map(slot => calculateSetup(config, diagnostics, telemetry, slot, baselineSetup));
+      
+      setSetup(formatOutput(results, config, baselineSetup));
       setIsGenerating(false);
       setIsFirstGen(false);
-
-      // Auto-scroll to results
-      setTimeout(() => {
-        outputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }, 800);
+      
+      if (outputRef.current) {
+        outputRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 1500);
   };
 
   const handleCsvUpload = (e) => {
@@ -775,57 +696,82 @@ export default function AISetupTool() {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                  {/* Common Electronics */}
+                  {/* Common Electronics & Brakes */}
                   {[
-                    { label: 'TC1', key: 'tcMap', step: 1, min: 1, max: 12 },
-                    { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
-                    { label: 'BB%', key: 'brakeBalance', step: 0.5, min: 45, max: 75 }
+                    { label: 'Traction Control', key: 'tcMap', step: 1, min: 1, max: 12 },
+                    { label: 'TC Power Cut', key: 'tcPower', step: 1, min: 1, max: 12 },
+                    { label: 'TC Slip Angle', key: 'tcSlip', step: 1, min: 1, max: 12 },
+                    { label: 'ABS Map', key: 'absMap', step: 1, min: 1, max: 12 },
+                    { label: 'Brake Balance (%)', key: 'brakeBalance', step: 0.5, min: 45, max: 75 },
+                    { label: 'Brake Ducts (F/R)', key: 'brakeDucts', step: 1, min: 0, max: 6 }
                   ].map(item => (
                     <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                       <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.max(item.min, prev[item.key] - item.step)}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>-</button>
-                        <span style={{ fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace' }}>{baselineSetup[item.key]}</span>
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.min(item.max, prev[item.key] + item.step)}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>+</button>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem' }}>
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.max(item.min || -100, prev[item.key] - item.step)}))} style={{ color: '#00f0ff', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>-</button>
+                        <input
+                          type="number"
+                          value={baselineSetup[item.key]}
+                          step={item.step}
+                          onChange={(e) => {
+                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value);
+                            setBaselineSetup(prev => ({...prev, [item.key]: val}));
+                          }}
+                          style={{ width: '100%', backgroundColor: 'transparent', border: 'none', textAlign: 'center', fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', outline: 'none' }}
+                        />
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.min(item.max || 1000, prev[item.key] + item.step)}))} style={{ color: '#00f0ff', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>+</button>
                       </div>
                     </div>
                   ))}
 
-                  {/* Open Only Items */}
+                  {/* Open Only Items (Suspension & Aero) */}
                   {mode === 'open' && [
-                    { label: 'Wing', key: 'rearWing', step: 1, min: 0, max: 20 },
-                    { label: 'RH Front', key: 'rhFront', step: 1, min: -20, max: 100 },
-                    { label: 'RH Rear', key: 'rhRear', step: 1, min: -20, max: 100 },
-                    { label: 'Ducts', key: 'brakeDucts', step: 1, min: 0, max: 6 },
-                    { label: 'Spring F', key: 'springFront', step: 1, min: -10, max: 10 },
-                    { label: 'ARB F', key: 'arbFront', step: 1, min: -5, max: 5 }
+                    { label: 'Rear Wing (Clicks)', key: 'rearWing', step: 1 },
+                    { label: 'Ride Height F (mm)', key: 'rhFront', step: 1 },
+                    { label: 'Ride Height R (mm)', key: 'rhRear', step: 1 },
+                    { label: 'Packer Front', key: 'packerFront', step: 1 },
+                    { label: 'Packer Rear', key: 'packerRear', step: 1 },
+                    { label: 'Spring Rate F', key: 'springFront', step: 1 },
+                    { label: 'Spring Rate R', key: 'springRear', step: 1 },
+                    { label: 'ARB Front', key: 'arbFront', step: 1 },
+                    { label: 'ARB Rear', key: 'arbRear', step: 1 },
+                    { label: 'Diff Preload (Nm)', key: 'preload', step: 5 }
                   ].map(item => (
                     <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                       <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] - item.step}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>-</button>
-                        <span style={{ fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace' }}>{baselineSetup[item.key]}</span>
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] + item.step}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>+</button>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem' }}>
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] - item.step}))} style={{ color: '#ff003c', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>-</button>
+                        <input
+                          type="number"
+                          value={baselineSetup[item.key]}
+                          step={item.step}
+                          onChange={(e) => {
+                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value);
+                            setBaselineSetup(prev => ({...prev, [item.key]: val}));
+                          }}
+                          style={{ width: '100%', backgroundColor: 'transparent', border: 'none', textAlign: 'center', fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', outline: 'none' }}
+                        />
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] + item.step}))} style={{ color: '#ff003c', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>+</button>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Driver Feedback */}
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{ fontSize: '9px', fontWeight: '900', color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '1rem' }}>1. 走行フィードバック</label>
+              {/* 1. Driver Feedback (v3.5 Phase Analysis) */}
+              <div style={{ marginBottom: '1.25rem' }}>
+                <label style={{ fontSize: '9px', fontWeight: '900', color: '#ff003c', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '1rem' }}>1. 走行フィードバック (Phase Analysis)</label>
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
                   {[
-                    { label: '低速コーナー', key: 'slowCorner', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (曲がりにくい)'},{v:'oversteer',t:'オーバー (流れる)'}] },
-                    { label: '高速コーナー', key: 'fastCorner', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (曲がりにくい)'},{v:'oversteer',t:'不安定 (オーバー気味)'}] },
-                    { label: 'シケイン (切り返し)', key: 'chicanes', options: [{v:'none',t:'問題なし'},{v:'unstable',t:'不安定 (ふらつく/遅れる)'}] },
-                    { label: '縁石 (走破性)', key: 'curbs', options: [{v:'none',t:'問題なし'},{v:'bumpy',t:'跳ねる (吸収不足)'}] }
+                    { label: '進入 (Entry) - ターンイン', key: 'entry', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (曲がらない)'},{v:'oversteer',t:'オーバー (不安定)'},{v:'unknown',t:'分からない / 特定不可'}] },
+                    { label: '中間 (Mid) - ボトム付近', key: 'mid', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (外に孕む)'},{v:'oversteer',t:'オーバー (回る)'},{v:'unknown',t:'分からない / 特定不可'}] },
+                    { label: '脱出 (Exit) - 立ち上がり', key: 'exit', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'パワーアンダー'},{v:'oversteer',t:'トラクション不足'},{v:'unknown',t:'分からない / 特定不可'}] },
+                    { label: '縁石 (Curbs) - 走破性', key: 'curbs', options: [{v:'none',t:'問題なし'},{v:'bumpy',t:'跳ねる (吸収不足)'},{v:'unknown',t:'分からない / 特定不可'}] }
                   ].map(item => (
                     <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                       <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</span>
                       <select 
-                        style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '0.75rem', color: 'white', outline: 'none', cursor: 'pointer' }}
+                        style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
                         value={diagnostics[item.key]}
                         onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
                       >

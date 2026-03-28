@@ -311,7 +311,7 @@ const formatOutput = (results, config) => {
   if (mode === 'open') {
     output += `\n[2. AERODYNAMICS / 空力]\n`;
     output += `Rear Wing (純正Default比) = ${main.rwOffset >= 0 ? '+' : ''}${main.rwOffset} clicks\n`;
-    output += `Brake Duct Setting (F/R)  = ${main.brakeDuctSetting}\n`;
+    output += `Brake Duct Setting (F/R)  = [ Front: ${main.brakeDuctSetting} / Rear: ${main.brakeDuctSetting} ]\n`;
 
     output += `\n[3. CHASSIS & SUSPENSION / 足回り]\n`;
     output += `Ride Height Front (車高F) = ${main.rhFront >= 0 ? '+' : ''}${main.rhFront} mm\n`;

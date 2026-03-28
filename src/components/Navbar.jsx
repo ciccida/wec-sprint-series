@@ -34,11 +34,6 @@ const Navbar = () => {
                         </a>
                     </li>
                     <li>
-                        <Link to="/setup-tool" className="nav-tool-link" style={{ borderLeft: '2px solid var(--color-primary)', paddingLeft: '10px' }}>
-                            AI SETUP ENGINEER
-                        </Link>
-                    </li>
-                    <li>
                         <Link to="/calculator" className="accent" style={{ fontWeight: 'bold' }}>
                             PIT CALC (TRIAL)
                         </Link>

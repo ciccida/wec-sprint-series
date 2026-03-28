@@ -50,7 +50,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/calculator" element={<PitCalculator />} />
-                    <Route path="/setup-tool" element={<SetupTool />} />
+                    <Route path="/ai-setup-engineer-lab-exclusive-v33" element={<SetupTool />} />
                 </Routes>
             </Layout>
         </Router>

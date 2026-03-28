@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Settings, 
@@ -112,7 +112,7 @@ const calculateSetup = (config) => {
   const models = CAR_MODELS[classId] || [];
   const model = models.find(m => m.id === modelId) || models[0];
   const circuit = CIRCUITS.find(cir => cir.id === circuitId);
-  const weather = WEATHER_CONDITIONS.find(w => w.id === weatherId);
+  const weather = WEATHER_CONDITIONS.find(w => w.id === weatherId) || WEATHER_CONDITIONS[0];
 
   // LMU DEFAULT BASELINE LOGIC (v2.2)
   
@@ -215,7 +215,7 @@ const calculateSetup = (config) => {
   const tempScaleSteps = Math.floor(tempDiff / 5);
   const brakeDuctSetting = 2 + (tempScaleSteps > 0 ? Math.min(tempScaleSteps, 3) : 0) + (weather.wetness > 2 ? 1 : 0);
 
-  // 4. Chassis & Suspension (v2.3 Full Expansion)
+  // 4. Chassis & Suspension (v3.3 Full Expansion)
   // Base values relative to LMU Default Medium Downforce
   
   // Ride Height (RH)
@@ -277,7 +277,7 @@ const calculateSetup = (config) => {
   return {
     tcMap, tcPower, tcSlip, absMap, brakeBalance, brakeDuctSetting, 
     rwOffset, rhFront, rhRear, springFront, springRear, arbFront, arbRear, damperAdvice,
-    preloadSetting, preloadNm, 
+    preloadSetting, preloadNm, camberAdvice,
     wetness: weather.wetness,
     weatherName: weather.name,
     temp: ambientTemp,
@@ -293,7 +293,7 @@ const formatOutput = (results, config) => {
   const circuit = CIRCUITS.find(cir => cir.id === circuitId);
   const profile = DRIVER_PROFILES.find(p => p.id === profileId);
 
-  let output = `--- LMU AI SETUP ENGINEER OUTPUT v2.3 (FULL OPEN) ---\n`;
+  let output = `--- LMU AI SETUP ENGINEER OUTPUT v3.3 (FULL OPEN) ---\n`;
   output += `CAR: ${model.name} (${carClass.name})\n`;
   output += `TRACK: ${circuit.name} [Property: ${circuit.bumpiness}]\n`;
   output += `DRIVER PROFILE: ${profile.name}\n`;
@@ -343,7 +343,7 @@ const formatOutput = (results, config) => {
   });
 
   output += `\n------------------------------------\n`;
-  output += `ENGINEERING ADVICE (v2.3 Strategy):\n`;
+  output += `ENGINEERING ADVICE (v3.3 Strategy):\n`;
   
   if (main.bumpiness === 'BUMPY') {
     output += `- 路面凹凸に対応するため、特にフロントサスペンションのバンプストップの設定も確認してください。\n`;
@@ -381,6 +381,10 @@ export default function AISetupTool() {
   });
   const [telemetry, setTelemetry] = useState(null);
   const [bestTime, setBestTime] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isFirstGen, setIsFirstGen] = useState(true);
+  
+  const outputRef = useRef(null);
   
   // 5-slot Session Forecast
   const [sessionSlots, setSessionSlots] = useState([
@@ -400,19 +404,30 @@ export default function AISetupTool() {
     setModelId(firstModel);
   }, [classId]);
 
-  // Generate setup on state change
-  useEffect(() => {
-    const results = sessionSlots.map(slot => calculateSetup({
-      classId, modelId, circuitId: circuit, profileId: profile, mode,
-      weatherId: slot.weatherId,
-      ambientTemp: slot.temp,
-      diagnostics,
-      telemetry
-    }));
+  const handleGenerateSetup = () => {
+    setIsGenerating(true);
+    
+    // Simulate brief processing for premium feel
+    setTimeout(() => {
+      const results = sessionSlots.map(slot => calculateSetup({
+        classId, modelId, circuitId: circuit, profileId: profile, mode,
+        weatherId: slot.weatherId || 'clear',
+        ambientTemp: slot.temp,
+        diagnostics,
+        telemetry
+      }));
 
-    const output = formatOutput(results, { classId, modelId, circuitId: circuit, profileId: profile, mode });
-    setSetup(output);
-  }, [classId, modelId, circuit, profile, mode, sessionSlots, diagnostics, telemetry]);
+      const output = formatOutput(results, { classId, modelId, circuitId: circuit, profileId: profile, mode });
+      setSetup(output);
+      setIsGenerating(false);
+      setIsFirstGen(false);
+
+      // Auto-scroll to results
+      setTimeout(() => {
+        outputRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }, 800);
+  };
 
   const handleCsvUpload = (e) => {
     const file = e.target.files[0];
@@ -452,7 +467,7 @@ export default function AISetupTool() {
           <div className="flex items-center gap-3 mb-2">
             <Zap className="text-[#00f0ff]" size={32} />
             <h1 className="text-4xl font-black italic tracking-tighter uppercase">
-              AI <span className="text-[#ff003c]">Setup</span> Engineer <span className="text-xs bg-[#ff003c] text-white px-2 py-0.5 rounded ml-2 not-italic tracking-normal">v3.2</span>
+              AI <span className="text-[#ff003c]">Setup</span> Engineer <span className="text-xs bg-[#ff003c] text-white px-2 py-0.5 rounded ml-2 not-italic tracking-normal">v3.3</span>
             </h1>
           </div>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
@@ -465,14 +480,15 @@ export default function AISetupTool() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
           {/* COL 1: BASIC SETTINGS */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="bg-[#121212] rounded-2xl p-5 border border-white/5 shadow-2xl h-full">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-500 tracking-widest">
+          <div className="lg:col-span-4 flex flex-col h-full">
+            <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl h-full flex flex-col">
+              <div className="space-y-5 flex-1 overflow-y-auto pr-1">
+                {/* 1. Class Selection */}
+                <div className="space-y-3">
+                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
                     <Car size={14} /> 1. Class
                   </label>
                   <div className="grid grid-cols-2 gap-2">
@@ -480,10 +496,10 @@ export default function AISetupTool() {
                       <button
                         key={c.id}
                         onClick={() => setClassId(c.id)}
-                        className={`py-2 px-2 rounded-lg text-[9px] font-bold transition-all border ${
-                          classId === c.id 
-                          ? 'bg-[#ff003c] border-[#ff003c] text-white shadow-lg' 
-                          : 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10'
+                        className={`text-[10px] font-black py-3.5 px-2 rounded-xl border transition-all tracking-wider ${
+                          classId === c.id
+                            ? 'bg-[#ff003c] border-[#ff003c] text-white shadow-[0_0_20px_rgba(255,0,60,0.4)]'
+                            : 'bg-black/40 border-white/5 text-slate-500 hover:border-white/20 hover:text-slate-300'
                         }`}
                       >
                         {c.name}
@@ -492,99 +508,116 @@ export default function AISetupTool() {
                   </div>
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-white/5">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-500 tracking-widest">
-                    <ChevronRight size={14} className="text-[#ff003c]" /> 2. Vehicle
+                {/* 2. Vehicle Selection */}
+                <div className="space-y-3">
+                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                    <ChevronRight size={14} /> 2. Vehicle
                   </label>
-                  <select 
-                    value={modelId}
-                    onChange={(e) => setModelId(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-[11px] font-bold focus:ring-2 focus:ring-[#ff003c] outline-none appearance-none cursor-pointer"
-                  >
-                    {(CAR_MODELS[classId] || []).map((m) => (
-                      <option key={m.id} value={m.id} className="bg-[#121212]">{m.name}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="space-y-3 pt-4 border-t border-white/5">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-slate-500 tracking-widest">
-                    <MapPin size={14} /> 3. Circuit
-                  </label>
-                  <select 
-                    value={circuit}
-                    onChange={(e) => setCircuit(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-[11px] font-bold focus:ring-2 focus:ring-[#ff003c] outline-none appearance-none cursor-pointer"
-                  >
-                    {CIRCUITS.map((cir) => (
-                      <option key={cir.id} value={cir.id} className="bg-[#121212]">{cir.name}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 pt-4 border-t border-white/5">
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-2 text-[9px] font-black uppercase text-slate-500 tracking-widest">
-                      <Settings size={12} /> 4. Mode
-                    </label>
-                    <div className="flex bg-black p-1 rounded-lg border border-white/5">
-                      {['fixed', 'open'].map((m) => (
-                        <button
-                          key={m}
-                          onClick={() => setMode(m)}
-                          className={`flex-1 py-1 rounded text-[8px] font-black uppercase transition-all ${
-                            mode === m ? 'bg-[#ff003c] text-white' : 'text-slate-500'
-                          }`}
-                        >
-                          {m.toUpperCase()}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-2 text-[9px] font-black uppercase text-slate-500 tracking-widest">
-                      <ShieldCheck size={12} /> 5. Profile
-                    </label>
-                    <select 
-                      value={profile}
-                      onChange={(e) => setProfile(e.target.value)}
-                      className="w-full bg-black border border-white/10 rounded-lg px-2 py-1 text-[9px] font-bold text-slate-300 outline-none"
+                  <div className="relative group">
+                    <select
+                      className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl p-3.5 text-[12px] font-bold text-white outline-none cursor-pointer focus:border-[#ff003c]/40 transition-all appearance-none"
+                      value={modelId}
+                      onChange={(e) => setModelId(e.target.value)}
                     >
-                      {DRIVER_PROFILES.map(p => (
-                        <option key={p.id} value={p.id}>{p.name}</option>
+                      {(CAR_MODELS[classId] || []).map((m) => (
+                        <option key={m.id} value={m.id} className="bg-black">{m.name}</option>
                       ))}
                     </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#ff003c] transition-colors">
+                      <ChevronRight size={16} />
+                    </div>
                   </div>
+                </div>
+
+                {/* 3. Circuit Selection */}
+                <div className="space-y-3">
+                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                    <MapPin size={14} /> 3. Circuit
+                  </label>
+                  <div className="relative group">
+                    <select
+                      className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl p-3.5 text-[12px] font-bold text-white outline-none cursor-pointer focus:border-[#ff003c]/40 transition-all appearance-none"
+                      value={circuit}
+                      onChange={(e) => setCircuit(e.target.value)}
+                    >
+                      {CIRCUITS.map((cir) => (
+                        <option key={cir.id} value={cir.id} className="bg-black">{cir.name}</option>
+                      ))}
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#ff003c] transition-colors">
+                      <ChevronRight size={16} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Setup Mode */}
+                <div className="space-y-3">
+                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                    <Settings size={14} /> 4. Mode
+                  </label>
+                  <div className="flex bg-black/40 p-1 rounded-xl border border-white/5">
+                    {['fixed', 'open'].map((m) => (
+                      <button
+                        key={m}
+                        onClick={() => setMode(m)}
+                        className={`flex-1 text-[10px] font-black py-3 rounded-lg transition-all uppercase tracking-widest ${
+                          mode === m 
+                            ? 'bg-[#ff003c] text-white shadow-lg' 
+                            : 'text-slate-500 hover:text-slate-300'
+                        }`}
+                      >
+                        {m}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 5. Strategy Profile */}
+                <div className="space-y-3 pb-2">
+                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                    <ShieldCheck size={14} /> 5. Profile
+                  </label>
+                  <select
+                    className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl p-3.5 text-[11px] font-bold text-white outline-none cursor-pointer focus:border-[#ff003c]/40 transition-all"
+                    value={profile}
+                    onChange={(e) => setProfile(e.target.value)}
+                  >
+                    {DRIVER_PROFILES.map(p => (
+                      <option key={p.id} value={p.id} className="bg-black">{p.name}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* COL 2: SESSION FORECAST */}
-          <div className="lg:col-span-3 space-y-6 flex flex-col h-full">
-            <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl space-y-4 flex-1">
+          {/* COL 2: CENTER: SESSION FORECAST */}
+          <div className="lg:col-span-4 flex flex-col h-full">
+            <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl space-y-4 h-full flex flex-col">
               <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
                 <Wind size={14} /> Forecast
               </label>
-              <div className="space-y-2.5">
+              <div className="grid grid-cols-1 gap-1.5 overflow-y-auto pr-1">
                 {sessionSlots.map((slot, index) => (
-                  <div key={index} className="flex flex-col gap-1 bg-black/40 p-2.5 rounded-xl border border-white/5 hover:border-white/10 transition-all text-white">
+                  <div key={index} className="flex flex-col gap-2 bg-black/40 p-3.5 rounded-xl border border-white/5 hover:border-white/10 transition-all text-white">
                     <div className="flex justify-between items-center px-1">
-                      <span className="text-[8px] font-black text-slate-600 uppercase">Slot #{index + 1}</span>
-                      <div className="flex items-center gap-1.5 bg-black/60 rounded px-2 py-0.5 border border-white/5">
-                        <Thermometer size={10} className="text-[#ff003c]" />
+                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Slot #{index + 1}</span>
+                      <div className="flex items-center gap-2 bg-black/60 rounded-md px-2 py-1 border border-white/5">
+                        <Thermometer size={14} className="text-[#ff003c]" />
                         <input
                           type="number"
                           value={slot.temp}
-                          onChange={(e) => updateSlot(index, 'temp', parseInt(e.target.value))}
-                          className="w-9 bg-transparent text-[10px] font-mono font-bold text-white outline-none"
+                          onChange={(e) => {
+                            const val = e.target.value === '' ? 0 : parseInt(e.target.value);
+                            updateSlot(index, 'temp', val);
+                          }}
+                          className="w-12 bg-transparent text-[13px] font-mono font-bold text-white outline-none"
                         />
-                        <span className="text-[8px] font-bold text-slate-500">°C</span>
+                        <span className="text-[10px] font-bold text-slate-500">°C</span>
                       </div>
                     </div>
                     <select
-                      className="bg-transparent text-[10px] font-bold text-slate-300 outline-none cursor-pointer hover:text-[#00f0ff] transition-colors"
+                      className="w-full bg-transparent text-[12px] font-bold text-slate-300 outline-none cursor-pointer hover:text-[#00f0ff] transition-colors border-t border-white/5 pt-2 mt-1"
                       value={slot.weatherId}
                       onChange={(e) => updateSlot(index, 'weatherId', e.target.value)}
                     >
@@ -595,16 +628,11 @@ export default function AISetupTool() {
                   </div>
                 ))}
               </div>
-              <div className="pt-4 text-center border-t border-white/5">
-                <p className="text-[8px] text-slate-600 font-mono uppercase tracking-[0.2em] animate-pulse">
-                  Strategy Active
-                </p>
-              </div>
             </div>
           </div>
 
           {/* COL 3: SMART ANALYSIS LAB */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-4 flex flex-col h-full">
             <div className="bg-[#111] rounded-2xl p-5 border border-[#ff003c]/20 shadow-[0_0_20px_rgba(255,0,60,0.1)] space-y-5 h-full">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-[#ff003c]/20 rounded-lg">
@@ -689,11 +717,45 @@ export default function AISetupTool() {
             </div>
           </div>
 
+          {/* ACTION BUTTON: CENTERED BELOW FORECAST */}
+          <div className="lg:col-start-5 lg:col-span-4 mt-2">
+            <motion.button
+              whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(255,0,60,0.4)' }}
+              whileTap={{ scale: 0.98 }}
+              onClick={handleGenerateSetup}
+              disabled={isGenerating}
+              className={`
+                w-full relative overflow-hidden px-4 py-6 rounded-2xl font-black italic tracking-[0.15em] uppercase text-sm transition-all
+                ${isGenerating 
+                  ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed' 
+                  : 'bg-gradient-to-r from-[#ff003c] via-[#ff4d79] to-[#ff003c] bg-[length:200%_auto] animate-gradient-x text-white shadow-[0_0_20px_rgba(255,0,60,0.2)] hover:shadow-[0_0_40px_rgba(255,0,60,0.5)]'
+                }
+              `}
+            >
+              <div className="flex items-center justify-center gap-3">
+                {isGenerating ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                    <span>ANALYZING...</span>
+                  </>
+                ) : (
+                  <>
+                    <Zap size={20} className="animate-pulse" />
+                    <span>GENERATE SETUP</span>
+                  </>
+                )}
+              </div>
+              {!isGenerating && (
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full hover:animate-[shimmer_2s_infinite] pointer-events-none" />
+              )}
+            </motion.button>
+          </div>
+
           {/* BOTTOM: OUTPUT ONLY */}
-          <div className="lg:col-span-12 space-y-6 mt-6 border-t border-white/5 pt-12">
+          <div ref={outputRef} className={`lg:col-span-12 space-y-6 mt-6 border-t border-white/5 pt-12 transition-all duration-1000 ${isFirstGen ? 'opacity-20 grayscale scale-[0.98]' : 'opacity-100'}`}>
             <div className="flex items-center justify-between px-2 mb-2">
               <label className="flex items-center gap-2 text-xs font-black uppercase text-slate-500 tracking-widest">
-                <ShieldCheck size={14} className="text-[#ff003c]" /> Computed Setup Data (v3.2)
+                <ShieldCheck size={14} className="text-[#ff003c]" /> Computed Setup Data (v3.3)
               </label>
               <button
                 onClick={copyToClipboard}
@@ -736,7 +798,7 @@ export default function AISetupTool() {
         {/* Footer info */}
         <footer className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600">
           <p className="text-[10px] font-mono uppercase tracking-widest text-[#ff003c]">
-            AI SETUP ENGINEER v3.2.0 // SMART ANALYSIS LAB // OPTIMIZED FOR LMU 2025
+            AI SETUP ENGINEER v3.3.0 // SMART ANALYSIS LAB // OPTIMIZED FOR LMU 2025
           </p>
           <div className="flex key-value gap-6">
              <span className="text-[10px] font-mono">[ STRATEGY ENGINE ACTIVE ]</span>

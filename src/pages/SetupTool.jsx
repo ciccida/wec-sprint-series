@@ -721,7 +721,7 @@ export default function AISetupTool() {
                     { label: 'TC Power Cut', key: 'tcPower', step: 1, min: 1, max: 12 },
                     { label: 'TC Slip Angle', key: 'tcSlip', step: 1, min: 1, max: 12 },
                     { label: 'ABS Map', key: 'absMap', step: 1, min: 1, max: 12 },
-                    { label: 'Brake Balance (%)', key: 'brakeBalance', step: 0.5, min: 45, max: 75 },
+                    { label: 'Brake Balance (Front %)', key: 'brakeBalance', step: 0.5, min: 45, max: 75 },
                     { label: 'Brake Ducts (F/R)', key: 'brakeDucts', step: 1, min: 0, max: 6 }
                   ].map(item => (
                     <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>

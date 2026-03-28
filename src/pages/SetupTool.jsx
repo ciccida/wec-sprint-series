@@ -343,7 +343,7 @@ export default function AISetupTool() {
   const [setup, setSetup] = useState('');
   const [copied, setCopied] = useState(false);
 
-  // v3.4 Baseline Setup State
+  // v3.5 Baseline Setup State
   const [baselineSetup, setBaselineSetup] = useState({
     tcMap: 2,
     absMap: 2,
@@ -701,7 +701,7 @@ export default function AISetupTool() {
                   </div>
                   <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', letterSpacing: '-0.025em', textTransform: 'uppercase', margin: 0 }}>Smart Analysis Lab</h3>
                 </div>
-                <div style={{ fontSize: '10px', color: '#ff003c', fontWeight: 'bold' }}>v3.4 PR</div>
+                <div style={{ fontSize: '10px', color: '#ff003c', fontWeight: 'bold' }}>v3.5</div>
               </div>
 
               {/* 0. CURRENT BASELINE (NEW) */}
@@ -914,7 +914,7 @@ export default function AISetupTool() {
         {/* Footer info */}
         <footer className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600">
           <p className="text-[10px] font-mono uppercase tracking-widest text-[#ff003c]">
-            AI SETUP ENGINEER v3.3.0 // SMART ANALYSIS LAB // OPTIMIZED FOR LMU 2025
+            AI SETUP ENGINEER v3.5.0 // SMART ANALYSIS LAB // OPTIMIZED FOR LMU 2025
           </p>
           <div className="flex key-value gap-6">
              <span className="text-[10px] font-mono">[ STRATEGY ENGINE ACTIVE ]</span>

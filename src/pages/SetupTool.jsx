@@ -471,18 +471,18 @@ export default function AISetupTool() {
       <div className="max-w-6xl mx-auto py-12">
         
         {/* Header */}
-        <header className="mb-12 border-l-4 border-[#ff003c] pl-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Zap className="text-[#00f0ff]" size={32} />
-            <h1 className="text-4xl font-black italic tracking-tighter uppercase">
-              AI <span className="text-[#ff003c]">Setup</span> Engineer <span className="text-xs bg-[#ff003c] text-white px-2 py-0.5 rounded ml-2 not-italic tracking-normal">v3.3</span>
+        <header style={{ marginBottom: '3rem', borderLeft: '4px solid #ff003c', paddingLeft: '1.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+            <Zap style={{ color: '#00f0ff' }} size={32} />
+            <h1 style={{ fontSize: '2.25rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
+              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.75rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.3</span>
             </h1>
           </div>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
-            <p className="text-slate-400 font-mono text-xs tracking-widest uppercase">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <p style={{ color: '#94a3b8', fontFamily: 'monospace', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>
               Le Mans Ultimate - Professional Race Engineering Module
             </p>
-            <p className="text-[#00f0ff] font-mono text-xs tracking-widest uppercase opacity-70">
+            <p style={{ color: '#00f0ff', fontFamily: 'monospace', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', opacity: 0.7, margin: 0 }}>
               [ 2024/25 Season & DLC Ready ]
             </p>
           </div>
@@ -498,26 +498,32 @@ export default function AISetupTool() {
           
           {/* COL 1: BASIC SETTINGS */}
           <div 
-            className="flex flex-col h-full"
-            style={{ gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto' }}
+            style={{ 
+              gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%'
+            }}
           >
-            <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl h-full flex flex-col">
-              <div className="space-y-5 flex-1 overflow-y-auto pr-1">
+            <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ spaceY: '1.25rem', flex: 1, overflowY: 'auto', paddingRight: '0.25rem' }}>
                 {/* 1. Class Selection */}
-                <div className="space-y-3">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
                     <Car size={14} /> 1. Class
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
                     {CAR_CLASSES.map((c) => (
                       <button
                         key={c.id}
                         onClick={() => setClassId(c.id)}
-                        className={`text-[10px] font-black py-3.5 px-2 rounded-xl border transition-all tracking-wider ${
-                          classId === c.id
-                            ? 'bg-[#ff003c] border-[#ff003c] text-white shadow-[0_0_20px_rgba(255,0,60,0.4)]'
-                            : 'bg-black/40 border-white/5 text-slate-500 hover:border-white/20 hover:text-slate-300'
-                        }`}
+                        style={{
+                          fontSize: '10px', fontWeight: '900', padding: '0.875rem 0.5rem', borderRadius: '0.75rem', border: '1px solid', transition: 'all', letterSpacing: '0.05em', cursor: 'pointer',
+                          backgroundColor: classId === c.id ? '#ff003c' : 'rgba(0,0,0,0.4)',
+                          borderColor: classId === c.id ? '#ff003c' : 'rgba(255,255,255,0.05)',
+                          color: classId === c.id ? 'white' : '#64748b',
+                          boxShadow: classId === c.id ? '0 0 20px rgba(255,0,60,0.4)' : 'none'
+                        }}
                       >
                         {c.name}
                       </button>
@@ -526,62 +532,56 @@ export default function AISetupTool() {
                 </div>
 
                 {/* 2. Vehicle Selection */}
-                <div className="space-y-3">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
                     <ChevronRight size={14} /> 2. Vehicle
                   </label>
-                  <div className="relative group">
+                  <div style={{ position: 'relative' }}>
                     <select
-                      className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl p-3.5 text-[12px] font-bold text-white outline-none cursor-pointer focus:border-[#ff003c]/40 transition-all appearance-none"
+                      style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.75rem', padding: '0.875rem', fontSize: '12px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer', appearance: 'none' }}
                       value={modelId}
                       onChange={(e) => setModelId(e.target.value)}
                     >
                       {(CAR_MODELS[classId] || []).map((m) => (
-                        <option key={m.id} value={m.id} className="bg-black">{m.name}</option>
+                        <option key={m.id} value={m.id} style={{ backgroundColor: 'black' }}>{m.name}</option>
                       ))}
                     </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#ff003c] transition-colors">
-                      <ChevronRight size={16} />
-                    </div>
                   </div>
                 </div>
 
                 {/* 3. Circuit Selection */}
-                <div className="space-y-3">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
                     <MapPin size={14} /> 3. Circuit
                   </label>
-                  <div className="relative group">
+                  <div style={{ position: 'relative' }}>
                     <select
-                      className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl p-3.5 text-[12px] font-bold text-white outline-none cursor-pointer focus:border-[#ff003c]/40 transition-all appearance-none"
+                      style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.75rem', padding: '0.875rem', fontSize: '12px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer', appearance: 'none' }}
                       value={circuit}
                       onChange={(e) => setCircuit(e.target.value)}
                     >
                       {CIRCUITS.map((cir) => (
-                        <option key={cir.id} value={cir.id} className="bg-black">{cir.name}</option>
+                        <option key={cir.id} value={cir.id} style={{ backgroundColor: 'black' }}>{cir.name}</option>
                       ))}
                     </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600 group-hover:text-[#ff003c] transition-colors">
-                      <ChevronRight size={16} />
-                    </div>
                   </div>
                 </div>
 
                 {/* 4. Setup Mode */}
-                <div className="space-y-3">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                <div style={{ marginBottom: '1.25rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
                     <Settings size={14} /> 4. Mode
                   </label>
-                  <div className="flex bg-black/40 p-1 rounded-xl border border-white/5">
+                  <div style={{ display: 'flex', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.25rem', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                     {['fixed', 'open'].map((m) => (
                       <button
                         key={m}
                         onClick={() => setMode(m)}
-                        className={`flex-1 text-[10px] font-black py-3 rounded-lg transition-all uppercase tracking-widest ${
-                          mode === m 
-                            ? 'bg-[#ff003c] text-white shadow-lg' 
-                            : 'text-slate-500 hover:text-slate-300'
-                        }`}
+                        style={{
+                          flex: 1, fontSize: '10px', fontWeight: '900', padding: '0.75rem 0', borderRadius: '0.5rem', transition: 'all', textTransform: 'uppercase', letterSpacing: '0.1em', border: 'none', cursor: 'pointer',
+                          backgroundColor: mode === m ? '#ff003c' : 'transparent',
+                          color: mode === m ? 'white' : '#64748b'
+                        }}
                       >
                         {m}
                       </button>
@@ -590,17 +590,17 @@ export default function AISetupTool() {
                 </div>
 
                 {/* 5. Strategy Profile */}
-                <div className="space-y-3 pb-2">
-                  <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
                     <ShieldCheck size={14} /> 5. Profile
                   </label>
                   <select
-                    className="w-full bg-[#0a0a0a] border border-white/5 rounded-xl p-3.5 text-[11px] font-bold text-white outline-none cursor-pointer focus:border-[#ff003c]/40 transition-all"
+                    style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.75rem', padding: '0.875rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
                     value={profile}
                     onChange={(e) => setProfile(e.target.value)}
                   >
                     {DRIVER_PROFILES.map(p => (
-                      <option key={p.id} value={p.id} className="bg-black">{p.name}</option>
+                      <option key={p.id} value={p.id} style={{ backgroundColor: 'black' }}>{p.name}</option>
                     ))}
                   </select>
                 </div>
@@ -610,20 +610,24 @@ export default function AISetupTool() {
 
           {/* COL 2: CENTER: SESSION FORECAST */}
           <div 
-            className="flex flex-col h-full"
-            style={{ gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto' }}
+            style={{ 
+              gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%'
+            }}
           >
-            <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl space-y-4 h-full flex flex-col">
-              <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
+            <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '1rem' }}>
                 <Wind size={14} /> Forecast
               </label>
-              <div className="grid grid-cols-1 gap-1.5 overflow-y-auto pr-1">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.375rem', overflowY: 'auto', paddingRight: '0.25rem' }}>
                 {sessionSlots.map((slot, index) => (
-                  <div key={index} className="flex flex-col gap-2 bg-black/40 p-3.5 rounded-xl border border-white/5 hover:border-white/10 transition-all text-white">
-                    <div className="flex justify-between items-center px-1">
-                      <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Slot #{index + 1}</span>
-                      <div className="flex items-center gap-2 bg-black/60 rounded-md px-2 py-1 border border-white/5">
-                        <Thermometer size={14} className="text-[#ff003c]" />
+                  <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.875rem', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.05)', transition: 'all', color: 'white' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 0.25rem' }}>
+                      <span style={{ fontSize: '10px', fontWeight: '900', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Slot #{index + 1}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '0.375rem', padding: '0.25rem 0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                        <Thermometer size={14} style={{ color: '#ff003c' }} />
                         <input
                           type="number"
                           value={slot.temp}
@@ -631,18 +635,18 @@ export default function AISetupTool() {
                             const val = e.target.value === '' ? 0 : parseInt(e.target.value);
                             updateSlot(index, 'temp', val);
                           }}
-                          className="w-12 bg-transparent text-[13px] font-mono font-bold text-white outline-none"
+                          style={{ width: '3rem', backgroundColor: 'transparent', fontSize: '13px', fontFamily: 'monospace', fontWeight: 'bold', color: 'white', border: 'none', outline: 'none' }}
                         />
-                        <span className="text-[10px] font-bold text-slate-500">°C</span>
+                        <span style={{ fontSize: '10px', fontWeight: 'bold', color: '#64748b' }}>°C</span>
                       </div>
                     </div>
                     <select
-                      className="w-full bg-transparent text-[12px] font-bold text-slate-300 outline-none cursor-pointer hover:text-[#00f0ff] transition-colors border-t border-white/5 pt-2 mt-1"
+                      style={{ width: '100%', backgroundColor: 'transparent', fontSize: '12px', fontWeight: 'bold', color: '#cbd5e1', outline: 'none', cursor: 'pointer', border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.5rem', marginTop: '0.25rem' }}
                       value={slot.weatherId}
                       onChange={(e) => updateSlot(index, 'weatherId', e.target.value)}
                     >
                       {WEATHER_CONDITIONS.map(w => (
-                        <option key={w.id} value={w.id} className="bg-black">{w.name}</option>
+                        <option key={w.id} value={w.id} style={{ backgroundColor: 'black' }}>{w.name}</option>
                       ))}
                     </select>
                   </div>
@@ -653,78 +657,53 @@ export default function AISetupTool() {
 
           {/* COL 3: SMART ANALYSIS LAB */}
           <div 
-            className="flex flex-col h-full"
-            style={{ gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto' }}
+            style={{ 
+              gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto',
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%'
+            }}
           >
-            <div className="bg-[#111] rounded-2xl p-5 border border-[#ff003c]/20 shadow-[0_0_20px_rgba(255,0,60,0.1)] space-y-5 h-full">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-[#ff003c]/20 rounded-lg">
-                  <Zap size={18} className="text-[#ff003c]" />
+            <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,0,60,0.2)', boxShadow: '0 0 20px rgba(255,0,60,0.1)', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                <div style={{ padding: '0.5rem', backgroundColor: 'rgba(255,0,60,0.2)', borderRadius: '0.5rem' }}>
+                  <Zap size={18} style={{ color: '#ff003c' }} />
                 </div>
-                <h3 className="text-lg font-bold tracking-tight uppercase">Smart Analysis Lab</h3>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', letterSpacing: '-0.025em', textTransform: 'uppercase', margin: 0 }}>Smart Analysis Lab</h3>
               </div>
 
               {/* Driver Feedback */}
-              <div className="space-y-4">
-                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-[0.2em] block">1. 走行フィードバック</label>
-                <div className="space-y-3">
-                  <div className="space-y-1">
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">低速コーナー</span>
-                    <select 
-                      className="w-full bg-black border border-white/10 rounded-lg p-2 text-xs focus:border-[#ff003c] outline-none cursor-pointer"
-                      value={diagnostics.slowCorner}
-                      onChange={(e) => setDiagnostics({...diagnostics, slowCorner: e.target.value})}
-                    >
-                      <option value="none">問題なし</option>
-                      <option value="understeer">アンダー (曲がりにくい)</option>
-                      <option value="oversteer">オーバー (流れる)</option>
-                    </select>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">高速コーナー</span>
-                    <select 
-                      className="w-full bg-black border border-white/10 rounded-lg p-2 text-xs focus:border-[#ff003c] outline-none cursor-pointer"
-                      value={diagnostics.fastCorner}
-                      onChange={(e) => setDiagnostics({...diagnostics, fastCorner: e.target.value})}
-                    >
-                      <option value="none">問題なし</option>
-                      <option value="understeer">アンダー (曲がりにくい)</option>
-                      <option value="oversteer">不安定 (オーバー気味)</option>
-                    </select>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">シケイン (切り返し)</span>
-                    <select 
-                      className="w-full bg-black border border-white/10 rounded-lg p-2 text-xs focus:border-[#ff003c] outline-none cursor-pointer"
-                      value={diagnostics.chicanes}
-                      onChange={(e) => setDiagnostics({...diagnostics, chicanes: e.target.value})}
-                    >
-                      <option value="none">問題なし</option>
-                      <option value="unstable">不安定 (ふらつく/遅れる)</option>
-                    </select>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">縁石 (走破性)</span>
-                    <select 
-                      className="w-full bg-black border border-white/10 rounded-lg p-2 text-xs focus:border-[#ff003c] outline-none cursor-pointer"
-                      value={diagnostics.curbs}
-                      onChange={(e) => setDiagnostics({...diagnostics, curbs: e.target.value})}
-                    >
-                      <option value="none">問題なし</option>
-                      <option value="bumpy">跳ねる (吸収不足)</option>
-                    </select>
-                  </div>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ fontSize: '9px', fontWeight: '900', color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '1rem' }}>1. 走行フィードバック</label>
+                <div style={{ display: 'grid', gap: '0.75rem' }}>
+                  {[
+                    { label: '低速コーナー', key: 'slowCorner', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (曲がりにくい)'},{v:'oversteer',t:'オーバー (流れる)'}] },
+                    { label: '高速コーナー', key: 'fastCorner', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (曲がりにくい)'},{v:'oversteer',t:'不安定 (オーバー気味)'}] },
+                    { label: 'シケイン (切り返し)', key: 'chicanes', options: [{v:'none',t:'問題なし'},{v:'unstable',t:'不安定 (ふらつく/遅れる)'}] },
+                    { label: '縁石 (走破性)', key: 'curbs', options: [{v:'none',t:'問題なし'},{v:'bumpy',t:'跳ねる (吸収不足)'}] }
+                  ].map(item => (
+                    <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</span>
+                      <select 
+                        style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '0.75rem', color: 'white', outline: 'none', cursor: 'pointer' }}
+                        value={diagnostics[item.key]}
+                        onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
+                      >
+                        {item.options.map(opt => <option key={opt.v} value={opt.v}>{opt.t}</option>)}
+                      </select>
+                    </div>
+                  ))}
                 </div>
               </div>
 
               {/* Telemetry Upload */}
-              <div className="space-y-3 pt-3 border-t border-white/5">
-                <label className="text-[9px] font-black text-zinc-500 uppercase tracking-[0.2em] block">2. MoTeC CSV データ連携</label>
-                <div className="relative border border-dashed border-white/10 rounded-xl p-4 hover:border-[#ff003c]/50 transition-colors group cursor-pointer bg-white/[0.02]">
+              <div style={{ paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '0.75rem' }}>
+                <label style={{ fontSize: '9px', fontWeight: '900', color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.75rem' }}>2. MoTeC CSV データ連携</label>
+                <div style={{ position: 'relative', border: '1px dashed rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '1rem', cursor: 'pointer', backgroundColor: 'rgba(255,255,255,0.02)' }}>
                   <input 
                     type="file" 
                     accept=".csv" 
-                    className="absolute inset-0 opacity-0 cursor-pointer"
+                    style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }}
                     onChange={handleCsvUpload}
                   />
                   <div className="text-center space-y-1.5">
@@ -742,80 +721,82 @@ export default function AISetupTool() {
 
           {/* ACTION BUTTON: CENTERED BELOW FORECAST */}
           <div 
-            className="mt-2"
-            style={{ gridColumn: isLargeScreen ? '5 / span 4' : 'auto' }}
+            style={{ 
+              gridColumn: isLargeScreen ? '5 / span 4' : 'auto',
+              marginTop: '0.5rem'
+            }}
           >
             <motion.button
-              whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(255,0,60,0.4)' }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleGenerateSetup}
               disabled={isGenerating}
-              className={`
-                w-full relative overflow-hidden px-4 py-6 rounded-2xl font-black italic tracking-[0.15em] uppercase text-sm transition-all
-                ${isGenerating 
-                  ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed' 
-                  : 'bg-gradient-to-r from-[#ff003c] via-[#ff4d79] to-[#ff003c] bg-[length:200%_auto] animate-gradient-x text-white shadow-[0_0_20px_rgba(255,0,60,0.2)] hover:shadow-[0_0_40px_rgba(255,0,60,0.5)]'
-                }
-              `}
+              style={{
+                width: '100%', position: 'relative', overflow: 'hidden', padding: '1.5rem 1rem', borderRadius: '1rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '0.15em', textTransform: 'uppercase', fontSize: '14px', transition: 'all', border: 'none', cursor: isGenerating ? 'not-allowed' : 'pointer',
+                background: isGenerating ? '#27272a' : 'linear-gradient(90deg, #ff003c, #ff4d79, #ff003c)',
+                color: isGenerating ? '#71717a' : 'white',
+                boxShadow: isGenerating ? 'none' : '0 0 20px rgba(255,0,60,0.2)'
+              }}
             >
-              <div className="flex items-center justify-center gap-3">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
                 {isGenerating ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                    <div style={{ width: '1rem', height: '1rem', border: '2px solid rgba(255,255,255,0.2)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
                     <span>ANALYZING...</span>
                   </>
                 ) : (
                   <>
-                    <Zap size={20} className="animate-pulse" />
+                    <Zap size={20} style={{ animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
                     <span>GENERATE SETUP</span>
                   </>
                 )}
               </div>
-              {!isGenerating && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full hover:animate-[shimmer_2s_infinite] pointer-events-none" />
-              )}
             </motion.button>
           </div>
 
           {/* BOTTOM: OUTPUT ONLY */}
           <div 
             ref={outputRef} 
-            className={`space-y-6 mt-6 border-t border-white/5 pt-12 transition-all duration-1000 ${isFirstGen ? 'opacity-20 grayscale scale-[0.98]' : 'opacity-100'}`}
-            style={{ gridColumn: isLargeScreen ? 'span 12 / span 12' : 'auto' }}
+            style={{ 
+              gridColumn: isLargeScreen ? 'span 12 / span 12' : 'auto',
+              marginTop: '1.5rem',
+              borderTop: '1px solid rgba(255,255,255,0.05)',
+              paddingTop: '3rem',
+              transition: 'all 1s',
+              opacity: isFirstGen ? 0.2 : 1
+            }}
           >
-            <div className="flex items-center justify-between px-2 mb-2">
-              <label className="flex items-center gap-2 text-xs font-black uppercase text-slate-500 tracking-widest">
-                <ShieldCheck size={14} className="text-[#ff003c]" /> Computed Setup Data (v3.3)
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 0.5rem', marginBottom: '0.5rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '12px', fontWeight: '900', textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.1em' }}>
+                <ShieldCheck size={14} style={{ color: '#ff003c' }} /> Computed Setup Data (v3.3)
               </label>
               <button
                 onClick={copyToClipboard}
-                className={`flex items-center gap-2 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
-                  copied ? 'bg-[#00f0ff] text-black shadow-[0_0_15px_rgba(0,240,255,0.4)]' : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'
-                }`}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1.5rem', borderRadius: '9999px', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.1em', transition: 'all', border: 'none', cursor: 'pointer',
+                  backgroundColor: copied ? '#00f0ff' : 'rgba(255,255,255,0.05)',
+                  color: copied ? 'black' : '#94a3b8'
+                }}
               >
-                {copied ? <><Check size={12} /> Copied to Clipboard</> : <><Copy size={12} /> Copy Setup Script</>}
+                {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy Script</>}
               </button>
             </div>
             
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#ff003c] via-[#00f0ff] to-[#ff003c] rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000 animate-gradient-x"></div>
-              <div className="relative bg-[#0a0a0a] rounded-2xl border border-white/10 p-8 shadow-2xl overflow-hidden min-h-[500px]">
-                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
-                  <Zap size={240} className="text-[#ff003c]" />
-                </div>
-                <pre className="font-mono text-[12px] lg:text-sm leading-relaxed text-slate-300 whitespace-pre-wrap">
+            <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative', backgroundColor: '#0a0a0a', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.1)', padding: '2rem', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', overflow: 'hidden', minHeight: '500px' }}>
+                <pre style={{ margin: 0, fontFamily: 'monospace', fontSize: '12px', lineHeight: '1.625', color: '#cbd5e1', whiteSpace: 'pre-wrap' }}>
                   {setup}
                 </pre>
               </div>
             </div>
 
-            <div className="bg-[#121212] p-5 rounded-2xl border border-white/5 flex items-start gap-4">
-              <div className="bg-[#ff003c]/20 p-2.5 rounded-xl">
-                <Info size={20} className="text-[#ff003c]" />
+            <div style={{ backgroundColor: '#121212', padding: '1.25rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'start', gap: '1rem', marginTop: '1.5rem' }}>
+              <div style={{ backgroundColor: 'rgba(255,0,60,0.2)', padding: '0.625rem', borderRadius: '0.75rem' }}>
+                <Info size={20} style={{ color: '#ff003c' }} />
               </div>
-              <div className="space-y-1.5 flex-1">
-                <p className="text-[11px] text-slate-200 font-black uppercase tracking-[0.2em]">Engineering Certification:</p>
-                <p className="text-[10px] text-slate-500 leading-relaxed max-w-3xl">
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: '11px', color: '#e2e8f0', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.2em', margin: '0 0 0.375rem 0' }}>Engineering Certification:</p>
+                <p style={{ fontSize: '10px', color: '#64748b', lineHeight: '1.625', margin: 0, maxWidth: '48rem' }}>
                   算出された設定値は Le Mans Ultimate 2025 シーズンの物理モデルに基づいています。
                   1.基本設定、2.セッション予測、3.スマート解析ラボ(診断+テレメトリ)の3つの情報源をAIが多角的に分析し、
                   対象セッションにおいて最も安定し、かつ競争力のある1周を刻むための最適化を行っています。

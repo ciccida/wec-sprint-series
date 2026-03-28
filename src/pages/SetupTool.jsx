@@ -723,7 +723,7 @@ export default function AISetupTool() {
                     { label: 'ABS Map', key: 'absMap', step: 1, min: 1, max: 12 },
                     { label: 'Brake Balance (Front %)', key: 'brakeBalance', step: 0.5, min: 45, max: 75 },
                     { label: 'Brake Ducts (F/R)', key: 'brakeDucts', step: 1, min: 0, max: 6 }
-                  ].map(item => (
+                  ].filter(item => mode === 'open' || item.key !== 'brakeDucts').map(item => (
                     <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
                       <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem' }}>

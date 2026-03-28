@@ -216,7 +216,7 @@ const calculateSetup = (config, diagnostics, telemetry, weatherSlot, baseline) =
     wetness: weather.wetness,
     weatherName: weather.name,
     temp: ambientTemp,
-    bumpiness: circuit.bumpiness,
+    bumpiness: circuit?.bumpiness || 'NORMAL',
     camberAdvice: "DEFAULT"
   };
 };
@@ -230,9 +230,9 @@ const formatOutput = (results, config, baseline) => {
   const profile = DRIVER_PROFILES.find(p => p.id === profileId);
 
   let output = `--- LMU AI SETUP ENGINEER OUTPUT v3.5 (OPTIMIZED STRATEGY) ---\n`;
-  output += `CAR: ${model.name} (${carClass.name})\n`;
-  output += `TRACK: ${circuit.name} [Property: ${circuit.bumpiness}]\n`;
-  output += `DRIVER PROFILE: ${profile.name}\n`;
+  output += `CAR: ${model?.name || 'Unknown'} (${carClass?.name || 'Common'})\n`;
+  output += `TRACK: ${circuit?.name || 'Unknown'} [Property: ${circuit?.bumpiness || 'N/A'}]\n`;
+  output += `DRIVER PROFILE: ${profile?.name || 'Standard'}\n`;
   output += `------------------------------------\n\n`;
 
   const main = results[0];
@@ -431,18 +431,34 @@ export default function AISetupTool() {
 
   const handleGenerateSetup = () => {
     setIsGenerating(true);
+    console.log("Starting Setup Generation v3.5...", { classId, modelId, circuit, profile, mode });
     
     // Simulate brief processing for premium feel
     setTimeout(() => {
-      const config = { classId, modelId, circuitId: circuit, profileId: profile, mode };
-      const results = sessionSlots.map(slot => calculateSetup(config, diagnostics, telemetry, slot, baselineSetup));
-      
-      setSetup(formatOutput(results, config, baselineSetup));
-      setIsGenerating(false);
-      setIsFirstGen(false);
-      
-      if (outputRef.current) {
-        outputRef.current.scrollIntoView({ behavior: 'smooth' });
+      try {
+        const config = { classId, modelId, circuitId: circuit, profileId: profile, mode };
+        console.log("Config built, running calculateSetup...");
+        
+        const results = sessionSlots.map((slot, idx) => {
+          console.log(`Analyzing Slot ${idx + 1}...`);
+          return calculateSetup(config, diagnostics, telemetry, slot, baselineSetup);
+        });
+        
+        console.log("Calculations complete, formatting output...");
+        const output = formatOutput(results, config, baselineSetup);
+        
+        setSetup(output);
+        setIsGenerating(false);
+        setIsFirstGen(false);
+        console.log("Setup Generation Complete.");
+        
+        if (outputRef.current) {
+          outputRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      } catch (err) {
+        console.error("SETUP_GEN_ERROR:", err);
+        alert("セットアップ計算中にエラーが発生しました: " + err.message);
+        setIsGenerating(false);
       }
     }, 1500);
   };

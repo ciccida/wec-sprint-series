@@ -279,10 +279,11 @@ const formatOutput = (results, config, baseline) => {
   output += `SLOT | WEATHER        | TEMP | TC | BB%  | TYRE\n`;
   output += `----------------------------------------------\n`;
   results.forEach((r, i) => {
-    const tyre = r.wetness > 2 ? 'WET ' : 'DRY ';
-    const wName = (r.weatherName || 'Clear').toString();
+    if (!r) return;
+    const tyre = (r.wetness || 0) > 2 ? 'WET ' : 'DRY ';
+    const wName = (r.weatherName || r.weatherId || 'Clear').toString();
     const tcStr = Math.round(r.tcMap || 0).toString();
-    output += `${i+1}    | ${wName.padEnd(14)} | ${r.temp}°C | ${tcStr.padEnd(2)} | ${(r.brakeBalance || 0).toFixed(1)} | ${tyre}\n`;
+    output += `${i+1}    | ${wName.padEnd(14)} | ${r.temp || 25}°C | ${tcStr.padEnd(2)} | ${(r.brakeBalance || 0).toFixed(1)} | ${tyre}\n`;
   });
 
   output += `\n------------------------------------\n`;

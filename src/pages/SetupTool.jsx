@@ -112,8 +112,8 @@ const calculateSetup = (config, diagnostics, telemetry, weatherSlot, baseline) =
   const models = CAR_MODELS[classId] || [];
   const model = models.find(m => m.id === modelId) || models[0];
   const circuit = CIRCUITS.find(cir => cir.id === circuitId);
-  const weather = weatherSlot || { weatherId: 'clear', temp: 25 };
-  const ambientTemp = weather.temp;
+  const weather = WEATHER_CONDITIONS.find(w => w.id === (weatherSlot?.weatherId || 'clear')) || WEATHER_CONDITIONS[0];
+  const ambientTemp = weatherSlot?.temp || weather.temp || 25;
 
   // Initialize with current user baseline
   let res = { ...baseline };
@@ -280,7 +280,9 @@ const formatOutput = (results, config, baseline) => {
   output += `----------------------------------------------\n`;
   results.forEach((r, i) => {
     const tyre = r.wetness > 2 ? 'WET ' : 'DRY ';
-    output += `${i+1}    | ${r.weatherName.padEnd(14)} | ${r.temp}°C | ${Math.round(r.tcMap).toString().padEnd(2)} | ${r.brakeBalance.toFixed(1)} | ${tyre}\n`;
+    const wName = (r.weatherName || 'Clear').toString();
+    const tcStr = Math.round(r.tcMap || 0).toString();
+    output += `${i+1}    | ${wName.padEnd(14)} | ${r.temp}°C | ${tcStr.padEnd(2)} | ${(r.brakeBalance || 0).toFixed(1)} | ${tyre}\n`;
   });
 
   output += `\n------------------------------------\n`;

@@ -11,7 +11,8 @@ import {
   Copy, 
   Check,
   ChevronRight,
-  Info
+  Info,
+  FileUp
 } from 'lucide-react';
 
 // --- DATA DEFINITIONS ---
@@ -285,7 +286,7 @@ const calculateSetup = (config) => {
   };
 };
 
-const formatOutput = (results, config) => {
+const formatOutput = (results, config, baseline) => {
   const { classId, modelId, circuitId, profileId, mode } = config;
   const carClass = CAR_CLASSES.find(c => c.id === classId);
   const models = CAR_MODELS[classId] || [];
@@ -293,7 +294,7 @@ const formatOutput = (results, config) => {
   const circuit = CIRCUITS.find(cir => cir.id === circuitId);
   const profile = DRIVER_PROFILES.find(p => p.id === profileId);
 
-  let output = `--- LMU AI SETUP ENGINEER OUTPUT v3.3 (FULL OPEN) ---\n`;
+  let output = `--- LMU AI SETUP ENGINEER OUTPUT v3.4 (BASELINE INTEGRATED) ---\n`;
   output += `CAR: ${model.name} (${carClass.name})\n`;
   output += `TRACK: ${circuit.name} [Property: ${circuit.bumpiness}]\n`;
   output += `DRIVER PROFILE: ${profile.name}\n`;
@@ -301,29 +302,39 @@ const formatOutput = (results, config) => {
 
   const main = results[0];
 
+  const getDelta = (curr, rec) => {
+    const d = rec - curr;
+    return d === 0 ? "(Optimal)" : `(${d >= 0 ? '+' : ''}${d.toFixed(1)})`;
+  };
+
+  const getDeltaInt = (curr, rec) => {
+    const d = rec - curr;
+    return d === 0 ? "(Keep)" : `(${d > 0 ? '+' : ''}${d})`;
+  };
+
   output += `[1. ELECTRONICS / 電子制御]\n`;
-  output += `Traction Control Map      = ${main.tcMap}\n`;
-  output += `TC Power Cut Map (TC2)    = ${main.tcPower}\n`;
-  output += `TC Slip Angle Map (TC3)   = ${main.tcSlip}\n`;
-  output += `Antilock Braking (ABS)    = ${main.absMap}\n`;
-  output += `Brake Balance (前後配分)  = ${main.brakeBalance.toFixed(1)}% (Front)\n`;
+  output += `Traction Control Map      = ${baseline.tcMap} -> ${main.tcMap} ${getDeltaInt(baseline.tcMap, main.tcMap)}\n`;
+  output += `TC Power Cut Map (TC2)    = ${baseline.tcPower} -> ${main.tcPower} ${getDeltaInt(baseline.tcPower, main.tcPower)}\n`;
+  output += `TC Slip Angle Map (TC3)   = ${baseline.tcSlip} -> ${main.tcSlip} ${getDeltaInt(baseline.tcSlip, main.tcSlip)}\n`;
+  output += `Antilock Braking (ABS)    = ${baseline.absMap} -> ${main.absMap} ${getDeltaInt(baseline.absMap, main.absMap)}\n`;
+  output += `Brake Balance (前後配分)  = ${baseline.brakeBalance.toFixed(1)}% -> ${main.brakeBalance.toFixed(1)}% ${getDelta(baseline.brakeBalance, main.brakeBalance)}\n`;
   
   if (mode === 'open') {
     output += `\n[2. AERODYNAMICS / 空力]\n`;
-    output += `Rear Wing (純正Default比) = ${main.rwOffset >= 0 ? '+' : ''}${main.rwOffset} clicks\n`;
+    output += `Rear Wing (基準偏移)       = ${baseline.rearWing} -> ${main.rwOffset} ${getDeltaInt(baseline.rearWing, main.rwOffset)} clicks\n`;
     output += `Brake Duct Setting (F/R)  = [ Front: ${main.brakeDuctSetting} / Rear: ${main.brakeDuctSetting} ]\n`;
 
     output += `\n[3. CHASSIS & SUSPENSION / 足回り]\n`;
-    output += `Ride Height Front (車高F) = ${main.rhFront >= 0 ? '+' : ''}${main.rhFront} mm\n`;
-    output += `Ride Height Rear  (車高R) = ${main.rhRear >= 0 ? '+' : ''}${main.rhRear} mm\n`;
-    output += `Spring Rate Front         = ${main.springFront}\n`;
-    output += `Spring Rate Rear          = ${main.springRear}\n`;
-    output += `Anti-Roll Bar Front (ARB) = ${main.arbFront}\n`;
-    output += `Anti-Roll Bar Rear  (ARB) = ${main.arbRear}\n`;
+    output += `Ride Height Front (車高F) = ${baseline.rhFront} -> ${main.rhFront} ${getDeltaInt(baseline.rhFront, main.rhFront)} mm\n`;
+    output += `Ride Height Rear  (車高R) = ${baseline.rhRear} -> ${main.rhRear} ${getDeltaInt(baseline.rhRear, main.rhRear)} mm\n`;
+    output += `Spring Rate Front         = ${baseline.springFront} -> ${main.springFront} (Targeting: ${main.springFront})\n`;
+    output += `Spring Rate Rear          = ${baseline.springRear} -> ${main.springRear} (Targeting: ${main.springRear})\n`;
+    output += `Anti-Roll Bar Front (ARB) = ${baseline.arbFront} -> ${main.arbFront} (Targeting: ${main.arbFront})\n`;
+    output += `Anti-Roll Bar Rear  (ARB) = ${baseline.arbRear} -> ${main.arbRear} (Targeting: ${main.arbRear})\n`;
     output += `Damper (Slow Bump/Reb)    = ${main.damperAdvice}\n`;
 
     output += `\n[4. DRIVETRAIN / 駆動系]\n`;
-    output += `Diff Preload Setting      = ${main.preloadSetting} // (${main.preloadNm} Nm相当)\n`;
+    output += `Diff Preload Setting      = ${baseline.preload} -> ${main.preloadSetting} ${getDeltaInt(baseline.preload, main.preloadSetting)} Nm/Index\n`;
   }
 
   output += `\n[5. TYRE STRATEGY / タイヤ戦略]\n`;
@@ -343,14 +354,18 @@ const formatOutput = (results, config) => {
   });
 
   output += `\n------------------------------------\n`;
-  output += `ENGINEERING ADVICE (v3.3 Strategy):\n`;
+  output += `ENGINEERING ADVICE (v3.4 Strategy):\n`;
   
   if (main.bumpiness === 'BUMPY') {
-    output += `- 路面凹凸に対応するため、特にフロントサスペンションのバンプストップの設定も確認してください。\n`;
+    output += `- 路面凹凸に対応するため、車高とパッカーの設定も現状から ${main.rhFront >= baseline.rhFront ? '上げる' : '調整する'} 方向で再確認してください。\n`;
   }
   
   if (profileId === 'aggressive') {
-    output += `- 回頭性を高めるために、高速コーナーでの安定性が不足する場合は、リアウイングを+1上げる検討をしてください。\n`;
+    if (main.tcMap <= 1 && baseline.tcMap <= 1) {
+      output += `- 既に限界（TC 1）設定です。これ以上の削減は挙動破綻のリスクが高いため、タイヤ管理を優先してください。\n`;
+    } else {
+      output += `- 回頭性を高めるために、高速コーナーでの安定性が不足する場合は、リアウイングをさらに+1上げる検討をしてください。\n`;
+    }
   } else if (profileId === 'stable') {
     output += `- 加速時のリアを安定させるため、ディファレンシャルのプリロードを上げ目に調整しています。\n`;
   }
@@ -406,6 +421,80 @@ export default function AISetupTool() {
   const [setup, setSetup] = useState('');
   const [copied, setCopied] = useState(false);
 
+  // v3.4 Baseline Setup State
+  const [baselineSetup, setBaselineSetup] = useState({
+    tcMap: 2,
+    absMap: 2,
+    tcPower: 2,
+    tcSlip: 2,
+    brakeBalance: 54.0,
+    brakeDucts: 2,
+    rearWing: 3,
+    rhFront: 0,
+    rhRear: 0,
+    packerFront: 0,
+    packerRear: 0,
+    springFront: 0,
+    springRear: 0,
+    arbFront: 0,
+    arbRear: 0,
+    preload: 120
+  });
+
+  const handleSvmUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target.result;
+      const newBaseline = { ...baselineSetup };
+      
+      const findVal = (key) => {
+        const regex = new RegExp(`${key}=(\\d+\\.?\\d*)`, 'i');
+        const match = text.match(regex);
+        return match ? parseFloat(match[1]) : null;
+      };
+
+      // Extract values from SVM (LMU/rF2 format)
+      const tc1 = findVal('TractionControlSetting');
+      if (tc1 !== null) newBaseline.tcMap = tc1 + 1; // SVM is often 0-indexed
+      
+      const abs = findVal('ABSSetting');
+      if (abs !== null) newBaseline.absMap = abs + 1;
+      
+      const bb = findVal('BrakeBalanceSetting');
+      if (bb !== null) newBaseline.brakeBalance = bb;
+      
+      const wing = findVal('RWSetting');
+      if (wing !== null) newBaseline.rearWing = wing;
+
+      const duct = findVal('BrakeDuctSetting');
+      if (duct !== null) newBaseline.brakeDucts = duct;
+
+      const rhf = findVal('FrontRideHeightSetting');
+      if (rhf !== null) newBaseline.rhFront = rhf;
+      const rhr = findVal('RearRideHeightSetting');
+      if (rhr !== null) newBaseline.rhRear = rhr;
+
+      const sf = findVal('FSpringSetting');
+      if (sf !== null) newBaseline.springFront = sf;
+      const sr = findVal('RSpringSetting');
+      if (sr !== null) newBaseline.springRear = sr;
+
+      const arbf = findVal('FAntiRollBarSetting');
+      if (arbf !== null) newBaseline.arbFront = arbf;
+      const arbr = findVal('RAntiRollBarSetting');
+      if (arbr !== null) newBaseline.arbRear = arbr;
+
+      const pre = findVal('DiffPreloadSetting');
+      if (pre !== null) newBaseline.preload = pre;
+
+      setBaselineSetup(newBaseline);
+      alert('.svmファイルを読み込み、現在の設定に反映しました。');
+    };
+    reader.readAsText(file);
+  };
+
   // Update model when class changes
   useEffect(() => {
     const firstModel = CAR_MODELS[classId][0].id;
@@ -425,7 +514,7 @@ export default function AISetupTool() {
         telemetry
       }));
 
-      const output = formatOutput(results, { classId, modelId, circuitId: circuit, profileId: profile, mode });
+      const output = formatOutput(results, { classId, modelId, circuitId: circuit, profileId: profile, mode }, baselineSetup);
       setSetup(output);
       setIsGenerating(false);
       setIsFirstGen(false);
@@ -665,11 +754,62 @@ export default function AISetupTool() {
             }}
           >
             <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,0,60,0.2)', boxShadow: '0 0 20px rgba(255,0,60,0.1)', height: '100%' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-                <div style={{ padding: '0.5rem', backgroundColor: 'rgba(255,0,60,0.2)', borderRadius: '0.5rem' }}>
-                  <Zap size={18} style={{ color: '#ff003c' }} />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ padding: '0.5rem', backgroundColor: 'rgba(255,0,60,0.2)', borderRadius: '0.5rem' }}>
+                    <Zap size={18} style={{ color: '#ff003c' }} />
+                  </div>
+                  <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', letterSpacing: '-0.025em', textTransform: 'uppercase', margin: 0 }}>Smart Analysis Lab</h3>
                 </div>
-                <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', letterSpacing: '-0.025em', textTransform: 'uppercase', margin: 0 }}>Smart Analysis Lab</h3>
+                <div style={{ fontSize: '10px', color: '#ff003c', fontWeight: 'bold' }}>v3.4 PR</div>
+              </div>
+
+              {/* 0. CURRENT BASELINE (NEW) */}
+              <div style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '0.75rem', border: '1px solid rgba(0,240,255,0.1)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <label style={{ fontSize: '9px', fontWeight: '900', color: '#00f0ff', textTransform: 'uppercase', letterSpacing: '0.2em' }}>0. CURRENT BASELINE (現状)</label>
+                  <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '9px', fontWeight: '900', padding: '0.375rem 0.625rem', backgroundColor: '#00f0ff', color: 'black', borderRadius: '0.375rem', transition: 'all' }}>
+                    <FileUp size={12} /> LOAD .SVM
+                    <input type="file" accept=".svm" style={{ display: 'none' }} onChange={handleSvmUpload} />
+                  </label>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                  {/* Common Electronics */}
+                  {[
+                    { label: 'TC1', key: 'tcMap', step: 1, min: 1, max: 12 },
+                    { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
+                    { label: 'BB%', key: 'brakeBalance', step: 0.5, min: 45, max: 75 }
+                  ].map(item => (
+                    <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.max(item.min, prev[item.key] - item.step)}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>-</button>
+                        <span style={{ fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace' }}>{baselineSetup[item.key]}</span>
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.min(item.max, prev[item.key] + item.step)}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>+</button>
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Open Only Items */}
+                  {mode === 'open' && [
+                    { label: 'Wing', key: 'rearWing', step: 1, min: 0, max: 20 },
+                    { label: 'RH Front', key: 'rhFront', step: 1, min: -20, max: 100 },
+                    { label: 'RH Rear', key: 'rhRear', step: 1, min: -20, max: 100 },
+                    { label: 'Ducts', key: 'brakeDucts', step: 1, min: 0, max: 6 },
+                    { label: 'Spring F', key: 'springFront', step: 1, min: -10, max: 10 },
+                    { label: 'ARB F', key: 'arbFront', step: 1, min: -5, max: 5 }
+                  ].map(item => (
+                    <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                      <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] - item.step}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>-</button>
+                        <span style={{ fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace' }}>{baselineSetup[item.key]}</span>
+                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] + item.step}))} style={{ color: 'white', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px' }}>+</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Driver Feedback */}

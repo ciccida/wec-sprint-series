@@ -366,6 +366,14 @@ const formatOutput = (results, config) => {
 // --- COMPONENT ---
 
 export default function AISetupTool() {
+  const [isLargeScreen, setIsLargeScreen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
+
+  useEffect(() => {
+    const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const [classId, setClassId] = useState('HY');
   const [modelId, setModelId] = useState('ferrari_499p');
   const [circuit, setCircuit] = useState('lemans');
@@ -480,10 +488,19 @@ export default function AISetupTool() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div 
+          className="grid gap-6 items-stretch"
+          style={{ 
+            display: 'grid', 
+            gridTemplateColumns: isLargeScreen ? 'repeat(12, minmax(0, 1fr))' : '1fr' 
+          }}
+        >
           
           {/* COL 1: BASIC SETTINGS */}
-          <div className="lg:col-span-4 flex flex-col h-full">
+          <div 
+            className="flex flex-col h-full"
+            style={{ gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto' }}
+          >
             <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl h-full flex flex-col">
               <div className="space-y-5 flex-1 overflow-y-auto pr-1">
                 {/* 1. Class Selection */}
@@ -592,7 +609,10 @@ export default function AISetupTool() {
           </div>
 
           {/* COL 2: CENTER: SESSION FORECAST */}
-          <div className="lg:col-span-4 flex flex-col h-full">
+          <div 
+            className="flex flex-col h-full"
+            style={{ gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto' }}
+          >
             <div className="bg-[#111] rounded-2xl p-5 border border-white/5 shadow-2xl space-y-4 h-full flex flex-col">
               <label className="flex items-center gap-2 text-[10px] font-black uppercase text-[#00f0ff] tracking-widest px-1">
                 <Wind size={14} /> Forecast
@@ -632,7 +652,10 @@ export default function AISetupTool() {
           </div>
 
           {/* COL 3: SMART ANALYSIS LAB */}
-          <div className="lg:col-span-4 flex flex-col h-full">
+          <div 
+            className="flex flex-col h-full"
+            style={{ gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto' }}
+          >
             <div className="bg-[#111] rounded-2xl p-5 border border-[#ff003c]/20 shadow-[0_0_20px_rgba(255,0,60,0.1)] space-y-5 h-full">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-[#ff003c]/20 rounded-lg">
@@ -718,7 +741,10 @@ export default function AISetupTool() {
           </div>
 
           {/* ACTION BUTTON: CENTERED BELOW FORECAST */}
-          <div className="lg:col-start-5 lg:col-span-4 mt-2">
+          <div 
+            className="mt-2"
+            style={{ gridColumn: isLargeScreen ? '5 / span 4' : 'auto' }}
+          >
             <motion.button
               whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(255,0,60,0.4)' }}
               whileTap={{ scale: 0.98 }}
@@ -752,7 +778,11 @@ export default function AISetupTool() {
           </div>
 
           {/* BOTTOM: OUTPUT ONLY */}
-          <div ref={outputRef} className={`lg:col-span-12 space-y-6 mt-6 border-t border-white/5 pt-12 transition-all duration-1000 ${isFirstGen ? 'opacity-20 grayscale scale-[0.98]' : 'opacity-100'}`}>
+          <div 
+            ref={outputRef} 
+            className={`space-y-6 mt-6 border-t border-white/5 pt-12 transition-all duration-1000 ${isFirstGen ? 'opacity-20 grayscale scale-[0.98]' : 'opacity-100'}`}
+            style={{ gridColumn: isLargeScreen ? 'span 12 / span 12' : 'auto' }}
+          >
             <div className="flex items-center justify-between px-2 mb-2">
               <label className="flex items-center gap-2 text-xs font-black uppercase text-slate-500 tracking-widest">
                 <ShieldCheck size={14} className="text-[#ff003c]" /> Computed Setup Data (v3.3)

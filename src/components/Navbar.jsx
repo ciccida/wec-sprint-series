@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
-    console.log("--- NAVBAR RENDERED v3.2 ---");
+    console.log("--- NAVBAR RENDERED v3.9 ---");
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
@@ -20,14 +20,15 @@ const Navbar = () => {
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container navbar-content">
-                <ul className="nav-links">
-                    {/* Only show scroll links on Home page, otherwise link to Home */}
+                <Link to="/" className="logo">
+                    <img src="/assets/logo.png" alt="WEC" />
+                </Link>
+                <ul className="nav-links" style={{ display: 'flex', alignItems: 'center' }}>
                     <li>{isHome ? <a href="#news">最新ニュース</a> : <Link to="/#news">最新ニュース</Link>}</li>
                     <li>{isHome ? <a href="#latest">最新の配信</a> : <Link to="/#latest">最新の配信</Link>}</li>
                     <li>{isHome ? <a href="#schedule">スケジュール</a> : <Link to="/#schedule">スケジュール</Link>}</li>
                     <li>{isHome ? <a href="#results">レース結果</a> : <Link to="/#results">レース結果</Link>}</li>
 
-                    {/* New Tool Links */}
                     <li>
                         <a href="/weather/" className="nav-tool-link">
                             WEATHER RANDOMIZER
@@ -38,18 +39,15 @@ const Navbar = () => {
                             PIT CALC (TRIAL)
                         </Link>
                     </li>
-                    <li className="header-sponsors">
-                        <span className="supported-by">SUPPORTED BY:</span>
-                        <a href="https://www.endless-sport.co.jp/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/sponsor-endless.png" alt="ENDLESS" />
+                    
+                    {/* v3.9 FORCE VISIBILITY with explicit styles */}
+                    <li className="header-sponsors-container" style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: '20px', paddingLeft: '20px', borderLeft: '1px solid rgba(255,255,255,0.2)', visibility: 'visible', opacity: 1 }}>
+                        <span style={{ fontSize: '0.7rem', color: '#fff', fontWeight: 'bold' }}>SUPPORTED BY:</span>
+                        <a href="https://jp.pimax.com/" target="_blank" rel="noopener noreferrer" style={{ display: 'block', height: '24px', width: '80px', position: 'relative', zIndex: 100 }}>
+                            <img src="/assets/sponsor-partner.png" alt="Pimax" style={{ height: '24px', width: 'auto', display: 'block', pointerEvents: 'auto' }} />
                         </a>
-                        <a href="https://jp.pimax.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="/assets/sponsor-partner.png" alt="Pimax" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.youtube.com/@WECSS81" target="_blank" rel="noopener noreferrer" className="btn-social">
-                            YouTube
+                        <a href="https://www.endless-sport.co.jp/" target="_blank" rel="noopener noreferrer" style={{ display: 'block', height: '24px', width: '60px', position: 'relative', zIndex: 100 }}>
+                            <img src="/assets/sponsor-endless.png" alt="ENDLESS" style={{ height: '24px', width: 'auto', display: 'block', pointerEvents: 'auto' }} />
                         </a>
                     </li>
                 </ul>

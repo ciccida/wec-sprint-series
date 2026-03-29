@@ -101,7 +101,10 @@
 
 @media (max-width: 1024px) {
     .header-sponsors {
-        display: none;
+        display: flex;
+        gap: 0.5rem; /* Smaller gap on mobile */
+        padding-left: 0.8rem;
+        margin-left: 0.5rem;
         /* Hide on mobile/tablet to save space */
     }
 }

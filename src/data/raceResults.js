@@ -453,6 +453,27 @@ export const raceResults = {
             "best": "1:36.001"
         }
     ],
+    "6": [
+        { "pos": "1", "driver": "Shingo Koyabu", "team": "Shingo Koyabu", "car": "#42 Ferrari 499P", "category": "Hypercar", "time": "30:55.878", "gap": "-", "best": "1:54.664" },
+        { "pos": "2", "driver": "Fusahiro Endo", "team": "Fusahiro Endo", "car": "#71 Ferrari 499P", "category": "Hypercar", "time": "+17.560", "gap": "-", "best": "1:55.020" },
+        { "pos": "3", "driver": "Macky Takagi", "team": "Macky Takagi", "car": "#55 Alpine A424", "category": "Hypercar", "time": "+18.280", "gap": "-", "best": "1:55.668" },
+        { "pos": "4", "driver": "Noba San", "team": "Noba San", "car": "#765 BMW M Hybrid V8", "category": "Hypercar", "time": "+33.080", "gap": "-", "best": "1:55.384" },
+        { "pos": "5", "driver": "ziggy Katsuya", "team": "ziggy Katsuya", "car": "#117 Ferrari 499P", "category": "Hypercar", "time": "+44.800", "gap": "-", "best": "1:57.718" },
+        { "pos": "6", "driver": "yas mishi", "team": "yas mishi", "car": "#41 Toyota GR010", "category": "Hypercar", "time": "+48.820", "gap": "-", "best": "1:56.017" },
+        { "pos": "7", "driver": "Kei Sagawa", "team": "Kei Sagawa", "car": "#364 Aston Martin Valkyrie LMH", "category": "Hypercar", "time": "+1:43.540", "gap": "-", "best": "1:58.106" },
+        { "pos": "8", "driver": "ToiToi Toys", "team": "ToiToi Toys", "car": "#222 Porsche 963", "category": "Hypercar", "time": "+1:44.280", "gap": "-", "best": "1:59.824" },
+        { "pos": "9", "driver": "KH-AE KMS", "team": "KH-AE KMS", "car": "#86 Porsche 963", "category": "Hypercar", "time": "+1 lap", "gap": "-", "best": "1:58.763" },
+        { "pos": "10", "driver": "aJ fault", "team": "aJ fault", "car": "#555 Ferrari 499P", "category": "Hypercar", "time": "+2 laps", "gap": "-", "best": "1:59.480" },
+        { "pos": "1", "driver": "Shingen Mochi", "team": "Shingen Mochi", "car": "#3 BMW M4 LMGT3", "category": "LMGT3", "time": "30:55.878 + 1 lap", "gap": "-", "best": "2:08.526" },
+        { "pos": "2", "driver": "Masa Matsumura", "team": "Masa Matsumura", "car": "#25 Porsche 911 GT3 R LMGT3", "category": "LMGT3", "time": "+1 lap", "gap": "-", "best": "2:08.740" },
+        { "pos": "3", "driver": "Naofumi Ishida", "team": "Naofumi Ishida", "car": "#8 Lexus RCF LMGT3", "category": "LMGT3", "time": "+1 lap", "gap": "-", "best": "2:08.703" },
+        { "pos": "4", "driver": "Fniku Neko", "team": "Fniku Neko", "car": "#29 Lamborghini Huracan LMGT3 Evo2", "category": "LMGT3", "time": "+1 lap", "gap": "-", "best": "2:08.808" },
+        { "pos": "5", "driver": "Rapid Tuyopon", "team": "Rapid Tuyopon", "car": "#24 McLaren 720S LMGT3 Evo", "category": "LMGT3", "time": "+1 lap", "gap": "-", "best": "2:09.987" },
+        { "pos": "6", "driver": "Seiken Xa", "team": "Seiken Xa", "car": "#40 Porsche 911 GT3 R LMGT3", "category": "LMGT3", "time": "+2 laps", "gap": "-", "best": "2:10.194" },
+        { "pos": "7", "driver": "simzo hunt", "team": "simzo hunt", "car": "#23 McLaren 720S LMGT3 Evo", "category": "LMGT3", "time": "+2 laps", "gap": "-", "best": "2:12.518" },
+        { "pos": "8", "driver": "milfoil strike", "team": "milfoil strike", "car": "#91 McLaren 720S LMGT3 Evo", "category": "LMGT3", "time": "+2 laps", "gap": "-", "best": "2:13.251" },
+        { "pos": "9", "driver": "Koki Yamamoto", "team": "Koki Yamamoto", "car": "#4 Porsche 911 GT3 R LMGT3", "category": "LMGT3", "time": "+3 laps", "gap": "-", "best": "2:07.981" }
+    ],
     "3": [
         {
             "pos": "1",

@@ -540,7 +540,7 @@ export default function AISetupTool() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
             <Zap style={{ color: '#00f0ff' }} size={32} />
             <h1 style={{ fontSize: '2.25rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
-              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.75rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.5</span>
+              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.75rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.6</span>
             </h1>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
@@ -553,396 +553,259 @@ export default function AISetupTool() {
           </div>
         </header>
 
-        <div 
-          className="grid gap-6 items-stretch"
-          style={{ 
-            display: 'grid', 
-            gridTemplateColumns: isLargeScreen ? 'repeat(12, minmax(0, 1fr))' : '1fr' 
-          }}
-        >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
-          {/* COL 1: BASIC SETTINGS */}
-          <div 
-            style={{ 
-              gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto',
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%'
-            }}
-          >
-            <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ spaceY: '1.25rem', flex: 1, overflowY: 'auto', paddingRight: '0.25rem' }}>
-                {/* 1. Class Selection */}
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
-                    <Car size={14} /> 1. Class
-                  </label>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                    {CAR_CLASSES.map((c) => (
-                      <button
-                        key={c.id}
-                        onClick={() => setClassId(c.id)}
-                        style={{
-                          fontSize: '10px', fontWeight: '900', padding: '0.875rem 0.5rem', borderRadius: '0.75rem', border: '1px solid', transition: 'all', letterSpacing: '0.05em', cursor: 'pointer',
-                          backgroundColor: classId === c.id ? '#ff003c' : 'rgba(0,0,0,0.4)',
-                          borderColor: classId === c.id ? '#ff003c' : 'rgba(255,255,255,0.05)',
-                          color: classId === c.id ? 'white' : '#64748b',
-                          boxShadow: classId === c.id ? '0 0 20px rgba(255,0,60,0.4)' : 'none'
-                        }}
-                      >
-                        {c.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 2. Vehicle Selection */}
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
-                    <ChevronRight size={14} /> 2. Vehicle
-                  </label>
-                  <div style={{ position: 'relative' }}>
-                    <select
-                      style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.75rem', padding: '0.875rem', fontSize: '12px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer', appearance: 'none' }}
-                      value={modelId}
-                      onChange={(e) => setModelId(e.target.value)}
+          {/* ROW 1: BASIC CONFIGURATION (HORIZONTAL) */}
+          <section style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.15em', marginBottom: '1.25rem' }}>
+              <Settings size={14} /> 1. Engineering Configuration
+            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? 'repeat(4, 1fr)' : '1fr', gap: '1.5rem' }}>
+              {/* Col 1: Vehicle */}
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                <div style={{ fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Class & Vehicle</div>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                  {CAR_CLASSES.map((c) => (
+                    <button
+                      key={c.id}
+                      onClick={() => setClassId(c.id)}
+                      style={{
+                        flex: 1, fontSize: '9px', fontWeight: '900', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid', cursor: 'pointer',
+                        backgroundColor: classId === c.id ? '#ff003c' : 'rgba(0,0,0,0.4)',
+                        borderColor: classId === c.id ? '#ff003c' : 'rgba(255,255,255,0.05)',
+                        color: classId === c.id ? 'white' : '#64748b',
+                      }}
                     >
-                      {(CAR_MODELS[classId] || []).map((m) => (
-                        <option key={m.id} value={m.id} style={{ backgroundColor: 'black' }}>{m.name}</option>
-                      ))}
-                    </select>
-                  </div>
+                      {c.id}
+                    </button>
+                  ))}
                 </div>
+                <select
+                  style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.75rem', fontSize: '12px', fontWeight: 'bold', color: 'white', outline: 'none' }}
+                  value={modelId}
+                  onChange={(e) => setModelId(e.target.value)}
+                >
+                  {(CAR_MODELS[classId] || []).map((m) => (
+                    <option key={m.id} value={m.id}>{m.name}</option>
+                  ))}
+                </select>
+              </div>
 
-                {/* 3. Circuit Selection */}
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
-                    <MapPin size={14} /> 3. Circuit
-                  </label>
-                  <div style={{ position: 'relative' }}>
-                    <select
-                      style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.75rem', padding: '0.875rem', fontSize: '12px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer', appearance: 'none' }}
-                      value={circuit}
-                      onChange={(e) => setCircuit(e.target.value)}
+              {/* Col 2: Track & Mode */}
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                <div style={{ fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Track & Setup Mode</div>
+                <select
+                  style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.75rem', fontSize: '12px', fontWeight: 'bold', color: 'white', outline: 'none' }}
+                  value={circuit}
+                  onChange={(e) => setCircuit(e.target.value)}
+                >
+                  {CIRCUITS.map((cir) => (
+                    <option key={cir.id} value={cir.id}>{cir.name}</option>
+                  ))}
+                </select>
+                <div style={{ display: 'flex', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.25rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  {['fixed', 'open'].map((m) => (
+                    <button
+                      key={m}
+                      onClick={() => setMode(m)}
+                      style={{
+                        flex: 1, fontSize: '9px', fontWeight: '900', padding: '0.5rem 0', borderRadius: '0.375rem', transition: 'all', textTransform: 'uppercase', border: 'none', cursor: 'pointer',
+                        backgroundColor: mode === m ? '#ff003c' : 'transparent',
+                        color: mode === m ? 'white' : '#64748b'
+                      }}
                     >
-                      {CIRCUITS.map((cir) => (
-                        <option key={cir.id} value={cir.id} style={{ backgroundColor: 'black' }}>{cir.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* 4. Setup Mode */}
-                <div style={{ marginBottom: '1.25rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
-                    <Settings size={14} /> 4. Mode
-                  </label>
-                  <div style={{ display: 'flex', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.25rem', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-                    {['fixed', 'open'].map((m) => (
-                      <button
-                        key={m}
-                        onClick={() => setMode(m)}
-                        style={{
-                          flex: 1, fontSize: '10px', fontWeight: '900', padding: '0.75rem 0', borderRadius: '0.5rem', transition: 'all', textTransform: 'uppercase', letterSpacing: '0.1em', border: 'none', cursor: 'pointer',
-                          backgroundColor: mode === m ? '#ff003c' : 'transparent',
-                          color: mode === m ? 'white' : '#64748b'
-                        }}
-                      >
-                        {m}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 5. Strategy Profile */}
-                <div style={{ marginBottom: '0.5rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '0.75rem' }}>
-                    <ShieldCheck size={14} /> 5. Profile
-                  </label>
-                  <select
-                    style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.75rem', padding: '0.875rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
-                    value={profile}
-                    onChange={(e) => setProfile(e.target.value)}
-                  >
-                    {DRIVER_PROFILES.map(p => (
-                      <option key={p.id} value={p.id} style={{ backgroundColor: 'black' }}>{p.name}</option>
-                    ))}
-                  </select>
+                      {m}
+                    </button>
+                  ))}
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* COL 2: CENTER: SESSION FORECAST */}
-          <div 
-            style={{ 
-              gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto',
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%'
-            }}
-          >
-            <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,255,255,0.05)', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.1em', padding: '0 0.25rem', marginBottom: '1rem' }}>
-                <Wind size={14} /> Forecast
-              </label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.375rem', overflowY: 'auto', paddingRight: '0.25rem' }}>
-                {sessionSlots.map((slot, index) => (
-                  <div key={index} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.4)', padding: '0.875rem', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.05)', transition: 'all', color: 'white' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 0.25rem' }}>
-                      <span style={{ fontSize: '10px', fontWeight: '900', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Slot #{index + 1}</span>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '0.375rem', padding: '0.25rem 0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-                        <Thermometer size={14} style={{ color: '#ff003c' }} />
-                        <input
-                          type="number"
-                          value={slot.temp}
-                          onChange={(e) => {
-                            const val = e.target.value === '' ? 0 : parseInt(e.target.value);
-                            updateSlot(index, 'temp', val);
-                          }}
-                          style={{ width: '3rem', backgroundColor: 'transparent', fontSize: '13px', fontFamily: 'monospace', fontWeight: 'bold', color: 'white', border: 'none', outline: 'none' }}
-                        />
-                        <span style={{ fontSize: '10px', fontWeight: 'bold', color: '#64748b' }}>°C</span>
-                      </div>
-                    </div>
-                    <select
-                      style={{ width: '100%', backgroundColor: 'transparent', fontSize: '12px', fontWeight: 'bold', color: '#cbd5e1', outline: 'none', cursor: 'pointer', border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.5rem', marginTop: '0.25rem' }}
-                      value={slot.weatherId}
-                      onChange={(e) => updateSlot(index, 'weatherId', e.target.value)}
-                    >
-                      {WEATHER_CONDITIONS.map(w => (
-                        <option key={w.id} value={w.id} style={{ backgroundColor: 'black' }}>{w.name}</option>
-                      ))}
-                    </select>
+              {/* Col 3: Profile & SVM */}
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                <div style={{ fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Driver Profile & Baseline</div>
+                <select
+                  style={{ width: '100%', backgroundColor: '#0a0a0a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.75rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none' }}
+                  value={profile}
+                  onChange={(e) => setProfile(e.target.value)}
+                >
+                  {DRIVER_PROFILES.map(p => (
+                    <option key={p.id} value={p.id}>{p.name}</option>
+                  ))}
+                </select>
+                <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontSize: '9px', fontWeight: '900', padding: '0.75rem', backgroundColor: '#00f0ff', color: 'black', borderRadius: '0.5rem', transition: 'all' }}>
+                  <FileUp size={14} /> IMPORT .SVM BASELINE
+                  <input type="file" accept=".svm" style={{ display: 'none' }} onChange={handleSvmUpload} />
+                </label>
+              </div>
+
+              {/* Col 4: Electronic Quick Setup */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                <div style={{ gridColumn: 'span 2', fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Current Electronics (Baseline)</div>
+                {[
+                  { label: 'TC1', key: 'tcMap' },
+                  { label: 'TC2', key: 'tcPower' },
+                  { label: 'ABS', key: 'absMap' },
+                  { label: 'BB%', key: 'brakeBalance' }
+                ].map(item => (
+                  <div key={item.key} style={{ backgroundColor: 'black', padding: '0.375rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <span style={{ fontSize: '7px', color: '#71717a' }}>{item.label}</span>
+                    <span style={{ fontSize: '10px', fontWeight: 'bold', fontFamily: 'monospace' }}>{baselineSetup[item.key]}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* COL 3: SMART ANALYSIS LAB */}
-          <div 
-            style={{ 
-              gridColumn: isLargeScreen ? 'span 4 / span 4' : 'auto',
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%'
-            }}
-          >
-            <div style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.25rem', border: '1px solid rgba(255,0,60,0.2)', boxShadow: '0 0 20px rgba(255,0,60,0.1)', height: '100%' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ padding: '0.5rem', backgroundColor: 'rgba(255,0,60,0.2)', borderRadius: '0.5rem' }}>
-                    <Zap size={18} style={{ color: '#ff003c' }} />
+          {/* ROW 2: SESSION FORECAST (HORIZONTAL) */}
+          <section style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.15em', marginBottom: '1.25rem' }}>
+              <Wind size={14} /> 2. Environmental Forecast (Slots 1-5)
+            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? 'repeat(5, 1fr)' : '1fr', gap: '0.75rem' }}>
+              {sessionSlots.map((slot, index) => (
+                <div key={index} style={{ backgroundColor: 'rgba(0,0,0,0.4)', padding: '1rem', borderRadius: '0.75rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                    <span style={{ fontSize: '9px', fontWeight: '900', color: '#64748b' }}>SLOT #{index + 1}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <Thermometer size={12} style={{ color: '#ff003c' }} />
+                      <input
+                        type="number"
+                        value={slot.temp}
+                        onChange={(e) => updateSlot(index, 'temp', parseInt(e.target.value) || 0)}
+                        style={{ width: '2rem', backgroundColor: 'transparent', fontSize: '12px', fontFamily: 'monospace', fontWeight: '900', color: 'white', border: 'none', outline: 'none' }}
+                      />
+                      <span style={{ fontSize: '8px', color: '#64748b' }}>°C</span>
+                    </div>
                   </div>
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: 'bold', letterSpacing: '-0.025em', textTransform: 'uppercase', margin: 0 }}>Smart Analysis Lab</h3>
+                  <select
+                    style={{ width: '100%', backgroundColor: 'transparent', fontSize: '11px', fontWeight: 'bold', color: '#cbd5e1', outline: 'none', cursor: 'pointer', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '0.5rem' }}
+                    value={slot.weatherId}
+                    onChange={(e) => updateSlot(index, 'weatherId', e.target.value)}
+                  >
+                    {WEATHER_CONDITIONS.map(w => (
+                      <option key={w.id} value={w.id} style={{ backgroundColor: 'black' }}>{w.name}</option>
+                    ))}
+                  </select>
                 </div>
-                <div style={{ fontSize: '10px', color: '#ff003c', fontWeight: 'bold' }}>v3.5</div>
-              </div>
+              ))}
+            </div>
+          </section>
 
-              {/* 0. CURRENT BASELINE (NEW) */}
-              <div style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '0.75rem', border: '1px solid rgba(0,240,255,0.1)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <label style={{ fontSize: '9px', fontWeight: '900', color: '#00f0ff', textTransform: 'uppercase', letterSpacing: '0.2em' }}>0. CURRENT BASELINE (現状)</label>
-                  <label style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.375rem', fontSize: '9px', fontWeight: '900', padding: '0.375rem 0.625rem', backgroundColor: '#00f0ff', color: 'black', borderRadius: '0.375rem', transition: 'all' }}>
-                    <FileUp size={12} /> LOAD .SVM
-                    <input type="file" accept=".svm" style={{ display: 'none' }} onChange={handleSvmUpload} />
-                  </label>
-                </div>
+          {/* ROW 3: SMART ANALYSIS LAB (HORIZONTAL) */}
+          <section style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.5rem', border: '1px solid rgba(255,0,60,0.2)', boxShadow: '0 0 30px rgba(255,0,60,0.05)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#ff003c', letterSpacing: '0.15em' }}>
+                <Zap size={14} /> 3. Smart Analysis Lab (Diagnostics)
+              </label>
+              <div style={{ fontSize: '10px', color: '#ff003c', fontWeight: 'bold', fontFamily: 'monospace' }}>MODEL_V3.6_ACTIVE</div>
+            </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                  {/* Common Electronics & Brakes */}
-                  {[
-                    { label: 'Traction Control', key: 'tcMap', step: 1, min: 1, max: 12 },
-                    { label: 'TC Power Cut', key: 'tcPower', step: 1, min: 1, max: 12 },
-                    { label: 'TC Slip Angle', key: 'tcSlip', step: 1, min: 1, max: 12 },
-                    { label: 'ABS Map', key: 'absMap', step: 1, min: 1, max: 12 },
-                    { label: 'Brake Balance (Front %)', key: 'brakeBalance', step: 0.5, min: 45, max: 75 },
-                    { label: 'Brake Ducts (F/R)', key: 'brakeDucts', step: 1, min: 0, max: 6 }
-                  ].filter(item => mode === 'open' || item.key !== 'brakeDucts').map(item => (
-                    <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem' }}>
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.max(item.min || -100, prev[item.key] - item.step)}))} style={{ color: '#00f0ff', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>-</button>
-                        <input
-                          type="number"
-                          value={baselineSetup[item.key]}
-                          step={item.step}
-                          onChange={(e) => {
-                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value);
-                            setBaselineSetup(prev => ({...prev, [item.key]: val}));
-                          }}
-                          style={{ width: '100%', backgroundColor: 'transparent', border: 'none', textAlign: 'center', fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', outline: 'none' }}
-                        />
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: Math.min(item.max || 1000, prev[item.key] + item.step)}))} style={{ color: '#00f0ff', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>+</button>
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Open Only Items (Suspension & Aero) */}
-                  {mode === 'open' && [
-                    { label: 'Rear Wing (Clicks)', key: 'rearWing', step: 1 },
-                    { label: 'Ride Height F (mm)', key: 'rhFront', step: 1 },
-                    { label: 'Ride Height R (mm)', key: 'rhRear', step: 1 },
-                    { label: 'Packer Front', key: 'packerFront', step: 1 },
-                    { label: 'Packer Rear', key: 'packerRear', step: 1 },
-                    { label: 'Spring Rate F', key: 'springFront', step: 1 },
-                    { label: 'Spring Rate R', key: 'springRear', step: 1 },
-                    { label: 'ARB Front', key: 'arbFront', step: 1 },
-                    { label: 'ARB Rear', key: 'arbRear', step: 1 },
-                    { label: 'Diff Preload (Nm)', key: 'preload', step: 5 }
-                  ].map(item => (
-                    <div key={item.key} style={{ backgroundColor: 'black', padding: '0.5rem', borderRadius: '0.5rem', border: '1px solid rgba(255,255,255,0.05)' }}>
-                      <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem' }}>
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] - item.step}))} style={{ color: '#ff003c', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>-</button>
-                        <input
-                          type="number"
-                          value={baselineSetup[item.key]}
-                          step={item.step}
-                          onChange={(e) => {
-                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value);
-                            setBaselineSetup(prev => ({...prev, [item.key]: val}));
-                          }}
-                          style={{ width: '100%', backgroundColor: 'transparent', border: 'none', textAlign: 'center', fontSize: '11px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', outline: 'none' }}
-                        />
-                        <button onClick={() => setBaselineSetup(prev => ({...prev, [item.key]: prev[item.key] + item.step}))} style={{ color: '#ff003c', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', width: '20px' }}>+</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* 1. Driver Feedback (v3.5 Phase Analysis) */}
-              <div style={{ marginBottom: '1.25rem' }}>
-                <label style={{ fontSize: '9px', fontWeight: '900', color: '#ff003c', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '1rem' }}>1. 走行フィードバック (Phase Analysis)</label>
+            <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? '1fr 1fr 1fr' : '1fr', gap: '2rem' }}>
+              {/* Col 1: Low Speed */}
+              <div style={{ padding: '1rem', backgroundColor: 'rgba(0,240,255,0.02)', borderRadius: '1rem', border: '1px solid rgba(0,240,255,0.1)' }}>
+                <div style={{ fontSize: '9px', color: '#00f0ff', fontWeight: '900', marginBottom: '1rem', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid rgba(0,240,255,0.1)', paddingBottom: '0.5rem' }}>Mechanical Focus (Low Speed)</div>
                 <div style={{ display: 'grid', gap: '1rem' }}>
-                  {/* LOW SPEED SECTION */}
-                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(0,240,255,0.03)', borderRadius: '0.75rem', border: '1px solid rgba(0,240,255,0.1)' }}>
-                    <div style={{ fontSize: '8px', color: '#00f0ff', fontWeight: '900', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Low Speed Corners (Mechanical Focus)</div>
-                    <div style={{ display: 'grid', gap: '0.75rem' }}>
-                      {[
-                        { label: '進入 (Entry) - 低速', key: 'entry_low', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] },
-                        { label: '中間 (Mid) - 低速', key: 'mid_low', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] },
-                        { label: '脱出 (Exit) - 低速', key: 'exit_low', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'トラクション抜ける'},{v:'oversteer',t:'リアが暴れる'}] }
-                      ].map(item => (
-                        <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                          <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold' }}>{item.label}</span>
-                          <select 
-                            style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
-                            value={diagnostics[item.key]}
-                            onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
-                          >
-                            {item.options.map(opt => <option key={opt.v} value={opt.v}>{opt.t}</option>)}
-                          </select>
-                        </div>
-                      ))}
+                  {[
+                    { label: '進入 (Entry) - 低速', key: 'entry_low' },
+                    { label: '中間 (Mid) - 低速', key: 'mid_low' },
+                    { label: '脱出 (Exit) - 低速', key: 'exit_low' }
+                  ].map(item => (
+                    <div key={item.key}>
+                      <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
+                      <select 
+                        style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.625rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none' }}
+                        value={diagnostics[item.key]}
+                        onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
+                      >
+                        <option value="none">問題なし</option>
+                        <option value="understeer">アンダー</option>
+                        <option value="oversteer">オーバー</option>
+                      </select>
                     </div>
-                  </div>
-
-                  {/* HIGH SPEED SECTION */}
-                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(255,0,60,0.03)', borderRadius: '0.75rem', border: '1px solid rgba(255,0,60,0.1)' }}>
-                    <div style={{ fontSize: '8px', color: '#ff003c', fontWeight: '900', marginBottom: '0.5rem', textTransform: 'uppercase' }}>High Speed Corners (Aero Focus)</div>
-                    <div style={{ display: 'grid', gap: '0.75rem' }}>
-                      {[
-                        { label: '進入 (Entry) - 高速', key: 'entry_high', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'リア浮く/不安定'}] },
-                        { label: '中間 (Mid) - 高速', key: 'mid_high', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] },
-                        { label: '脱出 (Exit) - 高速', key: 'exit_high', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] }
-                      ].map(item => (
-                        <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                          <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold' }}>{item.label}</span>
-                          <select 
-                            style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
-                            value={diagnostics[item.key]}
-                            onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
-                          >
-                            {item.options.map(opt => <option key={opt.v} value={opt.v}>{opt.t}</option>)}
-                          </select>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* CURBS */}
-                  <div style={{ padding: '0.25rem 0' }}>
-                    <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold' }}>縁石 (Curbs) - 走破性</span>
-                    <select 
-                      style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
-                      value={diagnostics.curbs}
-                      onChange={(e) => setDiagnostics({...diagnostics, curbs: e.target.value})}
-                    >
-                      <option value="none">問題なし</option>
-                      <option value="bumpy">跳ねる (吸収不足)</option>
-                      <option value="unknown">分からない</option>
-                    </select>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Telemetry Upload */}
-              <div style={{ paddingTop: '0.75rem', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '0.75rem' }}>
-                <label style={{ fontSize: '9px', fontWeight: '900', color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '0.75rem' }}>2. MoTeC CSV データ連携</label>
-                <div style={{ position: 'relative', border: '1px dashed rgba(255,255,255,0.1)', borderRadius: '0.75rem', padding: '1rem', cursor: 'pointer', backgroundColor: 'rgba(255,255,255,0.02)' }}>
+              {/* Col 2: High Speed */}
+              <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,60,0.02)', borderRadius: '1rem', border: '1px solid rgba(255,0,60,0.1)' }}>
+                <div style={{ fontSize: '9px', color: '#ff003c', fontWeight: '900', marginBottom: '1rem', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid rgba(255,0,60,0.1)', paddingBottom: '0.5rem' }}>Aerodynamic Focus (High Speed)</div>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  {[
+                    { label: '進入 (Entry) - 高速', key: 'entry_high' },
+                    { label: '中間 (Mid) - 高速', key: 'mid_high' },
+                    { label: '脱出 (Exit) - 高速', key: 'exit_high' }
+                  ].map(item => (
+                    <div key={item.key}>
+                      <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>{item.label}</div>
+                      <select 
+                        style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.625rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none' }}
+                        value={diagnostics[item.key]}
+                        onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
+                      >
+                        <option value="none">問題なし</option>
+                        <option value="understeer">アンダー</option>
+                        <option value="oversteer">オーバー</option>
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Col 3: Curbs & Telemetry */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ padding: '1rem', backgroundColor: '#0c0c0c', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ fontSize: '8px', color: '#71717a', marginBottom: '0.25rem', fontWeight: 'bold' }}>縁石 (Curbs) - 走破性</div>
+                  <select 
+                    style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.625rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none' }}
+                    value={diagnostics.curbs}
+                    onChange={(e) => setDiagnostics({...diagnostics, curbs: e.target.value})}
+                  >
+                    <option value="none">問題なし</option>
+                    <option value="bumpy">跳ねる</option>
+                  </select>
+                </div>
+
+                <div style={{ flex: 1, position: 'relative', border: '1px dashed rgba(255,255,255,0.1)', borderRadius: '1rem', padding: '1rem', cursor: 'pointer', backgroundColor: 'rgba(255,255,255,0.01)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                   <input 
                     type="file" 
                     accept=".csv" 
                     style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer' }}
                     onChange={handleCsvUpload}
                   />
-                  <div className="text-center space-y-1.5">
-                    <div className="flex justify-center">
-                      <FileUp size={20} className={telemetry ? "text-[#00f0ff]" : "text-zinc-600"} />
+                  <FileUp size={24} className={telemetry ? "text-[#00f0ff]" : "text-zinc-600"} style={{ marginBottom: '0.5rem' }} />
+                  {telemetry ? (
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{ fontSize: '10px', fontWeight: '900', color: '#00f0ff', margin: 0 }}>TELEMETRY CONNECTED</p>
+                      <p style={{ fontSize: '8px', color: '#64748b', marginTop: '0.25rem', fontFamily: 'monospace' }}>
+                        {telemetry.metadata.venue} | {telemetry.metadata.lap}
+                      </p>
                     </div>
-                    {telemetry ? (
-                      <div style={{ animation: 'fadeIn 0.5s ease-out' }}>
-                        <p className="text-[10px] font-bold text-[#00f0ff]">✅ TELEMETRY ACTIVE</p>
-                        <p className="text-[8px] text-zinc-400 mt-1 uppercase font-mono">
-                          {telemetry.metadata.venue} | {telemetry.metadata.vehicle} | {telemetry.metadata.lap}
-                        </p>
-                      </div>
-                    ) : (
-                      <p className="text-[10px] font-bold text-zinc-400">CSVをドロップ</p>
-                    )}
-                  </div>
+                  ) : (
+                    <p style={{ fontSize: '10px', fontWeight: '900', color: '#64748b', margin: 0 }}>DROP MoTeC CSV</p>
+                  )}
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* ACTION BUTTON: CENTERED BELOW FORECAST */}
-          <div 
-            style={{ 
-              gridColumn: isLargeScreen ? '5 / span 4' : 'auto',
-              marginTop: '0.5rem'
-            }}
-          >
+          {/* ACTION BUTTON (CENTERED) */}
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '1rem 0' }}>
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(255,0,60,0.3)' }}
               whileTap={{ scale: 0.98 }}
               onClick={handleGenerateSetup}
               disabled={isGenerating}
               style={{
-                width: '100%', position: 'relative', overflow: 'hidden', padding: '1.5rem 1rem', borderRadius: '1rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '0.15em', textTransform: 'uppercase', fontSize: '14px', transition: 'all', border: 'none', cursor: isGenerating ? 'not-allowed' : 'pointer',
+                width: isLargeScreen ? '400px' : '100%', padding: '1.5rem', borderRadius: '1rem', fontWeight: '900', fontSize: '16px', letterSpacing: '0.1em', transition: 'all', border: 'none', cursor: isGenerating ? 'not-allowed' : 'pointer',
                 background: isGenerating ? '#27272a' : 'linear-gradient(90deg, #ff003c, #ff4d79, #ff003c)',
-                color: isGenerating ? '#71717a' : 'white',
-                boxShadow: isGenerating ? 'none' : '0 0 20px rgba(255,0,60,0.2)'
+                color: 'white',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
-                {isGenerating ? (
-                  <>
-                    <div style={{ width: '1rem', height: '1rem', border: '2px solid rgba(255,255,255,0.2)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
-                    <span>ANALYZING...</span>
-                  </>
-                ) : (
-                  <>
-                    <Zap size={20} style={{ animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
-                    <span>GENERATE SETUP</span>
-                  </>
-                )}
-              </div>
+              {isGenerating ? "ANALYZING DATA..." : "GENERATE FINAL SETUP"}
             </motion.button>
           </div>
+
+        </div>
 
           {/* BOTTOM: OUTPUT ONLY */}
           <div 
@@ -958,7 +821,7 @@ export default function AISetupTool() {
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 0.5rem', marginBottom: '0.5rem' }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '12px', fontWeight: '900', textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.1em' }}>
-                <ShieldCheck size={14} style={{ color: '#ff003c' }} /> Computed Setup Data (v3.3)
+                <ShieldCheck size={14} style={{ color: '#ff003c' }} /> Computed Setup Data (v3.6)
               </label>
               <button
                 onClick={copyToClipboard}
@@ -999,7 +862,7 @@ export default function AISetupTool() {
         {/* Footer info */}
         <footer className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-600">
           <p className="text-[10px] font-mono uppercase tracking-widest text-[#ff003c]">
-            AI SETUP ENGINEER v3.5.0 // SMART ANALYSIS LAB // OPTIMIZED FOR LMU 2025
+            AI SETUP ENGINEER v3.6.0 // SMART ANALYSIS LAB // OPTIMIZED FOR LMU 2025
           </p>
           <div className="flex key-value gap-6">
              <span className="text-[10px] font-mono">[ STRATEGY ENGINE ACTIVE ]</span>
@@ -1008,6 +871,5 @@ export default function AISetupTool() {
         </footer>
 
       </div>
-    </div>
-  );
-}
+    );
+  }

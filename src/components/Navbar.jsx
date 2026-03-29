@@ -17,10 +17,17 @@ const Navbar = () => {
 
     const isHome = location.pathname === '/';
 
+    const handleLogoClick = (e) => {
+        if (isHome) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container navbar-content">
-                <Link to="/" className="logo">
+                <Link to="/" className="logo" onClick={handleLogoClick}>
                     <img src="/assets/logo.png" alt="WEC" />
                 </Link>
                 <ul className="nav-links" style={{ display: 'flex', alignItems: 'center' }}>

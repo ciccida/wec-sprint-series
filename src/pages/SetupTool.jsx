@@ -642,14 +642,26 @@ export default function AISetupTool() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
                 <div style={{ gridColumn: 'span 2', fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Current Electronics (Baseline)</div>
                 {[
-                  { label: 'TC1', key: 'tcMap' },
-                  { label: 'TC2', key: 'tcPower' },
-                  { label: 'ABS', key: 'absMap' },
-                  { label: 'BB%', key: 'brakeBalance' }
+                  { label: 'TC1', key: 'tcMap', step: 1, min: 1, max: 12 },
+                  { label: 'TC2', key: 'tcPower', step: 1, min: 1, max: 12 },
+                  { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
+                  { label: 'BB%', key: 'brakeBalance', step: 0.1, min: 40, max: 80 }
                 ].map(item => (
-                  <div key={item.key} style={{ backgroundColor: 'black', padding: '0.375rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <span style={{ fontSize: '7px', color: '#71717a' }}>{item.label}</span>
-                    <span style={{ fontSize: '10px', fontWeight: 'bold', fontFamily: 'monospace' }}>{baselineSetup[item.key]}</span>
+                  <div key={item.key} style={{ backgroundColor: 'black', padding: '0.375rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.125rem' }}>
+                    <span style={{ fontSize: '7px', color: '#71717a', textTransform: 'uppercase' }}>{item.label}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <button 
+                        onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.max(item.min, prev[item.key] - item.step) }))}
+                        style={{ background: 'none', border: 'none', color: '#ff003c', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
+                      >-</button>
+                      <span style={{ fontSize: '10px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', minWidth: '1.5rem', textAlign: 'center' }}>
+                        {item.key === 'brakeBalance' ? baselineSetup[item.key].toFixed(1) : Math.round(baselineSetup[item.key])}
+                      </span>
+                      <button 
+                        onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.min(item.max, prev[item.key] + item.step) }))}
+                        style={{ background: 'none', border: 'none', color: '#00f0ff', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
+                      >+</button>
+                    </div>
                   </div>
                 ))}
               </div>

@@ -726,7 +726,7 @@ export default function AISetupTool() {
                         type="number"
                         value={slot.temp}
                         onChange={(e) => updateSlot(index, 'temp', parseInt(e.target.value) || 0)}
-                        style={{ width: '2rem', backgroundColor: 'transparent', fontSize: '15px', fontFamily: 'monospace', fontWeight: '900', color: 'white', border: 'none', outline: 'none' }}
+                        style={{ width: '3rem', backgroundColor: 'transparent', fontSize: '15px', fontFamily: 'monospace', fontWeight: '900', color: 'white', border: 'none', outline: 'none', textAlign: 'right' }}
                       />
                       <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 'bold' }}>°C</span>
                     </div>

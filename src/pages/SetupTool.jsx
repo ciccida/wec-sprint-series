@@ -694,10 +694,10 @@ export default function AISetupTool() {
           {/* ROW 3: SMART ANALYSIS LAB (HORIZONTAL) */}
           <section style={{ backgroundColor: '#111', borderRadius: '1rem', padding: '1.5rem', border: '1px solid rgba(255,0,60,0.2)', boxShadow: '0 0 30px rgba(255,0,60,0.05)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#ff003c', letterSpacing: '0.15em' }}>
-                <Zap size={14} /> 3. Smart Analysis Lab (Diagnostics)
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', color: '#00f0ff', letterSpacing: '0.15em' }}>
+                <Zap size={14} style={{ color: '#00f0ff' }} /> 3. Smart Analysis Lab (Diagnostics)
               </label>
-              <div style={{ fontSize: '10px', color: '#ff003c', fontWeight: 'bold', fontFamily: 'monospace' }}>MODEL_V3.6_ACTIVE</div>
+              <div style={{ fontSize: '10px', color: '#00f0ff', fontWeight: 'bold', fontFamily: 'monospace', opacity: 0.8 }}>MODEL_V3.6_ACTIVE</div>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? '1fr 1fr 1fr' : '1fr', gap: '2rem' }}>

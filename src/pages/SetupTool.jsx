@@ -688,19 +688,23 @@ export default function AISetupTool() {
                     { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
                     { label: 'BB% (F)', key: 'brakeBalance', step: 0.1, min: 40, max: 80 }
                   ].map(item => (
-                    <div key={item.key} style={{ backgroundColor: 'black', padding: '1.5rem 0.25rem 0.75rem 0.25rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.125rem', position: 'relative', overflow: 'hidden' }}>
+                    <div key={item.key} style={{ backgroundColor: 'black', padding: '1.5rem 0.25rem 0.75rem 0.25rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', position: 'relative' }}>
                       <span style={{ position: 'absolute', top: '0.4375rem', left: 0, width: '100%', textAlign: 'center', fontSize: '8px', color: '#71717a', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</span>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.125rem' }}>
+                      
+                      {/* Current Value (Middle) */}
+                      <span style={{ fontSize: '18px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', marginTop: '0.5rem' }}>
+                        {item.key === 'brakeBalance' ? baselineSetup[item.key].toFixed(1) : Math.round(baselineSetup[item.key])}
+                      </span>
+
+                      {/* Control Buttons (Bottom) */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <LongPressButton 
                           onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.max(item.min, prev[item.key] - item.step) }))}
-                          style={{ background: 'none', border: 'none', color: '#ff003c', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
+                          style={{ backgroundColor: 'rgba(255,0,60,0.1)', border: '1px solid rgba(255,0,60,0.2)', borderRadius: '4px', color: '#ff003c', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', width: '28px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
                         >-</LongPressButton>
-                        <span style={{ fontSize: '13px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', minWidth: '1.5rem', textAlign: 'center' }}>
-                          {item.key === 'brakeBalance' ? baselineSetup[item.key].toFixed(1) : Math.round(baselineSetup[item.key])}
-                        </span>
                         <LongPressButton 
                           onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.min(item.max, prev[item.key] + item.step) }))}
-                          style={{ background: 'none', border: 'none', color: '#00f0ff', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
+                          style={{ backgroundColor: 'rgba(0,240,255,0.1)', border: '1px solid rgba(0,240,255,0.2)', borderRadius: '4px', color: '#00f0ff', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', width: '28px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
                         >+</LongPressButton>
                       </div>
                     </div>

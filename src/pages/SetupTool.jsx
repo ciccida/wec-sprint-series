@@ -533,7 +533,7 @@ export default function AISetupTool() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#ff003c]/30 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto py-12">
+      <div className="max-w-6xl mx-auto pt-32 pb-12">
         
         {/* Header */}
         <header style={{ marginBottom: '3rem', borderLeft: '4px solid #ff003c', paddingLeft: '1.5rem' }}>

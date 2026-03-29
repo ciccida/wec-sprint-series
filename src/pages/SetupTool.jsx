@@ -678,32 +678,34 @@ export default function AISetupTool() {
               </div>
 
               {/* Col 4: Electronic Quick Setup */}
-              <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? 'repeat(5, 1fr)' : 'repeat(2, 1fr)', gap: '0.5rem' }}>
-                <div style={{ gridColumn: isLargeScreen ? 'span 5' : 'span 2', fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Current Electronics (Baseline)</div>
-                {[
-                  { label: 'TC', key: 'tcMap', step: 1, min: 1, max: 12 },
-                  { label: 'TC Cut', key: 'tcPower', step: 1, min: 1, max: 12 },
-                  { label: 'TC Slip', key: 'tcSlip', step: 1, min: 1, max: 15 },
-                  { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
-                  { label: 'BB% (F)', key: 'brakeBalance', step: 0.1, min: 40, max: 80 }
-                ].map(item => (
-                  <div key={item.key} style={{ backgroundColor: 'black', padding: '0.375rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.125rem' }}>
-                    <span style={{ fontSize: '7px', color: '#71717a', textTransform: 'uppercase' }}>{item.label}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                      <LongPressButton 
-                        onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.max(item.min, prev[item.key] - item.step) }))}
-                        style={{ background: 'none', border: 'none', color: '#ff003c', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
-                      >-</LongPressButton>
-                      <span style={{ fontSize: '10px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', minWidth: '1.5rem', textAlign: 'center' }}>
-                        {item.key === 'brakeBalance' ? baselineSetup[item.key].toFixed(1) : Math.round(baselineSetup[item.key])}
-                      </span>
-                      <LongPressButton 
-                        onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.min(item.max, prev[item.key] + item.step) }))}
-                        style={{ background: 'none', border: 'none', color: '#00f0ff', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
-                      >+</LongPressButton>
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                <div style={{ fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Current Electronics (Baseline)</div>
+                <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? 'repeat(5, 1fr)' : 'repeat(2, 1fr)', gap: '0.5rem' }}>
+                  {[
+                    { label: 'TC', key: 'tcMap', step: 1, min: 1, max: 12 },
+                    { label: 'TC Cut', key: 'tcPower', step: 1, min: 1, max: 12 },
+                    { label: 'TC Slip', key: 'tcSlip', step: 1, min: 1, max: 15 },
+                    { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
+                    { label: 'BB% (F)', key: 'brakeBalance', step: 0.1, min: 40, max: 80 }
+                  ].map(item => (
+                    <div key={item.key} style={{ backgroundColor: 'black', padding: '1.25rem 0.25rem 0.625rem 0.25rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.125rem', position: 'relative', overflow: 'hidden' }}>
+                      <span style={{ position: 'absolute', top: '0.375rem', left: 0, width: '100%', textAlign: 'center', fontSize: '6px', color: '#52525b', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.125rem' }}>
+                        <LongPressButton 
+                          onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.max(item.min, prev[item.key] - item.step) }))}
+                          style={{ background: 'none', border: 'none', color: '#ff003c', fontSize: '11px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
+                        >-</LongPressButton>
+                        <span style={{ fontSize: '10px', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', minWidth: '1.25rem', textAlign: 'center' }}>
+                          {item.key === 'brakeBalance' ? baselineSetup[item.key].toFixed(1) : Math.round(baselineSetup[item.key])}
+                        </span>
+                        <LongPressButton 
+                          onClick={() => setBaselineSetup(prev => ({ ...prev, [item.key]: Math.min(item.max, prev[item.key] + item.step) }))}
+                          style={{ background: 'none', border: 'none', color: '#00f0ff', fontSize: '11px', fontWeight: 'bold', cursor: 'pointer', padding: '0 0.25rem' }}
+                        >+</LongPressButton>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </section>

@@ -678,11 +678,12 @@ export default function AISetupTool() {
               </div>
 
               {/* Col 4: Electronic Quick Setup */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                <div style={{ gridColumn: 'span 2', fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Current Electronics (Baseline)</div>
+              <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? 'repeat(5, 1fr)' : 'repeat(2, 1fr)', gap: '0.5rem' }}>
+                <div style={{ gridColumn: isLargeScreen ? 'span 5' : 'span 2', fontSize: '8px', color: '#64748b', fontWeight: '900', textTransform: 'uppercase' }}>Current Electronics (Baseline)</div>
                 {[
-                  { label: 'TC1', key: 'tcMap', step: 1, min: 1, max: 12 },
-                  { label: 'TC2', key: 'tcPower', step: 1, min: 1, max: 12 },
+                  { label: 'TC', key: 'tcMap', step: 1, min: 1, max: 12 },
+                  { label: 'TC Cut', key: 'tcPower', step: 1, min: 1, max: 12 },
+                  { label: 'TC Slip', key: 'tcSlip', step: 1, min: 1, max: 15 },
                   { label: 'ABS', key: 'absMap', step: 1, min: 1, max: 12 },
                   { label: 'BB% (F)', key: 'brakeBalance', step: 0.1, min: 40, max: 80 }
                 ].map(item => (

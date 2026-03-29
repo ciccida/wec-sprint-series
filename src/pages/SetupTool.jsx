@@ -538,7 +538,7 @@ export default function AISetupTool() {
         {/* Header */}
         <header style={{ marginBottom: '3rem', borderLeft: '4px solid #ff003c', paddingLeft: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <Zap style={{ color: '#00f0ff' }} size={32} />
+            <Zap style={{ color: '#00f0ff' }} size={24} />
             <h1 style={{ fontSize: '2.25rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
               AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.75rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.6</span>
             </h1>
@@ -703,7 +703,7 @@ export default function AISetupTool() {
             <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? '1fr 1fr 1fr' : '1fr', gap: '2rem' }}>
               {/* Col 1: Low Speed */}
               <div style={{ padding: '1rem', backgroundColor: 'rgba(0,240,255,0.02)', borderRadius: '1rem', border: '1px solid rgba(0,240,255,0.1)' }}>
-                <div style={{ fontSize: '9px', color: '#00f0ff', fontWeight: '900', marginBottom: '1rem', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid rgba(0,240,255,0.1)', paddingBottom: '0.5rem' }}>Mechanical Focus (Low Speed)</div>
+                <div style={{ fontSize: '9px', color: '#00f0ff', fontWeight: '900', marginBottom: '1rem', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid rgba(0,240,255,0.1)', paddingBottom: '0.5rem' }}>低速コーナー (メカニカル重視)</div>
                 <div style={{ display: 'grid', gap: '1rem' }}>
                   {[
                     { label: '進入 (Entry) - 低速', key: 'entry_low' },
@@ -728,7 +728,7 @@ export default function AISetupTool() {
 
               {/* Col 2: High Speed */}
               <div style={{ padding: '1rem', backgroundColor: 'rgba(255,0,60,0.02)', borderRadius: '1rem', border: '1px solid rgba(255,0,60,0.1)' }}>
-                <div style={{ fontSize: '9px', color: '#ff003c', fontWeight: '900', marginBottom: '1rem', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid rgba(255,0,60,0.1)', paddingBottom: '0.5rem' }}>Aerodynamic Focus (High Speed)</div>
+                <div style={{ fontSize: '9px', color: '#ff003c', fontWeight: '900', marginBottom: '1rem', textTransform: 'uppercase', textAlign: 'center', borderBottom: '1px solid rgba(255,0,60,0.1)', paddingBottom: '0.5rem' }}>高速コーナー (空力・レーキ重視)</div>
                 <div style={{ display: 'grid', gap: '1rem' }}>
                   {[
                     { label: '進入 (Entry) - 高速', key: 'entry_high' },

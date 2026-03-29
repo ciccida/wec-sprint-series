@@ -133,38 +133,55 @@ const calculateSetup = (config, diagnostics, telemetry, weatherSlot, baseline) =
     res.rearWing = res.rearWing + 2;
   }
 
-  // --- 3. PHASE-AWARE PINPOINT ADJUSTMENTS ---
+  // --- 3. PHASE-AWARE PINPOINT ADJUSTMENTS (v3.5 High/Low Speed Split) ---
   
-  // ENTRY PHASE: Brakes, Aero, Diff
-  if (diagnostics.entry === 'understeer') {
+  // LOW SPEED (Mechanical Grip focus)
+  if (diagnostics.entry_low === 'understeer') {
     res.brakeBalance -= 1.0;
-    res.rearWing -= 1;
     res.preload += 20;
-  } else if (diagnostics.entry === 'oversteer') {
+  } else if (diagnostics.entry_low === 'oversteer') {
     res.brakeBalance += 1.0;
-    res.rearWing += 2;
     res.preload -= 20;
   }
 
-  // MID PHASE: Front Suspension
-  if (diagnostics.mid === 'understeer') {
+  if (diagnostics.mid_low === 'understeer') {
     res.springFront -= 1;
     res.arbFront -= 1;
-  } else if (diagnostics.mid === 'oversteer') {
+  } else if (diagnostics.mid_low === 'oversteer') {
     res.springFront += 1;
     res.arbFront += 1;
   }
 
-  // EXIT PHASE: Rear Suspension, TC
-  if (diagnostics.exit === 'understeer') {
+  if (diagnostics.exit_low === 'understeer') {
     res.springRear += 1;
     res.arbRear -= 1;
-    res.tcMap -= 1;
-  } else if (diagnostics.exit === 'oversteer') {
+  } else if (diagnostics.exit_low === 'oversteer') {
     res.springRear -= 1;
     res.arbRear += 1;
-    res.tcPower += 1; // Increase Cut
-    res.tcSlip += 1;  // Stricter Slip
+    res.tcPower += 1;
+  }
+
+  // HIGH SPEED (Aero / Rake focus)
+  if (diagnostics.entry_high === 'understeer') {
+    res.rearWing -= 1;
+    res.rhFront -= 2;
+  } else if (diagnostics.entry_high === 'oversteer') {
+    res.rearWing += 1;
+    res.rhFront += 2;
+  }
+
+  if (diagnostics.mid_high === 'understeer') {
+    res.rearWing -= 1;
+    res.rhFront -= 2;
+  } else if (diagnostics.mid_high === 'oversteer') {
+    res.rearWing += 1;
+    res.rhFront += 2;
+  }
+
+  if (diagnostics.exit_high === 'understeer') {
+    res.rearWing -= 1;
+  } else if (diagnostics.exit_high === 'oversteer') {
+    res.rearWing += 1;
   }
 
   // CURBS: Compliance
@@ -317,11 +334,14 @@ export default function AISetupTool() {
   const [mode, setMode] = useState('fixed');
   const [profile, setProfile] = useState('stable');
   
-  // Smart Analysis (v3.0)
+  // Smart Analysis (v3.5)
   const [diagnostics, setDiagnostics] = useState({
-    entry: 'none',
-    mid: 'none',
-    exit: 'none',
+    entry_low: 'none',
+    entry_high: 'none',
+    mid_low: 'none',
+    mid_high: 'none',
+    exit_low: 'none',
+    exit_high: 'none',
     curbs: 'none'
   });
   const [telemetry, setTelemetry] = useState(null);
@@ -471,14 +491,30 @@ export default function AISetupTool() {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (event) => {
-      // Dummy Parsing logic (to be expanded)
-      // We look for tire temp patterns in the CSV string
       const text = event.target.result;
-      if (text.includes('Tyre Temp')) {
-        setTelemetry({
-          tireTemps: { fl: { inner: 85, outer: 70 }, fr: { inner: 82, outer: 72 }, rl: { inner: 80, outer: 75 }, rr: { inner: 80, outer: 75 } }
-        });
-      }
+      const lines = text.split('\n');
+      
+      let metadata = {
+        venue: 'Unknown',
+        vehicle: 'Unknown',
+        lap: 'Unknown'
+      };
+
+      // Robust Header Parsing
+      lines.slice(0, 30).forEach(line => {
+        const parts = line.split(',').map(p => p.replace(/"/g, '').trim());
+        if (parts[0] === 'Venue') metadata.venue = parts[1];
+        if (parts[0] === 'Vehicle') metadata.vehicle = parts[1];
+        if (parts[0] === 'Range') metadata.lap = parts[1];
+      });
+
+      setTelemetry({
+        metadata,
+        timestamp: new Date().toLocaleTimeString(),
+        rawText: text.substring(0, 1000)
+      });
+      
+      alert(`MoTeC Telemetry Loaded:\nVenue: ${metadata.venue}\nVehicle: ${metadata.vehicle}\nLap: ${metadata.lap}\n\nAnalyzing driving patterns...`);
     };
     reader.readAsText(file);
   };
@@ -504,7 +540,7 @@ export default function AISetupTool() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
             <Zap style={{ color: '#00f0ff' }} size={32} />
             <h1 style={{ fontSize: '2.25rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
-              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.75rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.3</span>
+              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.75rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.5</span>
             </h1>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
@@ -780,24 +816,66 @@ export default function AISetupTool() {
               {/* 1. Driver Feedback (v3.5 Phase Analysis) */}
               <div style={{ marginBottom: '1.25rem' }}>
                 <label style={{ fontSize: '9px', fontWeight: '900', color: '#ff003c', textTransform: 'uppercase', letterSpacing: '0.2em', display: 'block', marginBottom: '1rem' }}>1. 走行フィードバック (Phase Analysis)</label>
-                <div style={{ display: 'grid', gap: '0.75rem' }}>
-                  {[
-                    { label: '進入 (Entry) - ターンイン', key: 'entry', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (曲がらない)'},{v:'oversteer',t:'オーバー (不安定)'},{v:'unknown',t:'分からない / 特定不可'}] },
-                    { label: '中間 (Mid) - ボトム付近', key: 'mid', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー (外に孕む)'},{v:'oversteer',t:'オーバー (回る)'},{v:'unknown',t:'分からない / 特定不可'}] },
-                    { label: '脱出 (Exit) - 立ち上がり', key: 'exit', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'パワーアンダー'},{v:'oversteer',t:'トラクション不足'},{v:'unknown',t:'分からない / 特定不可'}] },
-                    { label: '縁石 (Curbs) - 走破性', key: 'curbs', options: [{v:'none',t:'問題なし'},{v:'bumpy',t:'跳ねる (吸収不足)'},{v:'unknown',t:'分からない / 特定不可'}] }
-                  ].map(item => (
-                    <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                      <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.label}</span>
-                      <select 
-                        style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
-                        value={diagnostics[item.key]}
-                        onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
-                      >
-                        {item.options.map(opt => <option key={opt.v} value={opt.v}>{opt.t}</option>)}
-                      </select>
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  {/* LOW SPEED SECTION */}
+                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(0,240,255,0.03)', borderRadius: '0.75rem', border: '1px solid rgba(0,240,255,0.1)' }}>
+                    <div style={{ fontSize: '8px', color: '#00f0ff', fontWeight: '900', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Low Speed Corners (Mechanical Focus)</div>
+                    <div style={{ display: 'grid', gap: '0.75rem' }}>
+                      {[
+                        { label: '進入 (Entry) - 低速', key: 'entry_low', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] },
+                        { label: '中間 (Mid) - 低速', key: 'mid_low', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] },
+                        { label: '脱出 (Exit) - 低速', key: 'exit_low', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'トラクション抜ける'},{v:'oversteer',t:'リアが暴れる'}] }
+                      ].map(item => (
+                        <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold' }}>{item.label}</span>
+                          <select 
+                            style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
+                            value={diagnostics[item.key]}
+                            onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
+                          >
+                            {item.options.map(opt => <option key={opt.v} value={opt.v}>{opt.t}</option>)}
+                          </select>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+
+                  {/* HIGH SPEED SECTION */}
+                  <div style={{ padding: '0.75rem', backgroundColor: 'rgba(255,0,60,0.03)', borderRadius: '0.75rem', border: '1px solid rgba(255,0,60,0.1)' }}>
+                    <div style={{ fontSize: '8px', color: '#ff003c', fontWeight: '900', marginBottom: '0.5rem', textTransform: 'uppercase' }}>High Speed Corners (Aero Focus)</div>
+                    <div style={{ display: 'grid', gap: '0.75rem' }}>
+                      {[
+                        { label: '進入 (Entry) - 高速', key: 'entry_high', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'リア浮く/不安定'}] },
+                        { label: '中間 (Mid) - 高速', key: 'mid_high', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] },
+                        { label: '脱出 (Exit) - 高速', key: 'exit_high', options: [{v:'none',t:'問題なし'},{v:'understeer',t:'アンダー'},{v:'oversteer',t:'オーバー'}] }
+                      ].map(item => (
+                        <div key={item.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold' }}>{item.label}</span>
+                          <select 
+                            style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
+                            value={diagnostics[item.key]}
+                            onChange={(e) => setDiagnostics({...diagnostics, [item.key]: e.target.value})}
+                          >
+                            {item.options.map(opt => <option key={opt.v} value={opt.v}>{opt.t}</option>)}
+                          </select>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CURBS */}
+                  <div style={{ padding: '0.25rem 0' }}>
+                    <span style={{ fontSize: '9px', color: '#71717a', fontWeight: 'bold' }}>縁石 (Curbs) - 走破性</span>
+                    <select 
+                      style={{ width: '100%', backgroundColor: 'black', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.5rem', padding: '0.5rem', fontSize: '11px', fontWeight: 'bold', color: 'white', outline: 'none', cursor: 'pointer' }}
+                      value={diagnostics.curbs}
+                      onChange={(e) => setDiagnostics({...diagnostics, curbs: e.target.value})}
+                    >
+                      <option value="none">問題なし</option>
+                      <option value="bumpy">跳ねる (吸収不足)</option>
+                      <option value="unknown">分からない</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -813,11 +891,18 @@ export default function AISetupTool() {
                   />
                   <div className="text-center space-y-1.5">
                     <div className="flex justify-center">
-                      <Info size={20} className="text-zinc-600 group-hover:text-[#ff003c] transition-colors" />
+                      <FileUp size={20} className={telemetry ? "text-[#00f0ff]" : "text-zinc-600"} />
                     </div>
-                    <p className="text-[10px] font-bold text-zinc-400">
-                      {telemetry ? "✅ データ読み込み完了" : "CSVをドロップ"}
-                    </p>
+                    {telemetry ? (
+                      <div style={{ animation: 'fadeIn 0.5s ease-out' }}>
+                        <p className="text-[10px] font-bold text-[#00f0ff]">✅ TELEMETRY ACTIVE</p>
+                        <p className="text-[8px] text-zinc-400 mt-1 uppercase font-mono">
+                          {telemetry.metadata.venue} | {telemetry.metadata.vehicle} | {telemetry.metadata.lap}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-[10px] font-bold text-zinc-400">CSVをドロップ</p>
+                    )}
                   </div>
                 </div>
               </div>

@@ -700,6 +700,17 @@ export default function AISetupTool() {
               <div style={{ fontSize: '10px', color: '#00f0ff', fontWeight: 'bold', fontFamily: 'monospace', opacity: 0.8 }}>MODEL_V3.6_ACTIVE</div>
             </div>
 
+            {/* Engineer Guide Tooltip (v3.6.2) */}
+            <div style={{ backgroundColor: 'rgba(255,255,255,0.02)', padding: '0.875rem 1.25rem', borderRadius: '0.75rem', borderLeft: '3px solid #00f0ff', marginBottom: '2rem' }}>
+              <p style={{ fontSize: '11px', color: '#94a3b8', margin: 0, lineHeight: '1.6' }}>
+                <span style={{ color: '#00f0ff', fontWeight: '900', marginRight: '0.5rem' }}>[ DIAGNOSTIC GUIDE / 診断のヒント ]</span>
+                <br />
+                <span style={{ color: 'white' }}>低速コーナー:</span> ダウンフォースが低いため、サスペンションやデフ等の<span style={{ color: '#00f0ff', fontWeight: 'bold' }}>機械構造 (Mechanical)</span> が挙動を支配します。
+                <br />
+                <span style={{ color: 'white' }}>高速コーナー:</span> 空力の力が増し、ウィングや車高（前後の姿勢＝レーキ）等の<span style={{ color: '#ff003c', fontWeight: 'bold' }}>空気力学 (Aerodynamic)</span> が支配的になります。
+              </p>
+            </div>
+
             <div style={{ display: 'grid', gridTemplateColumns: isLargeScreen ? '1fr 1fr 1fr' : '1fr', gap: '2rem' }}>
               {/* Col 1: Low Speed */}
               <div style={{ padding: '1rem', backgroundColor: 'rgba(0,240,255,0.02)', borderRadius: '1rem', border: '1px solid rgba(0,240,255,0.1)' }}>

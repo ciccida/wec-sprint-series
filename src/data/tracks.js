@@ -102,7 +102,7 @@ export const tracks = [
     },
     {
         id: 'barcelona',
-        name: 'Circuit de Barcelona-Catalunya',
+        name: 'Catalunya',
         layouts: [
             { id: 'barcelona-gp', name: 'Grand Prix', baseLapTime: 105 }
         ]

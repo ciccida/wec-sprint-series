@@ -84,7 +84,7 @@ const CIRCUITS = [
   { id: 'silverstone', name: 'Silverstone', downforce: 'MED-HIGH', bumpiness: 'MIXED' },
   { id: 'paul_ricard', name: 'Circuit Paul Ricard', downforce: 'MED-LOW', bumpiness: 'SMOOTH' },
   { id: 'portimao', name: 'Portimão', downforce: 'MED-HIGH', bumpiness: 'MIXED' },
-  { id: 'barcelona', name: 'Barcelona-Catalunya', downforce: 'MED-HIGH', bumpiness: 'SMOOTH' },
+  { id: 'barcelona', name: 'Catalunya', downforce: 'MED-HIGH', bumpiness: 'SMOOTH' },
 ];
 
 const WEATHER_CONDITIONS = [

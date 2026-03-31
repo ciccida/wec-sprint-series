@@ -325,7 +325,22 @@
         "Portimao": { lat: 37.23, lon: -8.63 },
         "Sebring": { lat: 27.45, lon: -81.35 },
         "Silverstone": { lat: 52.07, lon: -1.02 },
-        "Spa-Francorchamps": { lat: 50.44, lon: 5.97 }
+        "Spa-Francorchamps": { lat: 50.44, lon: 5.97 },
+        "Catalunya": { lat: 41.57, lon: 2.26 }
+    };
+
+    const circuitDates = {
+        "Lusail": { y: 2025, m: 2, d: 28 },
+        "Imola": { y: 2025, m: 4, d: 20 },
+        "Spa-Francorchamps": { y: 2025, m: 5, d: 10 },
+        "Catalunya": { y: 2025, m: 5, d: 18 },
+        "Circuit de la Sarthe (Le Mans)": { y: 2025, m: 6, d: 14 },
+        "Paul Ricard": { y: 2025, m: 7, d: 6 },
+        "Interlagos": { y: 2025, m: 7, d: 13 },
+        "COTA": { y: 2025, m: 9, d: 7 },
+        "Silverstone": { y: 2025, m: 9, d: 14 },
+        "Fuji Speedway": { y: 2025, m: 9, d: 28 },
+        "Bahrain": { y: 2025, m: 11, d: 8 }
     };
 
     const circuitSelect = document.getElementById('circuitSelect');
@@ -334,6 +349,16 @@
         opt.value = name; opt.textContent = name;
         if(name.includes("Le Mans")) opt.selected = true;
         circuitSelect.appendChild(opt);
+    });
+
+    // Automatically update date when circuit is selected
+    circuitSelect.addEventListener('change', (e) => {
+        const date = circuitDates[e.target.value];
+        if (date) {
+            document.getElementById('targetYear').value = date.y;
+            document.getElementById('targetMonth').value = date.m;
+            document.getElementById('targetDay').value = date.d;
+        }
     });
 
     // ランダム時間のON/OFF
@@ -396,7 +421,8 @@
         const loc = circuits[circuitSelect.value];
 
         // 24時間レース（N+1日）もカバーするため、十分な余裕を持って取得
-        const fetchStartStr = addDaysStr(currentCenterDateStr, -16);
+        // ユーザー希望の「前後14日間（合計29日）」を正確に取得
+        const fetchStartStr = addDaysStr(currentCenterDateStr, -14);
         const fetchEndStr = addDaysStr(currentCenterDateStr, 14);
         
         btn.disabled = true;

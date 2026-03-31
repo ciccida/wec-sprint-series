@@ -100,4 +100,11 @@ export const tracks = [
             { id: 'silverstone-gp', name: 'Grand Prix', baseLapTime: 112 }
         ]
     },
+    {
+        id: 'barcelona',
+        name: 'Circuit de Barcelona-Catalunya',
+        layouts: [
+            { id: 'barcelona-gp', name: 'Grand Prix', baseLapTime: 105 }
+        ]
+    }
 ];

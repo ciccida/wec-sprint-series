@@ -6,7 +6,8 @@ export const TRACKS = [
     { id: 'saopaulo', name: 'Sao Paulo', lat: -23.7036, lon: -46.6997, defaultMonth: 7, raceDate: '2025-07-13' },
     { id: 'cota', name: 'COTA', lat: 30.1328, lon: -97.6411, defaultMonth: 9, raceDate: '2025-09-07' },
     { id: 'fuji', name: 'Fuji', lat: 35.3717, lon: 138.9266, defaultMonth: 9, raceDate: '2025-09-28' },
-    { id: 'bahrain', name: 'Bahrain', lat: 26.0325, lon: 50.5106, defaultMonth: 11, raceDate: '2025-11-08' }
+    { id: 'bahrain', name: 'Bahrain', lat: 26.0325, lon: 50.5106, defaultMonth: 11, raceDate: '2025-11-08' },
+    { id: 'barcelona', name: 'Barcelona-Catalunya', lat: 41.5701, lon: 2.2611, defaultMonth: 5, raceDate: '2025-05-18' }
 ];
 
 export const MONTHS = [

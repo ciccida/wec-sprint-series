@@ -16,7 +16,8 @@ export const carClasses = [
             { id: 'isotta-fraschini-tipo6c', name: 'Isotta Fraschini Tipo 6-C' },
             { id: 'aston-martin-valkyrie', name: 'Aston Martin Valkyrie AMR-LMH' },
             { id: 'glickenhaus-007', name: 'Glickenhaus SCG 007 LMH' },
-            { id: 'vanwall-vandervell', name: 'Vanwall Vandervell 680' }
+            { id: 'vanwall-vandervell', name: 'Vanwall Vandervell 680' },
+            { id: 'genesis-gmr01', name: 'Genesis GMR-001' }
         ]
     },
     {
@@ -36,7 +37,8 @@ export const carClasses = [
         cars: [
             { id: 'ginetta-g61', name: 'Ginetta G61-LT-P325 Evo' },
             { id: 'ligier-js-p325', name: 'Ligier JS P325' },
-            { id: 'duqueine-d08', name: 'Duqueine D08' }
+            { id: 'duqueine-d08', name: 'Duqueine D08' },
+            { id: 'duqueine-d09', name: 'Duqueine D09' }
         ]
     },
     {

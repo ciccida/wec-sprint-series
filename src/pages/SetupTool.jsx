@@ -40,6 +40,7 @@ const CAR_MODELS = {
     { id: 'vanwall_680', name: 'Vanwall Vandervell 680', basePreload: 130 },
     { id: 'glickenhaus_007', name: 'Glickenhaus SCG 007', basePreload: 140 },
     { id: 'aston_valkyrie', name: 'Aston Martin Valkyrie AMR Pro', basePreload: 180 },
+    { id: 'genesis_gmr001', name: 'Genesis GMR-001', basePreload: 170 },
   ],
   'LMP2': [
     { id: 'oreca_07_wec', name: 'Oreca 07 Gibson (WEC-spec)', basePreload: 120 },
@@ -48,6 +49,7 @@ const CAR_MODELS = {
   'LMP3': [
     { id: 'ligier_js_p325', name: 'Ligier JS P325', basePreload: 100 },
     { id: 'ginetta_g61', name: 'Ginetta G61-LT-P325-EVO', basePreload: 105 },
+    { id: 'duqueine_d09', name: 'Duqueine D09 (LMP3)', basePreload: 100 },
   ],
   'LMGT3': [
     { id: 'lambo_gt3_evo2', name: 'Lamborghini Huracán GT3 Evo 2', basePreload: 120 },
@@ -82,6 +84,7 @@ const CIRCUITS = [
   { id: 'silverstone', name: 'Silverstone', downforce: 'MED-HIGH', bumpiness: 'MIXED' },
   { id: 'paul_ricard', name: 'Circuit Paul Ricard', downforce: 'MED-LOW', bumpiness: 'SMOOTH' },
   { id: 'portimao', name: 'Portimão', downforce: 'MED-HIGH', bumpiness: 'MIXED' },
+  { id: 'barcelona', name: 'Barcelona-Catalunya', downforce: 'MED-HIGH', bumpiness: 'SMOOTH' },
 ];
 
 const WEATHER_CONDITIONS = [
@@ -579,7 +582,7 @@ export default function AISetupTool() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
             <Zap style={{ color: '#00f0ff' }} size={24} />
             <h1 style={{ fontSize: '2.5rem', fontWeight: '900', fontStyle: 'italic', letterSpacing: '-0.05em', textTransform: 'uppercase', margin: 0 }}>
-              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.875rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.625rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.6.7</span>
+              AI <span style={{ color: '#ff003c' }}>Setup</span> Engineer <span style={{ fontSize: '0.875rem', backgroundColor: '#ff003c', color: 'white', padding: '0.125rem 0.625rem', borderRadius: '0.25rem', marginLeft: '0.5rem', fontStyle: 'normal', letterSpacing: 'normal' }}>v3.9.6</span>
             </h1>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>

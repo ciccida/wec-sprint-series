@@ -49,7 +49,7 @@ const CAR_MODELS = {
   'LMP3': [
     { id: 'ligier_js_p325', name: 'Ligier JS P325', basePreload: 100 },
     { id: 'ginetta_g61', name: 'Ginetta G61-LT-P325-EVO', basePreload: 105 },
-    { id: 'duqueine_d09', name: 'Duqueine D09 (LMP3)', basePreload: 100 },
+    { id: 'duqueine_d09', name: 'Duqueine D09', basePreload: 100 },
   ],
   'LMGT3': [
     { id: 'lambo_gt3_evo2', name: 'Lamborghini Huracán GT3 Evo 2', basePreload: 120 },

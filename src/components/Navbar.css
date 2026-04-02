@@ -26,6 +26,23 @@
     /* Force 1 line */
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+}
+
 .nav-links {
     display: flex;
     gap: 1.2rem;
@@ -115,6 +132,9 @@
     }
     .logo {
         flex-shrink: 0; /* Prevent logo from squishing */
+    }
+    .logo img {
+        height: 36px;
     }
     .nav-links {
         overflow-x: auto;

@@ -12,7 +12,7 @@ import About from '../components/About';
 import Sponsors from '../components/Sponsors';
 
 const Home = () => {
-    const [selectedRound, setSelectedRound] = useState(6);
+    const [selectedRound, setSelectedRound] = useState(7);
     const { hash } = useLocation();
 
     useEffect(() => {
@@ -33,7 +33,8 @@ const Home = () => {
         3: "Rd.3 Spa",
         4: "Rd.4 Le Mans",
         5: "Rd.5 Interlagos",
-        6: "Rd.6 COTA"
+        6: "Rd.6 COTA",
+        7: "Rd.7 Fuji"
     };
 
     return (

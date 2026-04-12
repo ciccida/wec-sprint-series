@@ -4,12 +4,21 @@ import './Ranking.css';
 
 const Ranking = () => {
     // Calculate total points and sort drivers
+    let currentRank = 0;
+    let lastPoints = -1;
     const sortedRanking = rankingData
         .map(driver => ({
             ...driver,
             totalPoints: driver.points.reduce((sum, p) => sum + (p || 0), 0)
         }))
-        .sort((a, b) => b.totalPoints - a.totalPoints);
+        .sort((a, b) => b.totalPoints - a.totalPoints)
+        .map((driver, index) => {
+            if (driver.totalPoints !== lastPoints) {
+                currentRank = index + 1;
+            }
+            lastPoints = driver.totalPoints;
+            return { ...driver, displayRank: currentRank };
+        });
 
     // Identify which rounds are "finished" (i.e., have at least one valid point entry)
     const finishedRounds = new Set();
@@ -43,9 +52,9 @@ const Ranking = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {sortedRanking.map((driver, index) => (
-                            <tr key={driver.id} className={index < 3 ? `top-${index + 1}` : ''}>
-                                <td className="sticky-col pos">{driver.rank}</td>
+                        {sortedRanking.map((driver) => (
+                            <tr key={driver.id} className={driver.displayRank <= 3 ? `top-${driver.displayRank}` : ''}>
+                                <td className="sticky-col pos">{driver.displayRank}</td>
                                 <td className="sticky-col driver-name">{driver.name}</td>
                                 {driver.points.map((p, i) => {
                                     // If round is finished but points are null, show 0

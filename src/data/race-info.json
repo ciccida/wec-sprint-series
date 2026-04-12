@@ -1,18 +1,18 @@
 {
-    "round": "Round 7",
-    "circuit": "Fuji",
-    "date": "2026.04.11 (SAT)",
+    "round": "Round 8",
+    "circuit": "Bahrain",
+    "date": "2026.04.25 (SAT)",
     "time": "21:50〜",
-    "description": "WEC Sprint Series Vol.2 Round 7。\n日本・富士スピードウェイでのホームレース！",
-    "image": "/assets/round7-fuji.jpg",
-    "broadcastLink": "https://youtube.com/live/fYpQVkTOmGk",
-    "title": "【LeMans Ultimate】WEC Sprint Series Vol.2 Round 7 COTA 実況生中継",
+    "description": "WEC Sprint Series Vol.2 最終戦！シーズンを締めくくるバーレーンでの激闘を、ぜひリアルタイムで見届けてください。",
+    "image": "/assets/round8-bahrain.jpg",
+    "broadcastLink": "https://youtube.com/live/bQJ2Mc7vE9Y?feature=share",
+    "title": "【LeMans Ultimate】WEC Sprint Series Vol.2 Round 8 Bahrain 実況生中継",
     "specialStream": {
-        "title": "【天候環境設定配信】WEC Sprint Series Vol.2 Round 7 FUJI｜公式公開練習",
-        "date": "2026.04.02 (SAT)",
+        "title": "【天候環境設定配信】WEC Sprint Series Vol.2 Round 8 Bahrain｜公式公開練習",
+        "date": "2026.04.15 (WED)",
         "time": "21:50〜",
-        "description": "Round 7 Fujiに向けた「天候環境設定」をリアルタイムで決定する運命の配信。",
-        "image": "/assets/round7-weather-stream.jpg",
-        "link": "https://youtube.com/live/EMMgx6CcXJY"
+        "description": "Round 8 Bahrainに向けた重要な天候設定配信。WEATHER RANDOMIZERにより詳細なレースコンディションが決定します。",
+        "image": "/assets/round8-weather-stream.jpg",
+        "link": "https://youtube.com/live/UGth9zf95fI?feature=share"
     }
 }

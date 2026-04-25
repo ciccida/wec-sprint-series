@@ -1,18 +1,26 @@
 import React from 'react';
-import { rankingData, rounds } from '../data/ranking';
 import './Ranking.css';
 
-const Ranking = () => {
+const Ranking = ({ limit, data, rounds, seasonName, selector, titleColor }) => {
+    // 外部からデータが渡されない場合のフォールバック
+    const displayData = data || [];
+    const displayRounds = rounds || [];
+
     // Calculate total points and sort drivers
     let currentRank = 0;
     let lastPoints = -1;
-    const sortedRanking = rankingData
+    let sortedRanking = displayData
         .map(driver => ({
             ...driver,
             totalPoints: driver.points.reduce((sum, p) => sum + (p || 0), 0)
         }))
-        .sort((a, b) => b.totalPoints - a.totalPoints)
-        .map((driver, index) => {
+        .sort((a, b) => b.totalPoints - a.totalPoints);
+
+    if (limit) {
+        sortedRanking = sortedRanking.slice(0, limit);
+    }
+
+    sortedRanking = sortedRanking.map((driver, index) => {
             if (driver.totalPoints !== lastPoints) {
                 currentRank = index + 1;
             }
@@ -22,7 +30,7 @@ const Ranking = () => {
 
     // Identify which rounds are "finished" (i.e., have at least one valid point entry)
     const finishedRounds = new Set();
-    rankingData.forEach(driver => {
+    displayData.forEach(driver => {
         driver.points.forEach((p, index) => {
             if (p !== null) {
                 finishedRounds.add(index);
@@ -33,8 +41,9 @@ const Ranking = () => {
     return (
         <div className="ranking-container">
             <div className="ranking-header">
-                <h2>Series Point Ranking</h2>
-                <p>Vol.2 Standings</p>
+                <h2 style={titleColor ? { color: titleColor } : {}}>Series Point Ranking</h2>
+                {selector}
+                <p>{seasonName || 'Season Standings'}</p>
             </div>
 
             <div className="table-responsive">
@@ -43,7 +52,7 @@ const Ranking = () => {
                         <tr>
                             <th className="sticky-col">Pos</th>
                             <th className="sticky-col">Driver</th>
-                            {rounds.map(round => (
+                            {displayRounds.map(round => (
                                 <th key={round.id} className="round-col" title={round.venue}>
                                     {round.name}
                                 </th>

@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import PitCalculator from './pages/PitCalculator';
 import SetupTool from './pages/SetupTool';
 import WeatherCheck from './pages/WeatherCheck';
+import Results from './pages/Results';
+import Regulations from './pages/Regulations';
 import Footer from './components/Footer';
 
 function ScrollToTop() {
@@ -50,6 +52,8 @@ function App() {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    {/* <Route path="/results" element={<Results />} /> */}
+                    {/* <Route path="/regulations" element={<Regulations />} /> */}
                     <Route path="/calculator" element={<PitCalculator />} />
                     <Route path="/ai-setup-engineer-lab-exclusive-v33" element={<SetupTool />} />
                     <Route path="/weather" element={<WeatherCheck />} />

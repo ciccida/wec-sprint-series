@@ -7,13 +7,54 @@ import TwitterFeed from '../components/TwitterFeed';
 import Schedule from '../components/Schedule';
 import Ranking from '../components/Ranking';
 import RaceResults from '../components/RaceResults';
-import { raceResults } from '../data/raceResults';
 import About from '../components/About';
 import Sponsors from '../components/Sponsors';
+import { rankingData, rounds } from '../data/ranking';
+import { raceResults } from '../data/raceResults';
+import { timeAttackData } from '../data/timeAttackData';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-    const [selectedRound, setSelectedRound] = useState(7);
     const { hash } = useLocation();
+
+    // シーラベル表記を変換する補助関数
+    const getSeasonLabel = (season) => {
+        if (season === "Vol2") return "Vol.2";
+        if (season.startsWith("Vol")) {
+            const num = season.replace("Vol", "");
+            return `Season ${num}`;
+        }
+        return season;
+    };
+
+    // 最新のシーズンを取得（ランキング用）
+    // 利用可能なシーズン (4/29までは Vol2 固定)
+    const availableSeasons = ["Vol2"];
+    const seasons = Object.keys(rankingData);
+    const latestSeason = [...seasons].reverse().find(s => rankingData[s] && rankingData[s].length > 0) || seasons[0] || "Vol2";
+    
+    // タイムアタックの最新シーズンを独自に取得
+    const taSeasons = Object.keys(timeAttackData);
+    const latestTaSeason = [...taSeasons].reverse().find(s => {
+        const seasonData = timeAttackData[s];
+        return Object.values(seasonData).some(rd => rd.results && rd.results.length > 0);
+    }) || "Vol3";
+
+    // 最新シーズンのランキングとラウンド情報
+    const currentRanking = rankingData[latestSeason] || [];
+    const currentRounds = rounds[latestSeason] || [];
+    
+    // タイムアタックの最新ラウンドを取得
+    const taSeasonData = timeAttackData[latestTaSeason] || {};
+    const taRoundsWithData = Object.keys(taSeasonData)
+        .filter(rd => taSeasonData[rd] && Array.isArray(taSeasonData[rd].results) && taSeasonData[rd].results.length > 0)
+        .map(Number)
+        .sort((a, b) => b - a);
+    const latestTaRound = taRoundsWithData[0] || 1;
+    const latestTaResults = (taSeasonData[latestTaRound] && taSeasonData[latestTaRound].results) || [];
+
+    // ラウンドリザルト用のステート (最新の8ラウンドをデフォルトに)
+    const [selectedRound, setSelectedRound] = useState(8);
 
     useEffect(() => {
         if (hash) {
@@ -27,16 +68,6 @@ const Home = () => {
         }
     }, [hash]);
 
-    const roundNames = {
-        1: "Rd.1 Lusail",
-        2: "Rd.2 Imola",
-        3: "Rd.3 Spa",
-        4: "Rd.4 Le Mans",
-        5: "Rd.5 Interlagos",
-        6: "Rd.6 COTA",
-        7: "Rd.7 Fuji"
-    };
-
     return (
         <>
             <Hero />
@@ -46,61 +77,53 @@ const Home = () => {
             <section id="schedule">
                 <Schedule />
             </section>
-            <section id="results">
-                <div className="ranking-container">
-                    <div className="ranking-header">
-                        <h2>Race Results</h2>
-                        <div className="round-selector">
-                            {Object.entries(roundNames).map(([round, name]) => (
+            
+            {/* 1. Series Standings (Full - Production Style) */}
+            <section id="ranking" style={{ padding: '80px 0 40px 0' }}>
+                <div className="container">
+                    <Ranking 
+                        data={currentRanking} 
+                        rounds={currentRounds} 
+                        seasonName={`SERIES POINT STANDINGS (${getSeasonLabel(latestSeason)})`} 
+                        titleColor="#ff003c"
+                    />
+                </div>
+            </section>
+
+            {/* 2. Race Results Section with Selector (Production Style) */}
+            <section id="results" style={{ padding: '40px 0 80px 0', background: 'rgba(0,0,0,0.2)' }}>
+                <div className="container">
+                    <div className="ranking-header" style={{ textAlign: 'center', marginBottom: '30px' }}>
+                        <h2 style={{ fontSize: '2.5rem', fontWeight: '900', color: '#ff003c', textTransform: 'uppercase' }}>Race Results</h2>
+                        
+                        <div className="round-selector" style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '20px' }}>
+                            {currentRounds.map((r) => (
                                 <button
-                                    key={round}
-                                    onClick={() => setSelectedRound(Number(round))}
-                                    className={`round-btn ${selectedRound === Number(round) ? 'active' : ''}`}
+                                    key={r.id}
+                                    onClick={() => setSelectedRound(r.id)}
+                                    className={`uk-button uk-button-small ${selectedRound === r.id ? 'uk-button-danger' : 'uk-button-default'}`}
+                                    style={{
+                                        background: selectedRound === r.id ? '#ff003c' : 'rgba(255,255,255,0.05)',
+                                        color: '#fff',
+                                        border: '1px solid ' + (selectedRound === r.id ? '#ff003c' : 'rgba(255,255,255,0.1)'),
+                                        borderRadius: '2px',
+                                        fontWeight: 'bold',
+                                        padding: '5px 15px'
+                                    }}
                                 >
-                                    {name}
+                                    {r.name}
                                 </button>
                             ))}
                         </div>
-                        <style>{`
-                            .round-selector {
-                                display: flex;
-                                gap: 10px;
-                                margin-top: 15px;
-                                justify-content: center;
-                                flex-wrap: wrap;
-                                padding: 10px;
-                            }
-                            .round-btn {
-                                background: rgba(255, 255, 255, 0.05);
-                                border: 1px solid rgba(255, 255, 255, 0.1);
-                                color: #aaa;
-                                padding: 6px 16px;
-                                font-size: 12px;
-                                font-weight: 700;
-                                text-transform: uppercase;
-                                letter-spacing: 0.1em;
-                                cursor: pointer;
-                                transition: all 0.3s ease;
-                                border-radius: 2px;
-                            }
-                            .round-btn:hover {
-                                background: rgba(255, 255, 255, 0.1);
-                                color: #fff;
-                            }
-                            .round-btn.active {
-                                background: #ff003c;
-                                border-color: #ff003c;
-                                color: #fff;
-                                box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
-                            }
-                        `}</style>
                     </div>
-                    <RaceResults results={raceResults[selectedRound]} roundName={roundNames[selectedRound]} />
+
+                    <RaceResults 
+                        results={raceResults[latestSeason] ? raceResults[latestSeason][selectedRound] : []} 
+                        roundName={`${getSeasonLabel(latestSeason)} ${currentRounds.find(r => r.id === selectedRound)?.name} - ${currentRounds.find(r => r.id === selectedRound)?.venue}`}
+                    />
                 </div>
             </section>
-            <section id="ranking">
-                <Ranking />
-            </section>
+
             <About />
             <Sponsors />
         </>

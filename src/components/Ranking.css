@@ -1,5 +1,5 @@
 .ranking-container {
-    padding: 4rem 2rem;
+    padding: 0 2rem 1rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
     color: #ffffff;
@@ -7,7 +7,7 @@
 
 .ranking-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .ranking-header h2 {

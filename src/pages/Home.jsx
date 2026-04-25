@@ -19,6 +19,7 @@ const Home = () => {
 
     // シーラベル表記を変換する補助関数
     const getSeasonLabel = (season) => {
+        if (season === "Vol1") return "Vol.1";
         if (season === "Vol2") return "Vol.2";
         if (season.startsWith("Vol")) {
             const num = season.replace("Vol", "");

@@ -52,6 +52,11 @@ function App() {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    {/* [RELEASE 4/29] Uncomment these routes */}
+                    {/* <Route path="/results" element={<Results />} /> */}
+                    {/* <Route path="/regulations" element={<Regulations />} /> */}
+                    {/* <Route path="/setup-engineer" element={<SetupTool />} /> */}
+
                     {/* <Route path="/results" element={<Results />} /> */}
                     {/* <Route path="/regulations" element={<Regulations />} /> */}
                     <Route path="/calculator" element={<PitCalculator />} />

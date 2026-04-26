@@ -37,6 +37,16 @@ const Navbar = () => {
                     {/* <li><Link to="/results">RESULTS</Link></li> */}
                     {/* <li><Link to="/regulations">REGULATIONS</Link></li> */}
 
+                    {/* [RELEASE 4/29] Uncomment the block below to show the full public menu */}
+                    {/* 
+                    <li><Link to="/">HOME</Link></li>
+                    <li><Link to="/results">RESULTS</Link></li>
+                    <li><Link to="/regulations">REGULATIONS</Link></li>
+                    <li><Link to="/setup-engineer">AI SETUP ENGINEER</Link></li>
+                    <li><a href="/weather/">WEATHER</a></li>
+                    <li><Link to="/calculator" className="accent">PIT CALC</Link></li>
+                    */}
+
                     <li>
                         <a href="/weather/" className="nav-tool-link">
                             WEATHER RANDOMIZER

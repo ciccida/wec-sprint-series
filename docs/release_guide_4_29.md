@@ -11,9 +11,10 @@
 
 以下の変更をすべて一括で適用してください：
 1. **ナビゲーションバーの完全公開**: `Navbar.jsx` のコメントを解除し、RESULTS, REGULATIONS を有効化。さらに「AI SETUP」をメニューに追加。
-2. **ルーティングの有効化**: `App.jsx` のコメントを解除し、すべてのページへのアクセスを許可。AI SETUP のURLを `/setup-engineer` に変更（旧URLからのリダイレクトまたは共存）。
+2. **ルーティングの有効化**: `App.jsx` のコメントを解除し、すべてのページへのアクセスを許可。AI SETUP のURLを `/setup-engineer` に変更。
 3. **トップページを Season 3 仕様に**: `Home.jsx` の `latestSeason` を `Vol3` に変更。非表示にしていた「Season 3 Time Attack」セクションを最上部に復活。
 4. **リザルト詳細の更新**: `Results.jsx` の `availableSeasons` に `Vol3` を追加し、初期表示を `Vol3` に設定。
+5. **最終確認**: `regulations.js` のプロテスト期限が「レースの翌日中」になっていることを確認した上で、レギュレーションページを公開。
 
 作業完了後、本番環境（GitHub/Vercel）へプッシュして保存してください。
 ---

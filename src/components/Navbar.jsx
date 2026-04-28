@@ -38,15 +38,15 @@ const Navbar = () => {
                     <li><Link to="/">HOME</Link></li>
                     <li><Link to="/results">RESULTS</Link></li>
                     <li><Link to="/regulations">REGULATIONS</Link></li>
-                    <li><Link to="/setup-engineer">AI SETUP ENGINEER</Link></li>
+                    <li><Link to="/setup-engineer">AI SETUP</Link></li>
                     <li>
                         <a href="/weather/" className="nav-tool-link">
-                            WEATHER RANDOMIZER
+                            WEATHER
                         </a>
                     </li>
                     <li>
                         <Link to="/calculator" className="accent" style={{ fontWeight: 'bold' }}>
-                            PIT CALC (TRIAL)
+                            PIT CALC
                         </Link>
                     </li>
                     

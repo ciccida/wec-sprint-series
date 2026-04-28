@@ -12,6 +12,7 @@ import Sponsors from '../components/Sponsors';
 import { rankingData, rounds } from '../data/ranking';
 import { raceResults } from '../data/raceResults';
 import { timeAttackData } from '../data/timeAttackData';
+import TimeAttackResults from '../components/TimeAttackResults';
 import { Link } from 'react-router-dom';
 
 const Home = () => {

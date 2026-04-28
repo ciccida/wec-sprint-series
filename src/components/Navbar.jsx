@@ -35,7 +35,6 @@ const Navbar = () => {
                     <li>{isHome ? <a href="#latest">最新の配信</a> : <Link to="/#latest">最新の配信</Link>}</li>
                     <li>{isHome ? <a href="#schedule">スケジュール</a> : <Link to="/#schedule">スケジュール</Link>}</li>
                     {/* [RELEASE 4/29] Full public menu */}
-                    <li><Link to="/">HOME</Link></li>
                     <li><Link to="/results">RESULTS</Link></li>
                     <li><Link to="/regulations">REGULATIONS</Link></li>
                     <li><Link to="/setup-engineer">AI SETUP</Link></li>

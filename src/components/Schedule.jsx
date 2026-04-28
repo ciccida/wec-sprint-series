@@ -2,22 +2,21 @@ import React from 'react';
 import './Schedule.css';
 
 const scheduleData = [
-    { round: "Test Round 1", date: "1/15", venue: "Sebring" },
-    { round: "Test Round 2", date: "1/16", venue: "Sebring" },
-    { round: "Rd1", date: "1/17", venue: "Lusail" },
-    { round: "Rd2", date: "1/31", venue: "Imola" },
-    { round: "Rd3", date: "2/14", venue: "Spa-Francorchamps" },
-    { round: "Rd4", date: "2/28", venue: "Sarthe (Le Mans)" },
-    { round: "Rd5", date: "3/14", venue: "Interlagos" },
-    { round: "Rd6", date: "3/28", venue: "COTA" },
-    { round: "Rd7", date: "4/11", venue: "Fuji" },
-    { round: "Rd8", date: "4/25", venue: "Bahrain" },
+    { round: "Rd1公式プラクティス", date: "5/1", venue: "モンツァ" },
+    { round: "Round1", date: "5/9", venue: "モンツァ" },
+    { round: "Round2", date: "5/23", venue: "アルガルヴェ" },
+    { round: "Round3", date: "6/6", venue: "シルバーストン" },
+    { round: "Round4", date: "6/20", venue: "カタロニア" },
+    { round: "Round5", date: "7/4", venue: "ポールリカール" },
+    { round: "Round6", date: "7/18", venue: "セブリング" },
+    { round: "Round7", date: "8/1", venue: "スパ・フランコルシャン" },
+    { round: "Round8", date: "8/22", venue: "サルト" }
 ];
 
 const Schedule = () => {
     return (
         <div className="schedule-container">
-            <h2 className="section-title">Race Schedule & Points <span style={{ fontSize: '0.6em', opacity: 0.8, marginLeft: '10px' }}>Vol.2</span></h2>
+            <h2 className="section-title">Race Schedule & Points <span style={{ fontSize: '0.6em', opacity: 0.8, marginLeft: '10px' }}>Season 3</span></h2>
             <div className="schedule-content">
                 <table className="schedule-table">
                     <thead>

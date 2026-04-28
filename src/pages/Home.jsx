@@ -77,6 +77,10 @@ const Home = () => {
             <TwitterFeed />
             <LatestVideos />
 
+            <section id="schedule">
+                <Schedule />
+            </section>
+            
             {/* [RELEASE 4/29] Season 3 Time Attack Results */}
             <section id="time-attack" style={{ padding: '80px 0 40px 0', background: 'linear-gradient(to bottom, #1a1a1a, #000)' }}>
                 <div className="container">
@@ -91,9 +95,6 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-            </section>
-            <section id="schedule">
-                <Schedule />
             </section>
             
             {/* 1. Series Standings (Full - Production Style) */}

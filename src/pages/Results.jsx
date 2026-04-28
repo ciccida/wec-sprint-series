@@ -95,7 +95,7 @@ const Results = () => {
                     <div className="section-title-area" style={{ textAlign: 'center', marginBottom: '10px' }}>
                         <h2 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#fff', marginBottom: '10px' }}>TIME ATTACK LEADERBOARD</h2>
                         
-                        {renderSeasonSelector(seasonTa, setSeasonTa, availableSeasons)}
+                        {renderSeasonSelector(seasonTa, setSeasonTa, ["Vol3"])}
 
                         <div className="round-selector" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', maxWidth: '500px', margin: '0 auto' }}>
                             {[1, 2, 3, 4, 5, 6, 7, 8].map((round) => {

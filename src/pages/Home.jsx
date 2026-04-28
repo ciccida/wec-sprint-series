@@ -29,10 +29,10 @@ const Home = () => {
     };
 
     // 最新のシーズンを取得（ランキング用）
-    // 利用可能なシーズン (4/29までは Vol2 固定)
-    const availableSeasons = ["Vol2"];
+    // 利用可能なシーズン (4/29リリース版)
+    const availableSeasons = ["Vol1", "Vol2", "Vol3"];
     const seasons = Object.keys(rankingData);
-    const latestSeason = [...seasons].reverse().find(s => rankingData[s] && rankingData[s].length > 0) || seasons[0] || "Vol2";
+    const latestSeason = "Vol3";
     
     // タイムアタックの最新シーズンを独自に取得
     const taSeasons = Object.keys(timeAttackData);
@@ -76,8 +76,7 @@ const Home = () => {
             <TwitterFeed />
             <LatestVideos />
 
-            {/* [RELEASE 4/29] Uncomment the section below to show Season 3 Time Attack Results at the top */}
-            {/* 
+            {/* [RELEASE 4/29] Season 3 Time Attack Results */}
             <section id="time-attack" style={{ padding: '80px 0 40px 0', background: 'linear-gradient(to bottom, #1a1a1a, #000)' }}>
                 <div className="container">
                     <div className="section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -92,7 +91,6 @@ const Home = () => {
                     )}
                 </div>
             </section>
-            */}
             <section id="schedule">
                 <Schedule />
             </section>

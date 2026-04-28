@@ -9,13 +9,12 @@ import './WeatherCheck.css';
 
 const Results = () => {
     // 利用可能なシーズン
-    // 利用可能なシーズン (4/29までは Vol2 固定)
-    const availableSeasons = ["Vol2"]; // [RELEASE 4/29] Change to ["Vol1", "Vol2", "Vol3"]
+    const availableSeasons = ["Vol1", "Vol2", "Vol3"];
     
     // セクションごとに独立したステート
     const [seasonTa, setSeasonTa] = useState("Vol3"); 
-    const [seasonRanking, setSeasonRanking] = useState("Vol2"); // [RELEASE 4/29] Change to "Vol3"
-    const [seasonRace, setSeasonRace] = useState("Vol2"); // [RELEASE 4/29] Change to "Vol3"
+    const [seasonRanking, setSeasonRanking] = useState("Vol3");
+    const [seasonRace, setSeasonRace] = useState("Vol3");
 
     // 各セクションの最新ラウンドを取得する補助関数
     const getLatestRound = (dataObj, isTimeAttack = false) => {

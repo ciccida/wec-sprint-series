@@ -34,19 +34,11 @@ const Navbar = () => {
                     <li>{isHome ? <a href="#news">最新ニュース</a> : <Link to="/#news">最新ニュース</Link>}</li>
                     <li>{isHome ? <a href="#latest">最新の配信</a> : <Link to="/#latest">最新の配信</Link>}</li>
                     <li>{isHome ? <a href="#schedule">スケジュール</a> : <Link to="/#schedule">スケジュール</Link>}</li>
-                    {/* <li><Link to="/results">RESULTS</Link></li> */}
-                    {/* <li><Link to="/regulations">REGULATIONS</Link></li> */}
-
-                    {/* [RELEASE 4/29] Uncomment the block below to show the full public menu */}
-                    {/* 
+                    {/* [RELEASE 4/29] Full public menu */}
                     <li><Link to="/">HOME</Link></li>
                     <li><Link to="/results">RESULTS</Link></li>
                     <li><Link to="/regulations">REGULATIONS</Link></li>
                     <li><Link to="/setup-engineer">AI SETUP ENGINEER</Link></li>
-                    <li><a href="/weather/">WEATHER</a></li>
-                    <li><Link to="/calculator" className="accent">PIT CALC</Link></li>
-                    */}
-
                     <li>
                         <a href="/weather/" className="nav-tool-link">
                             WEATHER RANDOMIZER

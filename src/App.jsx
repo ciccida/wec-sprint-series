@@ -52,15 +52,11 @@ function App() {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    {/* [RELEASE 4/29] Uncomment these routes */}
-                    {/* <Route path="/results" element={<Results />} /> */}
-                    {/* <Route path="/regulations" element={<Regulations />} /> */}
-                    {/* <Route path="/setup-engineer" element={<SetupTool />} /> */}
-
-                    {/* <Route path="/results" element={<Results />} /> */}
-                    {/* <Route path="/regulations" element={<Regulations />} /> */}
+                    {/* [RELEASE 4/29] Full Routes */}
+                    <Route path="/results" element={<Results />} />
+                    <Route path="/regulations" element={<Regulations />} />
+                    <Route path="/setup-engineer" element={<SetupTool />} />
                     <Route path="/calculator" element={<PitCalculator />} />
-                    <Route path="/ai-setup-engineer-lab-exclusive-v33" element={<SetupTool />} />
                     <Route path="/weather" element={<WeatherCheck />} />
                 </Routes>
             </Layout>

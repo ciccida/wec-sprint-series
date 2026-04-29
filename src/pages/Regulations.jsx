@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { regulationsData } from '../data/regulations';
-import './WeatherCheck.css'; // 共通のスタイリングを利用
+import './SharedPageStyles.css'; // 共通のスタイリングを利用
 
 const Regulations = () => {
     const availableSeasons = Object.keys(regulationsData);

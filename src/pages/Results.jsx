@@ -5,7 +5,7 @@ import TimeAttackResults from '../components/TimeAttackResults';
 import { rankingData, rounds } from '../data/ranking';
 import { raceResults } from '../data/raceResults';
 import { timeAttackData } from '../data/timeAttackData';
-import './WeatherCheck.css';
+import './SharedPageStyles.css';
 
 const Results = () => {
     // 利用可能なシーズン

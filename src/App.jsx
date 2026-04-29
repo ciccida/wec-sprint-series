@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PitCalculator from './pages/PitCalculator';
 import SetupTool from './pages/SetupTool';
-import WeatherCheck from './pages/WeatherCheck';
+
 import Results from './pages/Results';
 import Regulations from './pages/Regulations';
 import Sponsorship from './pages/Sponsorship';

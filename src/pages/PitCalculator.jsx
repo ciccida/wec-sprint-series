@@ -1,7 +1,7 @@
 import React from 'react';
 import Calculator from '../components/Calculator';
 import { Calculator as CalculatorIcon, Info } from 'lucide-react';
-import './WeatherCheck.css'; // Reusing the CSS file for now as it contains the new styles
+import './SharedPageStyles.css'; // Reusing the CSS file for now as it contains the new styles
 
 const PitCalculator = () => {
     return (

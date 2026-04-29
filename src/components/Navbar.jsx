@@ -40,7 +40,7 @@ const Navbar = () => {
                     <li><Link to="/setup-engineer">AI SETUP</Link></li>
                     <li><Link to="/sponsorship">PARTNER</Link></li>
                     <li>
-                        <a href="/weather/" className="nav-tool-link">
+                        <a href="/weather/index.html" className="nav-tool-link">
                             WEATHER
                         </a>
                     </li>

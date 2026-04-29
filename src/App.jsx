@@ -59,7 +59,6 @@ function App() {
                     <Route path="/setup-engineer" element={<SetupTool />} />
                     <Route path="/sponsorship" element={<Sponsorship />} />
                     <Route path="/calculator" element={<PitCalculator />} />
-                    <Route path="/weather" element={<WeatherCheck />} />
                 </Routes>
             </Layout>
         </Router>

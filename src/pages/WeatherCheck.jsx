@@ -118,8 +118,8 @@ const WeatherCheck = () => {
                                 ABOUT TOOL
                             </h3>
                             <p className="info-description">
-                                各サーキットの正確な座標と<span className="info-highlight">2025年の実際の<br />
-                                    気象データ</span>を使用し、
+                                各サーキットの正確な座標と<span className="info-highlight">WEC/ELMS過去開催年の<br />
+                                    実際の気象データ</span>を使用し、
                                 リアリティのある気候を再現します。
                             </p>
                             <div className="info-grid">
@@ -162,7 +162,7 @@ const WeatherCheck = () => {
 
                                 <div>
                                     <div className="date-display-group">
-                                        <label className="control-label" style={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem' }}>2025年開催日</label>
+                                        <label className="control-label" style={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem' }}>データ参照基準日</label>
                                         <span className="date-value">
                                             {selectedTrack.raceDate}
                                         </span>

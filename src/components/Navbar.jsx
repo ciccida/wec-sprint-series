@@ -38,11 +38,7 @@ const Navbar = () => {
                     <li><Link to="/results">RESULTS</Link></li>
                     <li><Link to="/regulations">REGULATIONS</Link></li>
                     <li><Link to="/setup-engineer">AI SETUP</Link></li>
-                    <li>
-                        <Link to="/sponsorship" style={{ color: '#ff003c', fontWeight: 'bold' }}>
-                            PARTNER
-                        </Link>
-                    </li>
+                    <li><Link to="/sponsorship">PARTNER</Link></li>
                     <li>
                         <a href="/weather/" className="nav-tool-link">
                             WEATHER

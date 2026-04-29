@@ -7,6 +7,7 @@ import SetupTool from './pages/SetupTool';
 import WeatherCheck from './pages/WeatherCheck';
 import Results from './pages/Results';
 import Regulations from './pages/Regulations';
+import Sponsorship from './pages/Sponsorship';
 import Footer from './components/Footer';
 
 function ScrollToTop() {
@@ -56,6 +57,7 @@ function App() {
                     <Route path="/results" element={<Results />} />
                     <Route path="/regulations" element={<Regulations />} />
                     <Route path="/setup-engineer" element={<SetupTool />} />
+                    <Route path="/sponsorship" element={<Sponsorship />} />
                     <Route path="/calculator" element={<PitCalculator />} />
                     <Route path="/weather" element={<WeatherCheck />} />
                 </Routes>

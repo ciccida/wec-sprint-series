@@ -185,6 +185,22 @@
     }
 }
 
+@keyframes pulseBadge {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.8);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(255, 0, 60, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 60, 0);
+    }
+}
+
+.sponsorship-badge {
+    animation: pulseBadge 2s infinite;
+}
+
 @media (max-width: 768px) {
     .title {
         font-size: 3rem;

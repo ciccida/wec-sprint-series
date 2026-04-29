@@ -1,18 +1,18 @@
 {
-    "round": "Round 8",
-    "circuit": "Bahrain",
-    "date": "2026.04.25 (SAT)",
+    "round": "Season 3",
+    "circuit": "Category Draw",
+    "date": "2026.05.06 (WED)",
     "time": "21:50〜",
-    "description": "WEC Sprint Series Vol.2 最終戦！シーズンを締めくくるバーレーンでの激闘を、ぜひリアルタイムで見届けてください。",
-    "image": "/assets/round8-bahrain.jpg",
-    "broadcastLink": "https://youtube.com/live/bQJ2Mc7vE9Y?feature=share",
-    "title": "【LeMans Ultimate】WEC Sprint Series Vol.2 Round 8 Bahrain 実況生中継",
+    "description": "いよいよ始まるSeason 3！参戦ドライバーの運命を決める車両カテゴリー抽選会を生配信でお届けします。",
+    "image": "/images/s3_category_draw.jpg",
+    "broadcastLink": "https://youtube.com/live/ZRfQDHVMGDA?feature=share",
+    "title": "【車両カテゴリー抽選会】WEC Sprint Series Season 3 開幕直前スペシャル",
     "specialStream": {
-        "title": "【天候環境設定配信】WEC Sprint Series Vol.2 Round 8 Bahrain｜公式公開練習",
-        "date": "2026.04.16 (THU)",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season3 Rd1 MONZA 天候環境設定抽選&公式プラクティス",
+        "date": "2026.05.01 (FRI)",
         "time": "21:50〜",
-        "description": "Round 8 Bahrainに向けた重要な天候設定配信。WEATHER RANDOMIZERにより詳細なレースコンディションが決定します。",
-        "image": "/assets/【環境設定配信】WECSSVol2Rd8.jpg",
-        "link": "https://youtube.com/live/UGth9zf95fI?feature=share"
+        "description": "開幕戦Monzaに向けた重要な天候設定抽選と、そのコンディション下での公式公開練習の模様をお届けします。",
+        "image": "/images/s3_rd1_practice.jpg",
+        "link": "https://youtube.com/live/vuZ3lS0DFR4?feature=share"
     }
 }

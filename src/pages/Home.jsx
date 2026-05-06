@@ -91,7 +91,7 @@ const Home = () => {
                     
                     {timeAttackData["Vol3"] && timeAttackData["Vol3"][1] && (
                         <div className="ta-featured">
-                            <TimeAttackResults data={timeAttackData["Vol3"][1].results} />
+                            <TimeAttackResults data={timeAttackData["Vol3"][1].results} limit={3} />
                         </div>
                     )}
                 </div>

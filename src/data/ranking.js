@@ -43,7 +43,17 @@ export const rankingData = {
     { "id": 35, "rank": 41, "name": "Yoshinori Tokunou", "points": [0, 0, 0, 0, 0, 0, 0, 0] },
     { "id": 37, "rank": 41, "name": "K.Kishimoto", "points": [0, 0, 0, 0, 0, 0, 0, 0] }
   ],
-  "Vol3": [] // 将来用
+  "Vol3": [
+    { "id": 1, "rank": 1, "name": "Koki Yamamoto", "points": [] },
+    { "id": 17, "rank": 2, "name": "Masa Matsumura", "points": [] },
+    { "id": 4, "rank": 3, "name": "Tomoya Onodera", "points": [] },
+    { "id": 28, "rank": 4, "name": "uesyun", "points": [] },
+    { "id": 33, "rank": 5, "name": "Sasuke Yuki", "points": [] },
+    { "id": 11, "rank": 6, "name": "Shingen Mochi", "points": [] },
+    { "id": 31, "rank": 7, "name": "Rapid Tuyopon", "points": [] },
+    { "id": 19, "rank": 8, "name": "KH-AE86KMS", "points": [] },
+    { "id": 29, "rank": 9, "name": "チダ(ciccida)", "points": [] }
+  ]
 };
 
 export const rounds = {
@@ -57,5 +67,7 @@ export const rounds = {
     { "id": 7, "name": "Rd.7", "venue": "Fuji", "date": "4/11" },
     { "id": 8, "name": "Rd.8", "venue": "Bahrain", "date": "4/25" }
   ],
-  "Vol3": []
+  "Vol3": [
+    { "id": 1, "name": "Rd.1", "venue": "Monza", "date": "5/22" }
+  ]
 };

@@ -8,20 +8,6 @@ const LatestVideos = () => {
             <div className="container">
                 <h2 className="section-title">LATEST MOVIES</h2>
                 <div className="video-grid">
-                    {/* Main card with Embedded Player */}
-                    <div className="video-main">
-                        <div className="video-embed-container">
-                            <iframe
-                                src="https://www.youtube.com/embed/okZ31jMgef0?si=sJKdw5VdZi8dmZIb"
-                                title="WEC Sprint Series Highlights"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                        <h3>ハイライト - Round 3 SPA</h3>
-                    </div>
-
                     <div className="video-links">
                         {/* Stream Archive Link (Renamed from Latest Stream) */}
                         <a href="https://www.youtube.com/@WECSS81/streams" target="_blank" rel="noopener noreferrer" className="video-card">
@@ -43,6 +29,26 @@ const LatestVideos = () => {
                             </div>
                             <div className="card-bg" style={{ background: 'linear-gradient(45deg, #eee, #999)' }}></div>
                         </a>
+                    </div>
+
+                    {/* Main card with New Info */}
+                    <div className="video-main">
+                        <div className="video-info-container">
+                            <img src="/images/s3_rd1_monza.jpg" alt="Season 3 Round 1 Monza" className="video-thumbnail" />
+                            <div className="video-overlay">
+                                <div className="video-details">
+                                    <h3>WEC Sprint Series Season 3<br />Round 1 Monza</h3>
+                                    <div className="stream-schedule">
+                                        <p><strong>Broadcast:</strong> 2026/05/09 21:50(JST)-</p>
+                                        <p><strong>Practice:</strong> 2026/05/09 22:00(JST)-</p>
+                                        <p style={{ fontSize: '0.8rem', marginTop: '0.5rem', opacity: 0.8 }}>Supported By Pimax / ENDLESS</p>
+                                    </div>
+                                    <a href="https://youtube.com/live/Dcj9PBZc6Ko?feature=share" target="_blank" rel="noopener noreferrer" className="watch-live-btn">
+                                        WATCH LIVE
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

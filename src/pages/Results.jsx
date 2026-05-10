@@ -22,9 +22,9 @@ const Results = () => {
         const roundsWithData = rounds.filter(r => {
             const content = dataObj[r];
             if (!content) return false;
-            // タイムアタックの場合は .results 配列の中身をチェック
+            // タイムアタックの場合は .results 配列の中身 または image をチェック
             if (isTimeAttack) {
-                return Array.isArray(content.results) && content.results.length > 0;
+                return (Array.isArray(content.results) && content.results.length > 0) || !!content.image;
             }
             return Array.isArray(content) ? content.length > 0 : !!content;
         });

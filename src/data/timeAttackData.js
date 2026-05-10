@@ -23,7 +23,7 @@ export const timeAttackData = {
         { name: "チダ(ciccida)", class: "LMGT3", car: "Lexus RC F LMGT3", time: "1:51.387", attempt: 2 }
       ]
     },
-    "2": { image: "", results: [] },
+    "2": { image: "/images/ta/vol3_rd2_cover.jpg", results: [] },
     "3": { image: "", results: [] },
     "4": { image: "", results: [] },
     "5": { image: "", results: [] },

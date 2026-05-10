@@ -18,7 +18,7 @@ export const timeAttackData = {
         { name: "ぱすてぃ", class: "LMGT3", car: "Lexus RC-F", time: "1:49.206", attempt: 1 },
         { name: "Shingen Mochi", class: "LMGT3", car: "BMW M4 LMGT3", time: "1:49.750", attempt: 2 },
         { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 / Evo", time: "1:49.943", attempt: 1 },
-        { name: "Yasu Tanaka  (※仮です)", class: "LMGT3", car: "Mclaren 720S LMGT3", time: "1:50.753", attempt: 1 },
+        { name: "Yasu Tanaka", class: "LMGT3", car: "Mclaren 720S LMGT3", time: "1:50.753", attempt: 1 },
         { name: "KH-AE86KMS", class: "LMGT3", car: "Porsche 911 GT3 R (992)", time: "1'51'258", attempt: 2 },
         { name: "チダ(ciccida)", class: "LMGT3", car: "Lexus RC F LMGT3", time: "1:51.387", attempt: 2 }
       ]

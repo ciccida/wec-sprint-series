@@ -60,6 +60,7 @@ async function updateTAFromSheets() {
 
     rows.forEach(row => {
       let name = (row[1] || '').trim();
+      name = name.replace(/\s*\(\s*※\s*仮\s*です\s*\)\s*/g, '').trim();
       const timeStr = (row[4] || '').trim();
       if (!name || !timeStr) return;
 

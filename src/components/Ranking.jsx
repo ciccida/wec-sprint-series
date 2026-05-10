@@ -65,9 +65,10 @@ const Ranking = ({ limit, data, rounds, seasonName, selector, titleColor }) => {
                             <tr key={driver.id} className={driver.displayRank <= 3 ? `top-${driver.displayRank}` : ''}>
                                 <td className="sticky-col pos">{driver.displayRank}</td>
                                 <td className="sticky-col driver-name">{driver.name}</td>
-                                {driver.points.map((p, i) => {
+                                {displayRounds.map((round, i) => {
+                                    const p = driver.points[i];
                                     // If round is finished but points are null, show 0
-                                    const displayValue = p !== null ? p : (finishedRounds.has(i) ? 0 : '-');
+                                    const displayValue = p !== null && p !== undefined ? p : (finishedRounds.has(i) ? 0 : '-');
                                     return (
                                         <td key={i} className="point-val">
                                             {displayValue}

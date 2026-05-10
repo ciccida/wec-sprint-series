@@ -1,18 +1,18 @@
 {
-    "round": "Season 3 Round 1",
-    "circuit": "Monza",
-    "date": "2026/05/09 (SAT)",
+    "round": "Season 3 Round 2",
+    "circuit": "Portimao",
+    "date": "2026/05/23 (SAT)",
     "time": "21:50〜",
-    "description": "WEC Sprint Series Season 3 開幕戦！伝統のモンツァ・サーキットで開催される第1戦の模様をライブ配信でお届けします。",
-    "image": "/images/s3_rd1_monza.jpg",
-    "broadcastLink": "https://youtube.com/live/Dcj9PBZc6Ko?feature=share",
-    "title": "WEC SPRINT SERIES SEASON 3 RD1 MONZA 本戦",
+    "description": "舞台は「ポルティマオ・ジェットコースター」の異名を持つ、激しい高低差とテクニカルなコーナーが連続するアルガルヴェ・インターナショナル・サーキット。興奮の実況生中継をお見逃しなく！",
+    "image": "/images/s3_rd2_portimao.jpg",
+    "broadcastLink": "https://youtube.com/live/81MlGhyT-dc?feature=share",
+    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 2 Portimao 実況生中継",
     "specialStream": {
-        "title": "【車両カテゴリー抽選会】WEC Sprint Series Season 3 開幕直前スペシャル",
-        "date": "2026.05.06 (WED)",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 2 Portimao 公式プラクティス",
+        "date": "2026/05/16 (SAT)",
         "time": "21:50〜",
-        "description": "いよいよ始まるSeason 3！参戦ドライバーの運命を決める車両カテゴリー抽選会を生配信でお届けします。",
-        "image": "/images/s3_category_draw.jpg",
-        "link": "https://youtube.com/live/ZRfQDHVMGDA?feature=share"
+        "description": "第2戦の舞台はポルトガルのテクニカルコース、ポルティマオ！本選に向けた公式プラクティスを配信。攻略の鍵を練習走行から探ります。",
+        "image": "/images/s3_rd2_practice.jpg",
+        "link": "https://youtube.com/live/UXN0TTv8Yac?feature=share"
     }
 }

@@ -395,10 +395,14 @@ Rules:
             const file = new File([blob], `WECSS_${fileNamePrefix}_${myDriverName}.png`, { type: 'image/png' });
             
             const shareText = fileNamePrefix === 'Card' 
-                ? `${myDriverName} のドライバーライセンス！\n#WECSS #LeMansUltimate`
+                ? `${myDriverName} のプロフィールカード！\n#WECSS #LeMansUltimate`
                 : `${myDriverName} の最新レーティング推移！\n#WECSS #LeMansUltimate`;
 
-            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            // スマホかどうかを判定
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+            // スマホの場合のみ、ネイティブのシェア機能（画像添付可能）を使う
+            if (isMobile && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
                     await navigator.share({
                         files: [file],
@@ -412,12 +416,19 @@ Rules:
                 }
             }
 
+            // PCの場合（またはシェア機能非対応の場合）はダウンロード＆Twitter誘導
             const link = document.createElement('a');
             link.download = file.name;
             link.href = URL.createObjectURL(blob);
             link.click();
             
-            alert(`画像をダウンロードしました！\nPCブラウザからは直接SNSに画像を自動添付できないため、ダウンロードした画像をご自身でX等に添付して投稿してください。`);
+            if (window.confirm(`画像を「${file.name}」としてダウンロードしました！\n\nPCブラウザからは画像を自動添付できないため、この後開くX(Twitter)の画面に、ダウンロードした画像をドラッグ＆ドロップしてください。\n\n今すぐXの投稿画面を開きますか？`)) {
+                const newTab = window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`, '_blank');
+                if (!newTab || newTab.closed || typeof newTab.closed === 'undefined') {
+                    // ポップアップブロックされた場合は、現在のタブをそのままXに遷移させる
+                    window.location.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+                }
+            }
 
         } catch (err) {
             console.error("Image generation failed", err);

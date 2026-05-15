@@ -698,7 +698,20 @@ Rules:
 
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                             <div>
-                                <label style={{ display: 'block', marginBottom: '8px', color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem' }}>Driver Name</label>
+                                <label style={{ display: 'flex', alignItems: 'center', marginBottom: '8px', color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem' }}>
+                                    Driver Name
+                                    <span 
+                                        onClick={() => {
+                                            if(window.confirm('ドライバー名を変更しますか？\n※過去の記録と名前が一致しなくなるため、Tracker上では新しいドライバーとして集計されます。')) {
+                                                localStorage.removeItem(`driverName_${user.uid}`);
+                                                setMyDriverName('');
+                                            }
+                                        }}
+                                        style={{ fontSize: '0.7rem', color: '#00d2ff', marginLeft: '15px', cursor: 'pointer', borderBottom: '1px solid #00d2ff' }}
+                                    >
+                                        変更する
+                                    </span>
+                                </label>
                                 <input 
                                     type="text" 
                                     value={myDriverName}

@@ -36,6 +36,14 @@ const parseRankString = (rankStr) => {
     return { rankName: rankStr.trim(), progress: 0 };
 };
 
+const getRankColor = (rankName) => {
+    if (rankName.includes("Bronze")) return "#cd7f32";
+    if (rankName.includes("Silver")) return "#c0c0c0";
+    if (rankName.includes("Gold")) return "#ffd700";
+    if (rankName.includes("Platinum")) return "#00d2ff"; // プラチナ
+    return "#555";
+};
+
 const Tracker = () => {
     // 認証ステート
     const [user, setUser] = useState(null);
@@ -62,7 +70,20 @@ const Tracker = () => {
         srProgress: 0
     });
     
+    // プロフィールカード用のステート
+    const [profile, setProfile] = useState({
+        driverTitle: '',
+        favClass: 'Hypercar',
+        favCar: '',
+        equipment: '',
+        playTime: '',
+        comment: '',
+        avatarImage: '',
+        carImage: ''
+    });
+    
     const chartRef = useRef(null);
+    const cardRef = useRef(null); // カード用のRefを追加
 
     // 認証状態の監視
     useEffect(() => {
@@ -74,6 +95,10 @@ const Tracker = () => {
                 const savedName = localStorage.getItem(`driverName_${currentUser.uid}`);
                 if (savedName) {
                     setMyDriverName(savedName);
+                }
+                const savedProfile = localStorage.getItem(`profile_${currentUser.uid}`);
+                if (savedProfile) {
+                    setProfile(JSON.parse(savedProfile));
                 }
             }
         });
@@ -202,6 +227,53 @@ const Tracker = () => {
         }
     };
 
+    const handleProfileChange = (e) => {
+        const newProfile = { ...profile, [e.target.name]: e.target.value };
+        setProfile(newProfile);
+        localStorage.setItem(`profile_${user.uid}`, JSON.stringify(newProfile));
+    };
+
+    const handleProfileImageUpload = (e, fieldName) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                // アバターは小さめ、車画像は大きめにリサイズ
+                const MAX_WIDTH = fieldName === 'avatarImage' ? 300 : 800;
+                const MAX_HEIGHT = fieldName === 'avatarImage' ? 300 : 600;
+                let width = img.width;
+                let height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.85); // 圧縮率0.85
+                
+                const newProfile = { ...profile, [fieldName]: dataUrl };
+                setProfile(newProfile);
+                localStorage.setItem(`profile_${user.uid}`, JSON.stringify(newProfile));
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
+
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -306,13 +378,13 @@ Rules:
         }
     };
 
-    const handleDownloadImage = async () => {
-        if (!chartRef.current) return;
+    const handleDownloadImage = async (targetRef, fileNamePrefix) => {
+        if (!targetRef.current) return;
         try {
-            const watermark = chartRef.current.querySelector('.chart-watermark');
+            const watermark = targetRef.current.querySelector('.chart-watermark');
             if (watermark) watermark.style.display = 'block';
 
-            const canvas = await html2canvas(chartRef.current, {
+            const canvas = await html2canvas(targetRef.current, {
                 backgroundColor: '#111',
                 scale: 2
             });
@@ -320,15 +392,17 @@ Rules:
             if (watermark) watermark.style.display = 'none';
 
             const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-            const file = new File([blob], `WECSS_Tracker_${myDriverName}.png`, { type: 'image/png' });
+            const file = new File([blob], `WECSS_${fileNamePrefix}_${myDriverName}.png`, { type: 'image/png' });
             
-            const shareText = `${myDriverName} の最新レーティング推移！\n#WECSS #LeMansUltimate`;
+            const shareText = fileNamePrefix === 'Card' 
+                ? `${myDriverName} のドライバーライセンス！\n#WECSS #LeMansUltimate`
+                : `${myDriverName} の最新レーティング推移！\n#WECSS #LeMansUltimate`;
 
             if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
                     await navigator.share({
                         files: [file],
-                        title: 'WECSS DR/SR Tracker',
+                        title: `WECSS ${fileNamePrefix}`,
                         text: shareText
                     });
                     return;
@@ -343,7 +417,7 @@ Rules:
             link.href = URL.createObjectURL(blob);
             link.click();
             
-            alert("グラフ画像をダウンロードしました！\nPCブラウザからは直接SNSに画像を自動添付できないため、ダウンロードした画像をご自身でX等に添付して投稿してください。");
+            alert(`画像をダウンロードしました！\nPCブラウザからは直接SNSに画像を自動添付できないため、ダウンロードした画像をご自身でX等に添付して投稿してください。`);
 
         } catch (err) {
             console.error("Image generation failed", err);
@@ -396,6 +470,13 @@ Rules:
         const baseInt = Math.floor(tickItem);
         return valueToRating[baseInt] || '';
     };
+
+    // 最新のデータを取得してカード用に整形
+    const latestEntry = history.length > 0 ? history[0] : null;
+    const currentDr = latestEntry ? parseRankString(latestEntry.dr) : { rankName: 'Bronze 1', progress: 0 };
+    const currentSr = latestEntry ? parseRankString(latestEntry.sr) : { rankName: 'Bronze 1', progress: 0 };
+    const drColor = getRankColor(currentDr.rankName);
+    const srColor = getRankColor(currentSr.rankName);
 
     if (authLoading) {
         return (
@@ -705,15 +786,15 @@ Rules:
                             </h2>
                             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                                 <button 
-                                    onClick={handleDownloadImage}
+                                    onClick={() => handleDownloadImage(chartRef, 'Graph')}
                                     style={{ background: '#ff003c', color: '#fff', border: 'none', padding: '8px 15px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
                                 >
-                                    SNSでシェア
+                                    グラフをシェア
                                 </button>
                             </div>
                         </div>
 
-                        <div ref={chartRef} style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'transparent' }}>
+                        <div ref={chartRef} style={{ padding: '10px', borderRadius: '10px', background: 'transparent', marginBottom: '30px' }}>
                             <div style={{ textAlign: 'center', marginBottom: '15px', display: 'none' }} className="chart-watermark">
                                 <img src="/assets/logo.png" alt="WECSS" style={{ height: '40px', marginBottom: '10px' }} />
                                 <h3 style={{ color: '#fff', margin: 0, fontSize: '1.2rem', letterSpacing: '1px' }}>DR/SR TRACKER</h3>
@@ -721,11 +802,11 @@ Rules:
                             </div>
 
                             {loading && chartData.length === 0 ? (
-                                <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'rgba(255,255,255,0.5)' }}>読み込み中...</div>
+                                <div style={{ height: '250px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'rgba(255,255,255,0.5)' }}>読み込み中...</div>
                             ) : chartData.length === 0 ? (
-                                <div style={{ height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'rgba(255,255,255,0.5)' }}>まだ記録がありません。最初の入力をしてみましょう！</div>
+                                <div style={{ height: '250px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'rgba(255,255,255,0.5)' }}>まだ記録がありません。最初の入力をしてみましょう！</div>
                             ) : (
-                                <div style={{ width: '100%', height: '300px' }}>
+                                <div style={{ width: '100%', height: '250px' }}>
                                     <ResponsiveContainer width="100%" height="100%">
                                         <LineChart data={chartData} margin={{ top: 20, right: 30, left: 10, bottom: 5 }}>
                                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -739,7 +820,7 @@ Rules:
                                                 tick={{fontSize: 12}}
                                             />
                                             <Tooltip content={<CustomTooltip />} />
-                                            <Legend wrapperStyle={{ paddingTop: '20px' }} />
+                                            <Legend wrapperStyle={{ paddingTop: '10px' }} />
                                             <Line type="linear" name="Driver Rank (DR)" dataKey="drValue" stroke="#ff003c" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                                             <Line type="linear" name="Safety Rank (SR)" dataKey="srValue" stroke="#00d2ff" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                                         </LineChart>
@@ -747,6 +828,186 @@ Rules:
                                 </div>
                             )}
                         </div>
+                        
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px' }}>
+                            <h2 style={{ fontSize: '1.3rem', color: '#fff', fontWeight: 'bold', margin: 0, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                MY PROFILE CARD
+                            </h2>
+                            <button 
+                                onClick={() => handleDownloadImage(cardRef, 'Card')}
+                                style={{ background: '#00d2ff', color: '#000', border: 'none', padding: '8px 15px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.8rem' }}
+                            >
+                                PROFILE CARD をシェア
+                            </button>
+                        </div>
+                        
+                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', marginBottom: '15px' }}>
+                            下の入力欄からプロフィールを編集すると、リアルタイムでカードに反映されます。
+                        </p>
+
+                        {/* プロフィール編集フォーム */}
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '30px', background: 'rgba(0,0,0,0.5)', padding: '20px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginBottom: '5px' }}>よく乗るクラス</label>
+                                <select name="favClass" value={profile.favClass} onChange={handleProfileChange} style={{ width: '100%', padding: '10px', background: 'rgba(20,20,20,0.8)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px' }}>
+                                    <option value="Hypercar">Hypercar</option>
+                                    <option value="LMP2">LMP2</option>
+                                    <option value="LMP3">LMP3</option>
+                                    <option value="LMGT3">LMGT3</option>
+                                    <option value="GTE">GTE</option>
+                                    <option value="All Classes">All Classes (何でも乗る)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginBottom: '5px' }}>好きな車種</label>
+                                <input type="text" name="favCar" value={profile.favCar} onChange={handleProfileChange} placeholder="例: Ferrari 499P" style={{ width: '100%', padding: '10px', background: 'rgba(20,20,20,0.8)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px' }} />
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginBottom: '5px' }}>肩書き / 所属チーム（通り名）</label>
+                                <input type="text" name="driverTitle" value={profile.driverTitle || ''} onChange={handleProfileChange} placeholder="例: WECSS DRIVER" style={{ width: '100%', padding: '10px', background: 'rgba(20,20,20,0.8)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px' }} />
+                            </div>
+                            <div>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginBottom: '5px' }}>主なプレイ時間帯</label>
+                                <input type="text" name="playTime" value={profile.playTime} onChange={handleProfileChange} placeholder="例: 平日21:00〜24:00" style={{ width: '100%', padding: '10px', background: 'rgba(20,20,20,0.8)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px' }} />
+                            </div>
+                            <div style={{ gridColumn: '1 / -1' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginBottom: '5px' }}>使用機材 (SIM RIG)</label>
+                                <input type="text" name="equipment" value={profile.equipment || ''} onChange={handleProfileChange} placeholder="例: Fanatec DD Pro 8Nm / CSL Pedals Load Cell" style={{ width: '100%', padding: '10px', background: 'rgba(20,20,20,0.8)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px' }} />
+                            </div>
+                            <div style={{ gridColumn: '1 / -1' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginBottom: '5px' }}>フリーコメント（意気込み・メッセージなど）</label>
+                                <input type="text" name="comment" value={profile.comment} onChange={handleProfileChange} placeholder="例: 一緒に練習してくれるフレンド募集中です！" style={{ width: '100%', padding: '10px', background: 'rgba(20,20,20,0.8)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '5px' }} />
+                            </div>
+                            
+                            {/* 画像アップロード */}
+                            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '15px', borderRadius: '8px' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#00d2ff', marginBottom: '8px', fontWeight: 'bold' }}>👤 アバター画像 (アイコン)</label>
+                                <input type="file" accept="image/*" onChange={(e) => handleProfileImageUpload(e, 'avatarImage')} style={{ fontSize: '0.8rem', color: '#ccc' }} />
+                            </div>
+                            <div style={{ background: 'rgba(255,255,255,0.05)', padding: '15px', borderRadius: '8px' }}>
+                                <label style={{ display: 'block', fontSize: '0.8rem', color: '#00d2ff', marginBottom: '8px', fontWeight: 'bold' }}>🏎️ 愛車の画像 (背景用)</label>
+                                <input type="file" accept="image/*" onChange={(e) => handleProfileImageUpload(e, 'carImage')} style={{ fontSize: '0.8rem', color: '#ccc' }} />
+                                <p style={{ margin: '5px 0 0 0', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)' }}>※愛車画像を設定すると、右側エリアの背景になります。</p>
+                            </div>
+                        </div>
+
+                        {/* プロフィールカード表示エリア (横長デザイン) */}
+                        <div style={{ overflowX: 'auto', paddingBottom: '20px' }}>
+                            <div ref={cardRef} style={{
+                                width: '800px', // 横長固定サイズ
+                                background: 'linear-gradient(135deg, #111 0%, #1a1a1a 100%)',
+                                border: `2px solid ${drColor}50`,
+                                borderRadius: '15px',
+                                padding: '0',
+                                position: 'relative',
+                                overflow: 'hidden',
+                                margin: '0 auto',
+                                boxShadow: '0 10px 40px rgba(0,0,0,0.9)',
+                                display: 'flex',
+                                fontFamily: '"Inter", sans-serif'
+                            }}>
+                                {/* 背景の装飾 */}
+                                <div style={{ position: 'absolute', top: '-50%', left: '-20%', width: '150%', height: '200%', background: 'radial-gradient(circle, rgba(0,210,255,0.05) 0%, transparent 60%)', pointerEvents: 'none' }}></div>
+                                <div style={{ position: 'absolute', bottom: 0, right: 0, width: '300px', height: '300px', background: `radial-gradient(circle, ${srColor}15 0%, transparent 70%)`, pointerEvents: 'none' }}></div>
+                                
+                                {/* 左サイド（ランク＆基本情報） */}
+                                <div style={{ width: '350px', background: 'rgba(0,0,0,0.6)', padding: '30px', borderRight: '1px solid rgba(255,255,255,0.05)', position: 'relative', zIndex: 2, backdropFilter: 'blur(5px)' }}>
+                                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '8px', background: `linear-gradient(90deg, ${drColor}, ${srColor})` }}></div>
+                                    
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '40px', marginTop: '10px' }}>
+                                        {profile.avatarImage ? (
+                                            <img src={profile.avatarImage} alt="Avatar" style={{ 
+                                                width: '70px', height: '70px', borderRadius: '50%', objectFit: 'cover',
+                                                border: `3px solid ${drColor}`, boxShadow: `0 0 20px ${drColor}60`
+                                            }} />
+                                        ) : (
+                                            <div style={{ 
+                                                width: '70px', height: '70px', borderRadius: '50%', background: '#222',
+                                                display: 'flex', justifyContent: 'center', alignItems: 'center',
+                                                fontSize: '2.5rem', fontWeight: 'bold', border: `3px solid ${drColor}`,
+                                                color: '#fff', boxShadow: `0 0 20px ${drColor}60`
+                                            }}>
+                                                {myDriverName.charAt(0).toUpperCase()}
+                                            </div>
+                                        )}
+                                        <div>
+                                            <h3 style={{ margin: 0, fontSize: '1.6rem', fontWeight: '900', letterSpacing: '1px', color: '#fff' }}>{myDriverName}</h3>
+                                            <span style={{ fontSize: '0.8rem', color: '#00d2ff', letterSpacing: '2px', fontWeight: 'bold' }}>{profile.driverTitle || 'LMU DRIVER'}</span>
+                                        </div>
+                                    </div>
+
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                                        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '15px', borderRadius: '10px', borderLeft: `4px solid ${drColor}` }}>
+                                            <p style={{ margin: '0 0 5px 0', fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', letterSpacing: '2px' }}>DRIVER RANK</p>
+                                            <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+                                                <p style={{ margin: 0, fontSize: '1.8rem', fontWeight: '900', color: drColor }}>{currentDr.rankName}</p>
+                                                <p style={{ margin: 0, fontSize: '1rem', color: '#fff', fontWeight: 'bold' }}>{currentDr.progress}%</p>
+                                            </div>
+                                        </div>
+                                        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '15px', borderRadius: '10px', borderLeft: `4px solid ${srColor}` }}>
+                                            <p style={{ margin: '0 0 5px 0', fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', letterSpacing: '2px' }}>SAFETY RANK</p>
+                                            <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px' }}>
+                                                <p style={{ margin: 0, fontSize: '1.8rem', fontWeight: '900', color: srColor }}>{currentSr.rankName}</p>
+                                                <p style={{ margin: 0, fontSize: '1rem', color: '#fff', fontWeight: 'bold' }}>{currentSr.progress}%</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style={{ marginTop: '40px' }}>
+                                        <img src="/assets/logo.png" alt="WECSS" style={{ height: '40px', opacity: 0.8 }} />
+                                    </div>
+                                </div>
+
+                                {/* 右サイド（詳細プロフィール） */}
+                                <div style={{ flex: 1, padding: '30px 40px', position: 'relative', overflow: 'hidden' }}>
+                                    
+                                    {/* 右サイドの愛車背景画像 */}
+                                    {profile.carImage && (
+                                        <div style={{ 
+                                            position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, 
+                                            backgroundImage: `url(${profile.carImage})`, backgroundSize: 'cover', backgroundPosition: 'center',
+                                            opacity: 0.3, zIndex: 0, pointerEvents: 'none'
+                                        }}></div>
+                                    )}
+                                    {profile.carImage && (
+                                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(90deg, #1a1a1a 0%, transparent 100%)', zIndex: 1 }}></div>
+                                    )}
+
+                                    <div style={{ position: 'relative', zIndex: 2 }}>
+                                        <h2 style={{ fontSize: '2.2rem', color: 'rgba(255,255,255,0.1)', position: 'absolute', top: '-10px', right: '-10px', margin: 0, fontWeight: '900', fontStyle: 'italic', pointerEvents: 'none', zIndex: -1 }}>LE MANS ULTIMATE</h2>
+                                        
+                                        <h4 style={{ color: '#fff', fontSize: '1.2rem', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '10px', marginBottom: '25px', marginTop: '10px', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>PROFILE</h4>
+                                        
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                                            <div style={{ display: 'flex', borderBottom: '1px dashed rgba(255,255,255,0.1)', paddingBottom: '10px', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                                                <span style={{ width: '150px', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', fontWeight: 'bold' }}>FAV CLASS</span>
+                                                <span style={{ color: '#fff', fontSize: '1rem', fontWeight: 'bold' }}>{profile.favClass || '-'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', borderBottom: '1px dashed rgba(255,255,255,0.1)', paddingBottom: '10px', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                                                <span style={{ width: '150px', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', fontWeight: 'bold' }}>FAV CAR</span>
+                                                <span style={{ color: profile.favCar ? '#ffb300' : '#fff', fontSize: '1rem', fontWeight: profile.favCar ? 'bold' : 'normal' }}>{profile.favCar || '-'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', borderBottom: '1px dashed rgba(255,255,255,0.1)', paddingBottom: '10px', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                                                <span style={{ width: '150px', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', fontWeight: 'bold' }}>SIM RIG</span>
+                                                <span style={{ color: '#fff', fontSize: '1rem' }}>{profile.equipment || '-'}</span>
+                                            </div>
+                                            <div style={{ display: 'flex', borderBottom: '1px dashed rgba(255,255,255,0.1)', paddingBottom: '10px', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                                                <span style={{ width: '150px', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', fontWeight: 'bold' }}>PLAY TIME</span>
+                                                <span style={{ color: '#fff', fontSize: '1rem' }}>{profile.playTime || '-'}</span>
+                                            </div>
+                                            <div style={{ marginTop: '10px' }}>
+                                                <span style={{ display: 'block', color: '#00d2ff', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '10px', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>MESSAGE</span>
+                                                <div style={{ background: 'rgba(0,0,0,0.6)', padding: '15px', borderRadius: '8px', borderLeft: '3px solid #00d2ff', color: '#fff', fontSize: '1rem', minHeight: '60px', wordBreak: 'break-word', backdropFilter: 'blur(3px)' }}>
+                                                    {profile.comment || 'よろしくお願いします！'}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

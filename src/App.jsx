@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Tracker from './pages/Tracker';
+import Drivers from './pages/Drivers';
 import PitCalculator from './pages/PitCalculator';
 import SetupTool from './pages/SetupTool';
 
@@ -55,6 +56,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/tracker" element={<Tracker />} />
+                    <Route path="/drivers" element={<Drivers />} />
                     {/* [RELEASE 4/29] Full Routes */}
                     <Route path="/results" element={<Results />} />
                     <Route path="/regulations" element={<Regulations />} />

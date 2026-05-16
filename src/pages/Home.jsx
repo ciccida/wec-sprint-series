@@ -86,12 +86,12 @@ const Home = () => {
                 <div className="container">
                     <div className="section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
                         <h2 style={{ fontSize: '3rem', fontWeight: '900', color: '#ff003c', textTransform: 'uppercase' }}>Season 3 Time Attack</h2>
-                        <p style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '2px' }}>RD.1 MONZA - OFFICIAL RESULTS</p>
+                        <p style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '2px' }}>RD.{latestTaRound} {latestTaRound === 2 ? 'PORTIMAO' : ''} - {latestTaRound === 2 ? 'INTERIM' : 'OFFICIAL'} RESULTS</p>
                     </div>
                     
-                    {timeAttackData["Vol3"] && timeAttackData["Vol3"][1] && (
+                    {latestTaResults.length > 0 && (
                         <div className="ta-featured">
-                            <TimeAttackResults data={timeAttackData["Vol3"][1].results} limit={3} />
+                            <TimeAttackResults data={latestTaResults} limit={3} />
                         </div>
                     )}
                 </div>

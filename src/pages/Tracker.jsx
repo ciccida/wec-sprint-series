@@ -693,7 +693,7 @@ Rules:
                                 <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} disabled={ocrLoading} />
                             </label>
                             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', marginTop: '10px' }}>Rank Breakdownの画面をアップロードしてください</p>
-                            <p style={{ color: '#ffb700', fontSize: '0.7rem', marginTop: '5px', lineHeight: '1.4' }}>※ゲージ量(%)の推測はブレる場合があります。<br/>読み込み後、ご自身の目で正しい数値に修正して保存してください。</p>
+                            <p style={{ color: '#ffb700', fontSize: '0.7rem', marginTop: '10px', lineHeight: '1.6', opacity: 0.85 }}>※ゲージ量(%)の解析には誤差が生じる場合があります。<br/>内容を確認し、正しい数値に修正して保存してください。</p>
                         </div>
 
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

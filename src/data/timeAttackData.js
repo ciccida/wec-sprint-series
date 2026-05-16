@@ -23,7 +23,16 @@ export const timeAttackData = {
         { name: "チダ(ciccida)", class: "LMGT3", car: "Lexus RC F LMGT3", time: "1:51.387", attempt: 2 }
       ]
     },
-    "2": { image: "/images/ta/vol3_rd2_cover.jpg", results: [] },
+    "2": { 
+      image: "/images/ta/vol3_rd2_cover.jpg", 
+      results: [
+        { name: "Tomoya Onodera", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:32.328", attempt: 1 },
+        { name: "Masa Matsumura", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:32.356", attempt: 2 },
+        { name: "Rapid Tuyopon", class: "HYPERCAR", car: "Porsche 963", time: "1:33.592", attempt: 2 },
+        { name: "チダ", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:46.928", attempt: 1 },
+        { name: "Masa Raido", class: "LMGT3", car: "Ferrari 296 LMGT3", time: "1:49.561", attempt: 1 }
+      ] 
+    },
     "3": { image: "", results: [] },
     "4": { image: "", results: [] },
     "5": { image: "", results: [] },

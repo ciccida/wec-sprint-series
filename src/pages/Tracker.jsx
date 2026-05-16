@@ -692,8 +692,16 @@ Rules:
                                 {ocrLoading ? 'AIが解析中...お待ちください' : '画像を選択する'}
                                 <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} disabled={ocrLoading} />
                             </label>
-                            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', marginTop: '10px' }}>Rank Breakdownの画面をアップロードしてください</p>
-                            <p style={{ color: '#ffb700', fontSize: '0.7rem', marginTop: '10px', lineHeight: '1.6', opacity: 0.85 }}>※ゲージ量(%)の解析には誤差が生じる場合があります。<br/>内容を確認し、正しい数値に修正して保存してください。</p>
+                            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', marginTop: '10px', lineHeight: '1.5' }}>
+                                <span style={{ display: 'inline-block' }}>Rank Breakdownの画面を</span>
+                                <span style={{ display: 'inline-block' }}>アップロードしてください</span>
+                            </p>
+                            <p style={{ color: '#ffb700', fontSize: '0.7rem', marginTop: '10px', lineHeight: '1.6', opacity: 0.85 }}>
+                                <span style={{ display: 'inline-block' }}>※ゲージ量(%)の解析には</span>
+                                <span style={{ display: 'inline-block' }}>誤差が生じる場合があります。</span><br/>
+                                <span style={{ display: 'inline-block' }}>内容を確認し、正しい数値に</span>
+                                <span style={{ display: 'inline-block' }}>修正して保存してください。</span>
+                            </p>
                         </div>
 
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

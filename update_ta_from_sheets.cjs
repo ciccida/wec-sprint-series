@@ -49,7 +49,7 @@ async function updateTAFromSheets() {
 
   const sheets = google.sheets({ version: 'v4', auth });
   const spreadsheetId = '1Ivkw-PybsyYmd-GZ9DPaUnhWYNDkG1QvL64NVNOwD_k';
-  const range = 'Season3Rd1_TA!B2:H100';
+  const range = 'Season3Rd2_TA!A2:H100';
 
   try {
     const res = await sheets.spreadsheets.values.get({ spreadsheetId, range });
@@ -59,26 +59,27 @@ async function updateTAFromSheets() {
     let driverMap = new Map();
 
     rows.forEach(row => {
-      let name = (row[1] || '').trim();
+      let name = (row[2] || '').trim();
       name = name.replace(/\s*\(\s*※\s*仮\s*です\s*\)\s*/g, '').trim();
-      const timeStr = (row[4] || '').trim();
+      name = name.replace(/^：/, '').trim(); // Remove leading colon if present
+      const timeStr = (row[6] || row[5] || '').trim(); // Try normalized time first, then raw
       if (!name || !timeStr) return;
 
       if (nameMapping[name]) name = nameMapping[name];
 
       const seconds = parseTimeToSeconds(timeStr);
-      let category = (row[2] || '').toUpperCase();
+      let category = (row[3] || '').toUpperCase();
       if (category.includes('HY')) category = 'HYPERCAR';
       if (category.includes('GT3')) category = 'LMGT3';
 
-      let rawAtt = row[6] || '';
+      let rawAtt = row[7] || '';
       let attempt = parseInt(rawAtt.toString().replace(/[^0-9]/g, ''));
       if (isNaN(attempt) || attempt > 100) attempt = 1;
 
       const entry = {
         name,
         class: category,
-        car: normalizeCarName(row[3]),
+        car: normalizeCarName(row[4]),
         time: timeStr,
         seconds: seconds,
         attempt: attempt
@@ -99,7 +100,7 @@ async function updateTAFromSheets() {
       `        { name: "${r.name}", class: "${r.class}", car: "${r.car}", time: "${r.time}", attempt: ${r.attempt} }`
     ).join(',\n');
 
-    const resultsSectionRegex = /("Vol3":\s*{\s*"1":\s*{\s*image:\s*"\/images\/ta_s3_rd1.jpg",\s*results:\s*\[)([\s\S]*?)(\]\s*},)/;
+    const resultsSectionRegex = /("2":\s*{\s*image:\s*"[^"]*",\s*results:\s*\[)([\s\S]*?)(\]\s*},)/;
     
     if (resultsSectionRegex.test(content)) {
         content = content.replace(resultsSectionRegex, `$1\n${resultsStr}\n      $3`);

@@ -21,6 +21,7 @@ export const timeAttackData = {
         { name: "Yuki", class: "LMGT3", car: "Lexus RC F LMGT3", time: "1.46:644", attempt: 1 },
         { name: "チダ", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:46.928", attempt: 1 },
         { name: "Masa Raido", class: "LMGT3", car: "Ferrari 296 LMGT3", time: "1:49.561", attempt: 1 }
+      
       ] },
     "4": { image: "", results: [] },
     "5": { image: "", results: [] },

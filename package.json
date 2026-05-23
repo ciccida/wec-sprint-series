@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "collect-ta": "node scripts/collect_tweets.cjs",
+    "update-ta": "node update_ta_from_sheets.cjs"
   },
   "dependencies": {
     "axios": "^1.13.5",
@@ -16,6 +18,7 @@
     "googleapis": "^171.4.0",
     "html2canvas": "^1.4.1",
     "lucide-react": "^0.344.0",
+    "playwright": "^1.60.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.13.0",

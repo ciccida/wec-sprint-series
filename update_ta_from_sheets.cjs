@@ -2,6 +2,39 @@ const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
 
+// 引数のパース (--round=2, --test=true など)
+const args = {};
+process.argv.slice(2).forEach(arg => {
+  const [key, value] = arg.split('=');
+  args[key.replace(/^--/, '')] = value;
+});
+
+let round = parseInt(args.round) || null;
+const isTestMode = args.test === 'true';
+let sheetName = isTestMode ? 'Test_TA' : '';
+
+async function getLatestRound(sheets, spreadsheetId) {
+  try {
+    const meta = await sheets.spreadsheets.get({ spreadsheetId });
+    const sheetNames = meta.data.sheets.map(s => s.properties.title);
+    
+    let maxRound = 2; // デフォルトの最低値
+    sheetNames.forEach(name => {
+      const match = name.match(/Season3Rd([0-9]+)_TA/);
+      if (match) {
+        const r = parseInt(match[1]);
+        if (r > maxRound) {
+          maxRound = r;
+        }
+      }
+    });
+    return maxRound;
+  } catch (err) {
+    console.error('[Warning] Failed to auto-detect latest round from sheet names:', err.message);
+    return 2;
+  }
+}
+
 const nameMapping = {
   "KH-KMS": "KH-AE86KMS"
 };
@@ -49,7 +82,20 @@ async function updateTAFromSheets() {
 
   const sheets = google.sheets({ version: 'v4', auth });
   const spreadsheetId = '1Ivkw-PybsyYmd-GZ9DPaUnhWYNDkG1QvL64NVNOwD_k';
-  const range = 'Season3Rd2_TA!A2:H100';
+
+  if (!round) {
+    console.log('[Config] Round was not specified. Auto-detecting latest round...');
+    round = await getLatestRound(sheets, spreadsheetId);
+  }
+  
+  if (!isTestMode) {
+    sheetName = `Season3Rd${round}_TA`;
+  }
+  
+  console.log(`[Config] Reading from Sheet: ${sheetName}`);
+  console.log(`[Config] Targeting Round on site: ${round}`);
+
+  const range = `${sheetName}!A2:H100`;
 
   try {
     const res = await sheets.spreadsheets.values.get({ spreadsheetId, range });
@@ -100,7 +146,7 @@ async function updateTAFromSheets() {
       `        { name: "${r.name}", class: "${r.class}", car: "${r.car}", time: "${r.time}", attempt: ${r.attempt} }`
     ).join(',\n');
 
-    const resultsSectionRegex = /("2":\s*{\s*image:\s*"[^"]*",\s*results:\s*\[)([\s\S]*?)(\]\s*},)/;
+    const resultsSectionRegex = new RegExp(`("${round}":\\s*{\\s*image:\\s*"[^"]*",\\s*results:\\s*\\[)([\\s\\S]*?)(\\s*\\].*},)`);
     
     if (resultsSectionRegex.test(content)) {
         content = content.replace(resultsSectionRegex, `$1\n${resultsStr}\n      $3`);

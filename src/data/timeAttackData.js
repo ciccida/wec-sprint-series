@@ -15,7 +15,7 @@ export const timeAttackData = {
       image: "/images/ta/vol3_rd2_cover.jpg", 
       results: [
         { name: "MUHI Tamaki", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:31.915", attempt: 1 },
-        { name: "Masa Matsumura", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:32.181", attempt: 3 },
+        { name: "Masa Matsumura", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:32.008", attempt: 4 },
         { name: "Tomoya Onodera", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:32.328", attempt: 1 },
         { name: "Rapid Tuyopon", class: "HYPERCAR", car: "Porsche 963", time: "1:33.592", attempt: 2 },
         { name: "Yuki", class: "LMGT3", car: "Lexus RC F LMGT3", time: "1.46:644", attempt: 1 },

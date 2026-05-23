@@ -68,8 +68,14 @@ const Home = () => {
     const trackName = taTrackNames[latestTaRound] || "";
     const statusText = latestTaRound <= 2 ? "OFFICIAL RESULTS" : "INTERIM RESULTS";
 
-    // ラウンドリザルト用のステート (最新の8ラウンドをデフォルトに)
-    const [selectedRound, setSelectedRound] = useState(8);
+    // ラウンドリザルト用のステート (データがある最新ラウンドをデフォルトにする)
+    const currentRaceResults = raceResults[latestSeason] || {};
+    const raceRoundsWithData = Object.keys(currentRaceResults)
+        .filter(rd => Array.isArray(currentRaceResults[rd]) && currentRaceResults[rd].length > 0)
+        .map(Number)
+        .sort((a, b) => b - a);
+    const latestRaceRound = raceRoundsWithData[0] || 1;
+    const [selectedRound, setSelectedRound] = useState(latestRaceRound);
 
     useEffect(() => {
         if (hash) {

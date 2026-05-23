@@ -38,7 +38,9 @@ async function getLatestRound(sheets, spreadsheetId) {
 }
 
 const nameMapping = {
-  "KH-KMS": "KH-AE86KMS"
+  "KH-KMS": "KH-AE86KMS",
+  "KH-AEKMS": "KH-AE86KMS",
+  "KH-AE KMS": "KH-AE86KMS"
 };
 
 function normalizeCarName(car) {

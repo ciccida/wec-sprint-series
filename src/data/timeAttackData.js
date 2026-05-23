@@ -20,7 +20,9 @@ export const timeAttackData = {
         { name: "Rapid Tuyopon", class: "HYPERCAR", car: "Porsche 963", time: "1:33.592", attempt: 2 },
         { name: "Yuki", class: "LMGT3", car: "Lexus RC F LMGT3", time: "1.46:644", attempt: 1 },
         { name: "チダ", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:46.928", attempt: 1 },
+        { name: "KH-AE86KMS", class: "LMGT3", car: "Porsche 911 LMGT3 R (992)", time: "1:47.618", attempt: 1 },
         { name: "Masa Raido", class: "LMGT3", car: "Ferrari 296 LMGT3", time: "1:49.561", attempt: 1 }
+      
       
       
       ] },

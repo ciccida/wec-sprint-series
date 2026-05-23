@@ -55,6 +55,19 @@ const Home = () => {
     const latestTaRound = taRoundsWithData[0] || 1;
     const latestTaResults = (taSeasonData[latestTaRound] && taSeasonData[latestTaRound].results) || [];
 
+    const taTrackNames = {
+        1: "MONZA",
+        2: "PORTIMAO",
+        3: "SILVERSTONE",
+        4: "CATALUNYA",
+        5: "PAUL RICARD",
+        6: "SEBRING",
+        7: "SPA-FRANCORCHAMPS",
+        8: "LE MANS"
+    };
+    const trackName = taTrackNames[latestTaRound] || "";
+    const statusText = latestTaRound <= 2 ? "OFFICIAL RESULTS" : "INTERIM RESULTS";
+
     // ラウンドリザルト用のステート (最新の8ラウンドをデフォルトに)
     const [selectedRound, setSelectedRound] = useState(8);
 
@@ -86,12 +99,12 @@ const Home = () => {
                 <div className="container">
                     <div className="section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
                         <h2 style={{ fontSize: '3rem', fontWeight: '900', color: '#ff003c', textTransform: 'uppercase' }}>Season 3 Time Attack</h2>
-                        <p style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '2px' }}>RD.1 MONZA - OFFICIAL RESULTS</p>
+                        <p style={{ color: 'rgba(255,255,255,0.6)', letterSpacing: '2px' }}>RD.{latestTaRound} {trackName} - {statusText}</p>
                     </div>
                     
-                    {timeAttackData["Vol3"] && timeAttackData["Vol3"][1] && (
+                    {latestTaResults.length > 0 && (
                         <div className="ta-featured">
-                            <TimeAttackResults data={timeAttackData["Vol3"][1].results} limit={3} />
+                            <TimeAttackResults data={latestTaResults} limit={3} />
                         </div>
                     )}
                 </div>

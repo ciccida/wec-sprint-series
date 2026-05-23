@@ -25,7 +25,9 @@ export const timeAttackData = {
       
       
       
+      
       ] },
+    "3": { image: "", results: [] },
     "4": { image: "", results: [] },
     "5": { image: "", results: [] },
     "6": { image: "", results: [] },

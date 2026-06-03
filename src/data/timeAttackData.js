@@ -27,7 +27,24 @@ export const timeAttackData = {
       
       
       ] },
-    "3": { image: "/images/ta/vol3_rd3_cover.jpg", results: [] },
+    "3": { image: "/images/ta/vol3_rd3_cover.jpg", results: [
+        { name: "Masa Matsumura", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:43.340", attempt: 3 },
+        { name: "Koki Yamamoto", class: "HYPERCAR", car: "GLICKENHAUS SCG 007", time: "1:43.656", attempt: 2 },
+        { name: "Salios SON", class: "HYPERCAR", car: "GLICKENHAUS SCG 007", time: "1:46.553", attempt: 1 },
+        { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:59.940", attempt: 1 },
+        { name: "Salios SON", class: "LMGT3", car: "Lexus RC F LMGT3", time: "2:00.528", attempt: 1 },
+        { name: "Tomoya Onodera", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "2:03.260", attempt: 1 }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      ] },
     "4": { image: "", results: [] },
     "5": { image: "", results: [] },
     "6": { image: "", results: [] },

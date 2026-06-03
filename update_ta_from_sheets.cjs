@@ -110,7 +110,7 @@ async function updateTAFromSheets() {
       let name = (row[2] || '').trim();
       name = name.replace(/\s*\(\s*※\s*仮\s*です\s*\)\s*/g, '').trim();
       name = name.replace(/^：/, '').trim(); // Remove leading colon if present
-      const timeStr = (row[6] || row[5] || '').trim(); // Try normalized time first, then raw
+      let timeStr = (row[6] || row[5] || '').trim(); // Try normalized time first, then raw
       if (!name || !timeStr) return;
 
       if (nameMapping[name]) name = nameMapping[name];
@@ -124,6 +124,13 @@ async function updateTAFromSheets() {
       let attempt = parseInt(rawAtt.toString().replace(/[^0-9]/g, ''));
       if (isNaN(attempt) || attempt > 100) attempt = 1;
 
+      // Manual fix for Tomoya Onodera
+      if (name === "Tomoya Onodera" && category === "") {
+          category = "LMGT3";
+          row[4] = "BMW M4 LMGT3 Evo";
+          if (timeStr === "2:03:26") timeStr = "2:03.260";
+      }
+
       const entry = {
         name,
         class: category,
@@ -133,8 +140,9 @@ async function updateTAFromSheets() {
         attempt: attempt
       };
 
-      if (!driverMap.has(name) || seconds < driverMap.get(name).seconds) {
-        driverMap.set(name, entry);
+      const key = `${name}_${category}`;
+      if (!driverMap.has(key) || seconds < driverMap.get(key).seconds) {
+        driverMap.set(key, entry);
       }
     });
 

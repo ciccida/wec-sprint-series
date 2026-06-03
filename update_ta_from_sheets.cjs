@@ -127,8 +127,8 @@ async function updateTAFromSheets() {
       // Manual fix for Tomoya Onodera
       if (name === "Tomoya Onodera" && category === "") {
           category = "LMGT3";
-          row[4] = "BMW M4 LMGT3 Evo";
-          if (timeStr === "2:03:26") timeStr = "2:03.260";
+          row[4] = "McLaren 720S LMGT3 Evo";
+          timeStr = "2:00.206";
       }
 
       const entry = {

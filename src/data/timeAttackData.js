@@ -32,8 +32,9 @@ export const timeAttackData = {
         { name: "Koki Yamamoto", class: "HYPERCAR", car: "GLICKENHAUS SCG 007", time: "1:43.656", attempt: 2 },
         { name: "Salios SON", class: "HYPERCAR", car: "GLICKENHAUS SCG 007", time: "1:46.553", attempt: 1 },
         { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:59.940", attempt: 1 },
-        { name: "Salios SON", class: "LMGT3", car: "Lexus RC F LMGT3", time: "2:00.528", attempt: 1 },
-        { name: "Tomoya Onodera", class: "LMGT3", car: "McLaren 720S LMGT3 Evo", time: "2:00.206", attempt: 1 }
+        { name: "Tomoya Onodera", class: "LMGT3", car: "McLaren 720S LMGT3 Evo", time: "2:00.206", attempt: 1 },
+        { name: "Salios SON", class: "LMGT3", car: "Lexus RC F LMGT3", time: "2:00.528", attempt: 1 }
+      
       
       
       

@@ -1,18 +1,20 @@
 {
-    "round": "Season 3 Round 2",
-    "circuit": "Portimao",
-    "date": "2026/05/23 (SAT)",
+    "round": "Season 3 Round 4",
+    "circuit": "Catalunya",
+    "date": "2026/06/20 (SAT)",
     "time": "21:50〜",
-    "description": "舞台は「ポルティマオ・ジェットコースター」の異名を持つ、激しい高低差とテクニカルなコーナーが連続するアルガルヴェ・インターナショナル・サーキット。興奮の実況生中継をお見逃しなく！",
-    "image": "/images/s3_rd2_portimao.jpg",
-    "broadcastLink": "https://youtube.com/live/81MlGhyT-dc?feature=share",
-    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 2 Portimao 実況生中継",
+    "description": "いよいよ第4戦、舞台はスペインのカタロニア・サーキット！ テクニカルな連続コーナーが待ち受ける難コース。決勝レースの白熱の実況生中継をお届けします！",
+    "image": "/images/s3_rd4_catalunya.jpg",
+    "broadcastLink": "https://youtube.com/live/W658Gq7rZFg?feature=share",
+    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 4 Catalunya 実況生中継",
     "specialStream": {
-        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 2 Portimao 公式プラクティス",
-        "date": "2026/05/16 (SAT)",
+        "label": "PREVIOUS RACE",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 3 Silverstone 実況生中継",
+        "date": "2026/06/06 (SAT)",
         "time": "21:50〜",
-        "description": "第2戦の舞台はポルトガルのテクニカルコース、ポルティマオ！本選に向けた公式プラクティスを配信。攻略の鍵を練習走行から探ります。",
-        "image": "/images/s3_rd2_practice.jpg",
-        "link": "https://youtube.com/live/UXN0TTv8Yac?feature=share"
+        "description": "舞台はイギリスのモータースポーツの聖地、シルバーストン・サーキット。ハイスピードコーナーが連続する伝統的なテクニカルコースでの戦い。アーカイブを公開中！",
+        "image": "/images/s3_rd3_silverstone.jpg",
+        "link": "https://youtube.com/live/fsJUYI40vnQ?feature=share",
+        "btnLabel": "Watch Archive"
     }
 }

@@ -12,7 +12,7 @@ const NextRace = () => {
                 {/* Special Stream Card */}
                 {raceInfo.specialStream && (
                     <div className="event-card special-stream">
-                        <div className="event-label">SPECIAL STREAM</div>
+                        <div className="event-label">{raceInfo.specialStream.label || "SPECIAL STREAM"}</div>
                         <div className="event-image">
                             <img src={raceInfo.specialStream.image} alt={raceInfo.specialStream.title} />
                         </div>
@@ -24,7 +24,7 @@ const NextRace = () => {
                             </div>
                             <p className="event-desc">{raceInfo.specialStream.description}</p>
                             <a href={raceInfo.specialStream.link} target="_blank" rel="noopener noreferrer" className="btn-event">
-                                <Youtube size={18} /> Watch Stream
+                                <Youtube size={18} /> {raceInfo.specialStream.btnLabel || "Watch Stream"}
                             </a>
                         </div>
                     </div>

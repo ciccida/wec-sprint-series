@@ -52,8 +52,9 @@ export const timeAttackData = {
       
       
       
+      
       ] },
-    "4": { image: "", results: [] },
+    "4": { image: "/images/ta/vol3_rd4_cover.jpg", results: [] },
     "5": { image: "", results: [] },
     "6": { image: "", results: [] },
     "7": { image: "", results: [] },

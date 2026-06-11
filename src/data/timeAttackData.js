@@ -54,7 +54,9 @@ export const timeAttackData = {
       
       
       ] },
-    "4": { image: "/images/ta/vol3_rd4_cover.jpg", results: [] },
+    "4": { image: "/images/ta/vol3_rd4_cover.jpg", results: [
+        { name: "チダ", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:44.569", attempt: 1 }
+      ] },
     "5": { image: "", results: [] },
     "6": { image: "", results: [] },
     "7": { image: "", results: [] },

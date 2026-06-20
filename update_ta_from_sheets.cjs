@@ -115,7 +115,7 @@ async function updateTAFromSheets() {
 
       if (nameMapping[name]) name = nameMapping[name];
 
-      const seconds = parseTimeToSeconds(timeStr);
+      let seconds = parseTimeToSeconds(timeStr);
       let category = (row[3] || '').toUpperCase();
       if (category.includes('HY')) category = 'HYPERCAR';
       if (category.includes('GT3')) category = 'LMGT3';
@@ -129,6 +129,7 @@ async function updateTAFromSheets() {
           category = "LMGT3";
           row[4] = "McLaren 720S LMGT3 Evo";
           timeStr = "2:00.206";
+          seconds = parseTimeToSeconds(timeStr);
       }
 
       const entry = {

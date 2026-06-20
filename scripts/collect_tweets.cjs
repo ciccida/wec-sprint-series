@@ -60,7 +60,7 @@ function parseTweetText(text) {
   let attemptText = '1回目';
 
   // 1. エントリー名の抽出
-  const nameMatch = text.match(/\[エントリー名\]\s*[:：]?\s*([^\n]+)/i);
+  const nameMatch = text.match(/\[?エントリー名\]?\s*[:：]?\s*([^\n]+)/i);
   if (nameMatch) {
     name = nameMatch[1].replace(/^：/, '').trim();
     name = name.replace(/\s*\(\s*※\s*仮\s*です\s*\)\s*/g, '').trim();
@@ -68,7 +68,7 @@ function parseTweetText(text) {
   }
 
   // 2. 車両(カテゴリ・車両名)の抽出
-  const carMatch = text.match(/\[車両\(カテゴリ・車両名\)\]\s*[:：]?\s*([^\n]+)/i);
+  const carMatch = text.match(/\[?車両[（(]カテゴリ・車両名[）)]?\]?\s*[:：]?\s*([^\n]+)/i);
   if (carMatch) {
     const rawCar = carMatch[1].replace(/^：/, '').trim();
     // カテゴリと車両名に分解
@@ -99,7 +99,7 @@ function parseTweetText(text) {
   }
 
   // 3. タイムの抽出
-  const timeMatch = text.match(/\[タイム\]\s*[:：]?\s*([^\n]+)/i);
+  const timeMatch = text.match(/\[?タイム\]?\s*[:：]?\s*([^\n]+)/i);
   if (timeMatch) {
     timeStr = timeMatch[1].replace(/^：/, '').replace(/[　\s]/g, '').trim();
     // タイム形式の標準化 (例: 1.46:644 -> 1:46.644)
@@ -113,7 +113,7 @@ function parseTweetText(text) {
   }
 
   // 4. 投稿回数の抽出
-  const attMatch = text.match(/\[投稿回数\]\s*[:：]?\s*([^\n]+)/i);
+  const attMatch = text.match(/\[?投稿回数\]?\s*[:：]?\s*([^\n]+)/i);
   if (attMatch) {
     attemptText = attMatch[1].replace(/^：/, '').trim();
   }
@@ -243,27 +243,39 @@ async function main() {
     }
 
     console.log('[Browser] Scanned. Scrolling to load more tweets...');
+    
+    // ページ内のすべての投稿からURLと本文テキストをセットで取得する関数
+    const extractTweets = async () => {
+      return await page.evaluate(() => {
+        const articles = Array.from(document.querySelectorAll('article'));
+        return articles.map(article => {
+          const timeEl = article.querySelector('time');
+          const aEl = timeEl ? timeEl.closest('a') : null;
+          const url = aEl ? aEl.href : '';
+          
+          const textEl = article.querySelector('[data-testid="tweetText"]');
+          const text = textEl ? textEl.innerText : '';
+          
+          return { url, text };
+        }).filter(item => item.url && item.url.includes('/status/'));
+      });
+    };
+
+    let allTweetData = [];
+    allTweetData.push(...await extractTweets());
+
     for (let i = 0; i < 3; i++) {
       await page.evaluate(() => window.scrollBy(0, 800));
       await page.waitForTimeout(1500);
+      allTweetData.push(...await extractTweets());
     }
 
-    console.log('[Browser] Extracting tweet URLs and text content...');
-    
-    // ページ内のすべての投稿からURLと本文テキストをセットで取得
-    const tweetData = await page.evaluate(() => {
-      const articles = Array.from(document.querySelectorAll('article'));
-      return articles.map(article => {
-        const timeEl = article.querySelector('time');
-        const aEl = timeEl ? timeEl.closest('a') : null;
-        const url = aEl ? aEl.href : '';
-        
-        const textEl = article.querySelector('[data-testid="tweetText"]');
-        const text = textEl ? textEl.innerText : '';
-        
-        return { url, text };
-      }).filter(item => item.url && item.url.includes('/status/'));
+    // URLで重複排除
+    const tweetMap = new Map();
+    allTweetData.forEach(item => {
+       if (item.url) tweetMap.set(item.url, item);
     });
+    const tweetData = Array.from(tweetMap.values());
 
     console.log(`[Browser] Scanned ${tweetData.length} tweets from X.`);
 
@@ -279,6 +291,7 @@ async function main() {
         if (!existingUrls.has(finalUrl) && !newEntriesMap.has(finalUrl)) {
           // 本文を直接パース
           const parsed = parseTweetText(item.text);
+          console.log("DEBUG PARSED:", finalUrl, parsed);
           // 必要なデータが最低限パースできている場合のみ追加
           if (parsed.name && parsed.timeStr) {
             newEntriesMap.set(finalUrl, {

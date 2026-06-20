@@ -32,7 +32,8 @@ const RaceResults = ({ results, roundName }) => {
                                     r.time.includes('Accident') ||
                                     r.time.includes('Fuel') ||
                                     r.time.includes('Suspension') ||
-                                    r.time.includes('Retired')
+                                    r.time.includes('Retired') ||
+                                    r.time.includes('DQ')
                                 );
                                 return (
                                     <tr key={i}>
@@ -75,7 +76,8 @@ const RaceResults = ({ results, roundName }) => {
                                     r.time.includes('Accident') ||
                                     r.time.includes('Fuel') ||
                                     r.time.includes('Suspension') ||
-                                    r.time.includes('Retired')
+                                    r.time.includes('Retired') ||
+                                    r.time.includes('DQ')
                                 );
                                 return (
                                     <tr key={i}>

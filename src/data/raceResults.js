@@ -2537,16 +2537,6 @@ export const raceResults = {
             },
             {
                 "pos": "13",
-                "driver": "Seiken Xa",
-                "team": "Seiken Xa",
-                "car": "#40 Porsche 963",
-                "category": "Hypercar",
-                "time": "DNF",
-                "gap": "-",
-                "best": "2:14.058"
-            },
-            {
-                "pos": "14",
                 "driver": "ziggy Katsuya",
                 "team": "ziggy Katsuya",
                 "car": "#117 Ferrari 499P",
@@ -2554,6 +2544,16 @@ export const raceResults = {
                 "time": "DNF",
                 "gap": "-",
                 "best": "1:34.628"
+            },
+            {
+                "pos": "14",
+                "driver": "Seiken Xa",
+                "team": "Seiken Xa",
+                "car": "#40 Porsche 963",
+                "category": "Hypercar",
+                "time": "DNF",
+                "gap": "-",
+                "best": "2:14.058"
             }
         ]
     }

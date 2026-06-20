@@ -35,6 +35,9 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 html {

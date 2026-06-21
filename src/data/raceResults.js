@@ -2527,16 +2527,6 @@ export const raceResults = {
             },
             {
                 "pos": "12",
-                "driver": "Stefano Ricchiuti",
-                "team": "Stefano Ricchiuti",
-                "car": "#164 Ferrari 296 LMGT3",
-                "category": "LMGT3",
-                "time": "+3 laps  +1:12.580",
-                "gap": "-",
-                "best": "1:43.256"
-            },
-            {
-                "pos": "13",
                 "driver": "ziggy Katsuya",
                 "team": "ziggy Katsuya",
                 "car": "#117 Ferrari 499P",
@@ -2546,7 +2536,7 @@ export const raceResults = {
                 "best": "1:34.628"
             },
             {
-                "pos": "14",
+                "pos": "13",
                 "driver": "Seiken Xa",
                 "team": "Seiken Xa",
                 "car": "#40 Porsche 963",
@@ -2554,6 +2544,16 @@ export const raceResults = {
                 "time": "DNF",
                 "gap": "-",
                 "best": "2:14.058"
+            },
+            {
+                "pos": "14",
+                "driver": "Stefano Ricchiuti",
+                "team": "Stefano Ricchiuti",
+                "car": "#164 Ferrari 296 LMGT3",
+                "category": "LMGT3",
+                "time": "DQ",
+                "gap": "-",
+                "best": "1:43.256"
             }
         ]
     }

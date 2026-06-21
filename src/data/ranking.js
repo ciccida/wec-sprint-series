@@ -745,7 +745,7 @@ export const rankingData = {
         12,
         15,
         null,
-        6,
+        0,
         null,
         null,
         null,

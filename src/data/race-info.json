@@ -8,13 +8,13 @@
     "broadcastLink": "https://youtube.com/live/W658Gq7rZFg?feature=share",
     "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 4 Catalunya 実況生中継",
     "specialStream": {
-        "label": "PREVIOUS RACE",
-        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 3 Silverstone 実況生中継",
-        "date": "2026/06/06 (SAT)",
+        "label": "PRACTICE & TA REPORT",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 5 Paul Ricard 公式プラクティス＆TA中間結果発表",
+        "date": "2026/07/04 (SAT)",
         "time": "21:50〜",
-        "description": "舞台はイギリスのモータースポーツの聖地、シルバーストン・サーキット。ハイスピードコーナーが連続する伝統的なテクニカルコースでの戦い。アーカイブを公開中！",
-        "image": "/images/s3_rd3_silverstone.jpg",
-        "link": "https://youtube.com/live/fsJUYI40vnQ?feature=share",
-        "btnLabel": "Watch Archive"
+        "description": "舞台はフランスのポール・リカール・サーキット。決勝レースに向けた公式プラクティスの模様と、Time Attackの中間結果発表をライブ配信でお届けします！",
+        "image": "/images/latest_news_rd5.jpg",
+        "link": "https://youtube.com/live/D7GjjbzF_Pc?feature=share",
+        "btnLabel": "Watch Live"
     }
 }

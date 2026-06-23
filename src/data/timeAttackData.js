@@ -68,7 +68,9 @@ export const timeAttackData = {
         { name: "Tomoya Onodera", class: "HYPERCAR", car: "Peugeot 9X8", time: "1:31.232", attempt: 1 },
         { name: "チダ", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "1:44.569", attempt: 1 }
       ] },
-    "5": { image: "/images/ta/vol3_rd5_cover.jpg", results: [] },
+    "5": { image: "/images/ta/vol3_rd5_cover.jpg", results: [
+        { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "2:06.227", attempt: 1 }
+      ] },
     "6": { image: "", results: [] },
     "7": { image: "", results: [] },
     "8": { image: "", results: [] }

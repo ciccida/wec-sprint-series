@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import SiteClosed from './components/SiteClosed';
 import Tracker from './pages/Tracker';
 import Drivers from './pages/Drivers';
 import PitCalculator from './pages/PitCalculator';
@@ -48,9 +49,50 @@ const Layout = ({ children }) => {
     );
 };
 
-function App() {
+function AppContent() {
+    const [isClosed, setIsClosed] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        // Check for admin unlock parameter
+        const searchParams = new URLSearchParams(location.search);
+        if (searchParams.get('unlock') === 'ciccida') {
+            localStorage.setItem('wecss_admin_unlocked', 'true');
+            // Remove the parameter from the URL to hide it
+            searchParams.delete('unlock');
+            const newSearch = searchParams.toString() ? `?${searchParams.toString()}` : '';
+            window.history.replaceState({}, '', `${location.pathname}${newSearch}`);
+        }
+
+        const checkClosure = () => {
+            const isUnlocked = localStorage.getItem('wecss_admin_unlocked') === 'true';
+            if (isUnlocked) {
+                setIsClosed(false);
+                return;
+            }
+
+            // Target closure time: August 23, 2026, 16:00 JST
+            const closureTime = new Date('2026-08-23T16:00:00+09:00').getTime();
+            const now = new Date().getTime();
+
+            if (now >= closureTime) {
+                setIsClosed(true);
+            }
+        };
+
+        checkClosure();
+        
+        // Optional: setup an interval to re-check if someone leaves the page open
+        const interval = setInterval(checkClosure, 60000);
+        return () => clearInterval(interval);
+    }, [location]);
+
+    if (isClosed) {
+        return <SiteClosed />;
+    }
+
     return (
-        <Router>
+        <>
             <ScrollToTop />
             <Layout>
                 <Routes>
@@ -65,6 +107,14 @@ function App() {
                     <Route path="/calculator" element={<PitCalculator />} />
                 </Routes>
             </Layout>
+        </>
+    );
+}
+
+function App() {
+    return (
+        <Router>
+            <AppContent />
         </Router>
     );
 }

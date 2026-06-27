@@ -75,7 +75,7 @@ function AppContent() {
             const closureTime = new Date('2026-08-23T16:00:00+09:00').getTime();
             const now = new Date().getTime();
 
-            if (now >= closureTime) {
+            if (now >= closureTime || searchParams.get('preview') === 'closed') {
                 setIsClosed(true);
             }
         };

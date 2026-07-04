@@ -1,0 +1,112 @@
+[
+    {
+        "pos": "1",
+        "driver": "Koki Yamamoto",
+        "team": "Koki Yamamoto",
+        "car": "#4 Genesis GMR001",
+        "category": "Hypercar",
+        "time": "30:01.477",
+        "gap": "-",
+        "best": "1:51.327"
+    },
+    {
+        "pos": "2",
+        "driver": "yas mishi",
+        "team": "yas mishi",
+        "car": "#7 Toyota GR010",
+        "category": "Hypercar",
+        "time": "+57.040",
+        "gap": "-",
+        "best": "1:54.104"
+    },
+    {
+        "pos": "3",
+        "driver": "Tomoya Onodera",
+        "team": "Tomoya Onodera",
+        "car": "#95 Peugeot 9x8",
+        "category": "Hypercar",
+        "time": "+1:01.480",
+        "gap": "-",
+        "best": "1:52.510"
+    },
+    {
+        "pos": "4",
+        "driver": "Stefano Ricchiuti",
+        "team": "Stefano Ricchiuti",
+        "car": "#164 Ferrari 499P",
+        "category": "Hypercar",
+        "time": "+1:16.760",
+        "gap": "-",
+        "best": "1:52.218"
+    },
+    {
+        "pos": "5",
+        "driver": "Muhi Tamaki",
+        "team": "Muhi Tamaki",
+        "car": "#33 Chevrolet Corvette Z06 LMGT3.R",
+        "category": "LMGT3",
+        "time": "+1 lap  +1:55.780",
+        "gap": "-",
+        "best": "2:05.900"
+    },
+    {
+        "pos": "6",
+        "driver": "Kaeru Uenchu",
+        "team": "Kaeru Uenchu",
+        "car": "#36 Lexus RCF LMGT3",
+        "category": "LMGT3",
+        "time": "+2 laps  +7.280",
+        "gap": "-",
+        "best": "2:06.348"
+    },
+    {
+        "pos": "7",
+        "driver": "H MOS",
+        "team": "H MOS",
+        "car": "#27 BMW M4 LMGT3",
+        "category": "LMGT3",
+        "time": "+2 laps  +21.340",
+        "gap": "-",
+        "best": "2:07.784"
+    },
+    {
+        "pos": "8",
+        "driver": "Rapid Tuyopon",
+        "team": "Rapid Tuyopon",
+        "car": "#32 BMW M4 LMGT3",
+        "category": "LMGT3",
+        "time": "+2 laps  +23.460",
+        "gap": "-",
+        "best": "2:06.733"
+    },
+    {
+        "pos": "9",
+        "driver": "ziggy Katsuya",
+        "team": "ziggy Katsuya",
+        "car": "#117 Ferrari 296 LMGT3",
+        "category": "LMGT3",
+        "time": "+2 laps  +45.800",
+        "gap": "-",
+        "best": "2:07.689"
+    },
+    {
+        "pos": "10",
+        "driver": "KH-AE KMS",
+        "team": "KH-AE KMS",
+        "car": "#86 Porsche 911 GT3 R LMGT3",
+        "category": "LMGT3",
+        "time": "+2 laps  +1:52.140",
+        "gap": "-",
+        "best": "2:12.066"
+    },
+    {
+        "pos": "11",
+        "driver": "Kei Sagawa",
+        "team": "Kei Sagawa",
+        "car": "#364 McLaren 720S LMGT3 Evo",
+        "category": "LMGT3",
+        "time": "+3 laps  +55.260",
+        "gap": "-",
+        "best": "2:09.676"
+    }
+]

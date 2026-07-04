@@ -723,21 +723,6 @@ export const rankingData = {
       ]
     },
     {
-      "id": 43,
-      "rank": 99,
-      "name": "Stefano Ricchiuti",
-      "points": [
-        12,
-        15,
-        null,
-        6,
-        12,
-        null,
-        null,
-        null
-      ]
-    },
-    {
       "id": 38,
       "rank": 99,
       "name": "Fusahiro Endo",
@@ -762,6 +747,21 @@ export const rankingData = {
         10,
         null,
         null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 43,
+      "rank": 99,
+      "name": "Stefano Ricchiuti",
+      "points": [
+        12,
+        15,
+        null,
+        0,
+        12,
         null,
         null,
         null

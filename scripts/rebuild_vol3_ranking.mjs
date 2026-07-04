@@ -54,7 +54,7 @@ Object.keys(vol3Results).forEach(roundStr => {
         list.forEach((r, i) => {
             const timeStr = String(r.time || '');
             let points = 0;
-            if (!timeStr.includes('DNF') && !timeStr.includes('Accident') && !timeStr.includes('Suspension') && timeStr !== 'DQ') {
+            if (timeStr !== 'DQ') {
                 points = POINTS_SYSTEM[i + 1] || 0;
             }
             

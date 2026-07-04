@@ -843,6 +843,21 @@ export const rankingData = {
       ]
     },
     {
+      "id": 12,
+      "rank": 99,
+      "name": "ziggy Katsuya",
+      "points": [
+        0,
+        2,
+        4,
+        8,
+        10,
+        null,
+        null,
+        null
+      ]
+    },
+    {
       "id": 5,
       "rank": 99,
       "name": "Macky Takagi",
@@ -912,21 +927,6 @@ export const rankingData = {
         null,
         12,
         null,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 12,
-      "rank": 99,
-      "name": "ziggy Katsuya",
-      "points": [
-        0,
-        2,
-        4,
-        0,
-        10,
         null,
         null,
         null
@@ -1023,6 +1023,21 @@ export const rankingData = {
       ]
     },
     {
+      "id": 51,
+      "rank": 99,
+      "name": "Seiken Xa",
+      "points": [
+        0,
+        null,
+        null,
+        6,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
       "id": 39,
       "rank": 99,
       "name": "Tomoki Hirose",
@@ -1091,21 +1106,6 @@ export const rankingData = {
         null,
         null,
         null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 51,
-      "rank": 99,
-      "name": "Seiken Xa",
-      "points": [
-        0,
-        null,
-        null,
-        0,
         null,
         null,
         null,

@@ -1,20 +1,20 @@
 {
-    "round": "Season 3 Round 5",
-    "circuit": "Paul Ricard",
-    "date": "2026/07/04 (SAT)",
+    "round": "Season 3 Round 6",
+    "circuit": "Sebring",
+    "date": "2026/07/18 (SAT)",
     "time": "21:50〜",
-    "description": "いよいよ第5戦、舞台はフランスのポール・リカール・サーキット！ 超ロングストレートとテクニカルセクションが交差する名コース。決勝レースの白熱の実況生中継をお届けします！",
-    "image": "/images/next_race_rd5.jpg",
-    "broadcastLink": "https://youtube.com/live/GZ23pm6a57M?feature=share",
-    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 5 Paul Ricard 実況生中継",
+    "description": "第6戦の舞台はアメリカ、セブリング・インターナショナル・レースウェイ！バンピーな路面と特徴的なレイアウトが待ち受ける伝統のコース。決勝レースの実況生中継をお見逃しなく！",
+    "image": "/images/next_race_rd6.jpg",
+    "broadcastLink": "https://youtube.com/live/hO8f_nSJs2I?feature=share",
+    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 6 Sebring 実況生中継",
     "specialStream": {
         "label": "PRACTICE & TA REPORT",
-        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 5 Paul Ricard 公式プラクティス＆TA中間結果発表",
-        "date": "2026/06/27 (SAT)",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 6 Sebring 公式プラクティス＆TimeAttack中間結果発表",
+        "date": "2026/07/11 (SAT)",
         "time": "21:50〜",
-        "description": "舞台はフランスのポール・リカール・サーキット。決勝レースに向けた公式プラクティスの模様と、Time Attackの中間結果発表をライブ配信でお届けします！",
-        "image": "/images/latest_news_rd5.jpg",
-        "link": "https://youtube.com/live/D7GjjbzF_Pc?feature=share",
+        "description": "舞台はアメリカのセブリング。決勝レースに向けた公式プラクティスの模様と、Time Attackの中間結果発表をライブ配信でお届けします！",
+        "image": "/images/latest_news_rd6.jpg",
+        "link": "https://youtube.com/live/TnYFosphoKY?feature=share",
         "btnLabel": "Watch Live"
     }
 }

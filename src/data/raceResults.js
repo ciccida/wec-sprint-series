@@ -2785,7 +2785,7 @@ export const raceResults = {
                 "team": "Tomoki Hirose",
                 "car": "#62 Toyota TR010",
                 "category": "Hypercar",
-                "time": "Suspension",
+                "time": "DNF",
                 "gap": "-",
                 "best": "1:50.160"
             }

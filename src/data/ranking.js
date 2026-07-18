@@ -642,7 +642,7 @@ export const rankingData = {
         25,
         25,
         25,
-        null,
+        25,
         null,
         null
       ]
@@ -657,7 +657,37 @@ export const rankingData = {
         25,
         25,
         25,
+        18,
         null,
+        null
+      ]
+    },
+    {
+      "id": 28,
+      "rank": 99,
+      "name": "Kaeru Uenchu",
+      "points": [
+        18,
+        18,
+        0,
+        null,
+        18,
+        12,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 30,
+      "rank": 99,
+      "name": "H MOS",
+      "points": [
+        null,
+        12,
+        8,
+        15,
+        15,
+        15,
         null,
         null
       ]
@@ -678,16 +708,16 @@ export const rankingData = {
       ]
     },
     {
-      "id": 28,
+      "id": 9,
       "rank": 99,
-      "name": "Kaeru Uenchu",
+      "name": "Sota Ito",
       "points": [
-        18,
-        18,
-        0,
         null,
+        null,
+        12,
         18,
         null,
+        25,
         null,
         null
       ]
@@ -708,16 +738,31 @@ export const rankingData = {
       ]
     },
     {
-      "id": 30,
+      "id": 31,
       "rank": 99,
-      "name": "H MOS",
+      "name": "Rapid Tuyopon",
       "points": [
-        null,
+        4,
+        2,
+        6,
+        15,
         12,
-        8,
-        15,
+        10,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 4,
+      "rank": 99,
+      "name": "Tomoya Onodera",
+      "points": [
+        0,
+        6,
         15,
         null,
+        15,
+        12,
         null,
         null
       ]
@@ -733,6 +778,21 @@ export const rankingData = {
         8,
         null,
         null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 50,
+      "rank": 99,
+      "name": "yas mishi",
+      "points": [
+        0,
+        0,
+        6,
+        12,
+        18,
+        8,
         null,
         null
       ]
@@ -768,61 +828,16 @@ export const rankingData = {
       ]
     },
     {
-      "id": 31,
+      "id": 104,
       "rank": 99,
-      "name": "Rapid Tuyopon",
+      "name": "Salios SON",
       "points": [
-        4,
-        2,
-        6,
-        15,
+        10,
+        null,
         12,
         null,
         null,
-        null
-      ]
-    },
-    {
-      "id": 4,
-      "rank": 99,
-      "name": "Tomoya Onodera",
-      "points": [
-        0,
-        6,
         15,
-        null,
-        15,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 50,
-      "rank": 99,
-      "name": "yas mishi",
-      "points": [
-        0,
-        0,
-        6,
-        12,
-        18,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 9,
-      "rank": 99,
-      "name": "Sota Ito",
-      "points": [
-        null,
-        null,
-        12,
-        18,
-        null,
-        null,
         null,
         null
       ]
@@ -873,21 +888,6 @@ export const rankingData = {
       ]
     },
     {
-      "id": 104,
-      "rank": 99,
-      "name": "Salios SON",
-      "points": [
-        10,
-        null,
-        12,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    {
       "id": 6,
       "rank": 99,
       "name": "Sara Mayo",
@@ -898,6 +898,21 @@ export const rankingData = {
         null,
         null,
         null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 103,
+      "rank": 99,
+      "name": "KH-AE KMS",
+      "points": [
+        0,
+        1,
+        1,
+        null,
+        8,
+        10,
         null,
         null
       ]
@@ -933,6 +948,21 @@ export const rankingData = {
       ]
     },
     {
+      "id": 111,
+      "rank": 99,
+      "name": "Keizo Hori",
+      "points": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        18,
+        null,
+        null
+      ]
+    },
+    {
       "id": 14,
       "rank": 99,
       "name": "Daitou Hatsune",
@@ -948,16 +978,16 @@ export const rankingData = {
       ]
     },
     {
-      "id": 103,
+      "id": 39,
       "rank": 99,
-      "name": "KH-AE KMS",
+      "name": "Tomoki Hirose",
       "points": [
-        0,
-        1,
-        1,
+        4,
+        null,
+        null,
+        null,
         null,
         8,
-        null,
         null,
         null
       ]
@@ -1031,21 +1061,6 @@ export const rankingData = {
         null,
         null,
         6,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 39,
-      "rank": 99,
-      "name": "Tomoki Hirose",
-      "points": [
-        4,
-        null,
-        null,
-        null,
         null,
         null,
         null,

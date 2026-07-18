@@ -2667,6 +2667,128 @@ export const raceResults = {
                 "gap": "-",
                 "best": "2:09.676"
             }
+        ],
+        "6": [
+            {
+                "pos": "1",
+                "driver": "Koki Yamamoto",
+                "team": "Koki Yamamoto",
+                "car": "#4 Genesis GMR001",
+                "category": "Hypercar",
+                "time": "31:19.618",
+                "gap": "-",
+                "best": "1:49.122"
+            },
+            {
+                "pos": "2",
+                "driver": "Muhi Tamaki",
+                "team": "Muhi Tamaki",
+                "car": "#33 Toyota GR010",
+                "category": "Hypercar",
+                "time": "+36.080",
+                "gap": "-",
+                "best": "1:48.550"
+            },
+            {
+                "pos": "3",
+                "driver": "H MOS",
+                "team": "H MOS",
+                "car": "#27 BMW M Hybrid V8",
+                "category": "Hypercar",
+                "time": "+3:09.600",
+                "gap": "-",
+                "best": "1:49.440"
+            },
+            {
+                "pos": "4",
+                "driver": "Kaeru Uenchu",
+                "team": "Kaeru Uenchu",
+                "car": "#36 Porsche 963",
+                "category": "Hypercar",
+                "time": "+1 lap  +3.680",
+                "gap": "-",
+                "best": "1:53.898"
+            },
+            {
+                "pos": "5",
+                "driver": "Rapid Tuyopon",
+                "team": "Rapid Tuyopon",
+                "car": "#122 Porsche 963",
+                "category": "Hypercar",
+                "time": "+1 lap  +44.320",
+                "gap": "-",
+                "best": "1:54.848"
+            },
+            {
+                "pos": "6",
+                "driver": "Sota Ito",
+                "team": "Sota Ito",
+                "car": "#14 Ford Mustang LMGT3",
+                "category": "LMGT3",
+                "time": "+2 laps  +1:07.960",
+                "gap": "-",
+                "best": "2:03.194"
+            },
+            {
+                "pos": "7",
+                "driver": "Keizo Hori",
+                "team": "Keizo Hori",
+                "car": "#404 McLaren 720S LMGT3 Evo",
+                "category": "LMGT3",
+                "time": "+2 laps  +1:09.400",
+                "gap": "-",
+                "best": "2:03.125"
+            },
+            {
+                "pos": "8",
+                "driver": "Salios SON",
+                "team": "Salios SON",
+                "car": "#178 Lexus RCF LMGT3",
+                "category": "LMGT3",
+                "time": "+2 laps  +1:54.660",
+                "gap": "-",
+                "best": "2:07.791"
+            },
+            {
+                "pos": "9",
+                "driver": "Tomoya Onodera",
+                "team": "Tomoya Onodera",
+                "car": "#95 McLaren 720S LMGT3 Evo",
+                "category": "LMGT3",
+                "time": "+3 laps  +14.860",
+                "gap": "-",
+                "best": "2:08.172"
+            },
+            {
+                "pos": "10",
+                "driver": "KH-AE KMS",
+                "team": "KH-AE KMS",
+                "car": "#86 Porsche 911 GT3 R LMGT3",
+                "category": "LMGT3",
+                "time": "+3 laps  +1:04.020",
+                "gap": "-",
+                "best": "2:03.859"
+            },
+            {
+                "pos": "11",
+                "driver": "yas mishi",
+                "team": "yas mishi",
+                "car": "#7 Lexus RCF LMGT3",
+                "category": "LMGT3",
+                "time": "+3 laps  +1:38.980",
+                "gap": "-",
+                "best": "2:08.661"
+            },
+            {
+                "pos": "12",
+                "driver": "Tomoki Hirose",
+                "team": "Tomoki Hirose",
+                "car": "#62 Toyota TR010",
+                "category": "Hypercar",
+                "time": "Suspension",
+                "gap": "-",
+                "best": "1:50.160"
+            }
         ]
     }
 };

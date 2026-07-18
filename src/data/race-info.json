@@ -1,20 +1,20 @@
 {
-    "round": "Season 3 Round 6",
-    "circuit": "Sebring",
-    "date": "2026/07/18 (SAT)",
+    "round": "Season 3 Round 7",
+    "circuit": "Spa",
+    "date": "2026/08/01 (SAT)",
     "time": "21:50〜",
-    "description": "第6戦の舞台はアメリカ、セブリング・インターナショナル・レースウェイ！バンピーな路面と特徴的なレイアウトが待ち受ける伝統のコース。決勝レースの実況生中継をお見逃しなく！",
-    "image": "/images/next_race_rd6.jpg",
-    "broadcastLink": "https://youtube.com/live/hO8f_nSJs2I?feature=share",
-    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 6 Sebring 実況生中継",
+    "description": "第7戦の舞台はベルギー、スパ・フランコルシャン！名物オー・ルージュをはじめとする高速コーナーが続く伝統のドライバーズサーキット。決勝レースの実況生中継をお見逃しなく！",
+    "image": "/images/next_race_rd7.jpg",
+    "broadcastLink": "https://youtube.com/live/MipWXRbh9mA?feature=share",
+    "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 7 Spa 実況生中継",
     "specialStream": {
-        "label": "PRACTICE & TA REPORT",
-        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 6 Sebring 公式プラクティス＆TimeAttack中間結果発表",
-        "date": "2026/07/11 (SAT)",
+        "label": "LAST RACE ARCHIVE",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 6 Sebring 実況生中継",
+        "date": "2026/07/18 (SAT)",
         "time": "21:50〜",
-        "description": "舞台はアメリカのセブリング。決勝レースに向けた公式プラクティスの模様と、Time Attackの中間結果発表をライブ配信でお届けします！",
-        "image": "/images/latest_news_rd6.jpg",
-        "link": "https://youtube.com/live/TnYFosphoKY?feature=share",
-        "btnLabel": "Watch Live"
+        "description": "第6戦の舞台はアメリカ、セブリング・インターナショナル・レースウェイ！バンピーな路面と特徴的なレイアウトが待ち受ける伝統のコース。決勝レースのアーカイブはこちらから！",
+        "image": "/images/next_race_rd6.jpg",
+        "link": "https://youtube.com/live/hO8f_nSJs2I?feature=share",
+        "btnLabel": "Watch Archive"
     }
 }

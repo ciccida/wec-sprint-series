@@ -75,7 +75,7 @@ export const timeAttackData = {
     "6": { image: "/images/ta/vol3_rd6_cover.jpg", results: [
         { name: "Koki Yamamoto", class: "HYPERCAR", car: "Toyota TR010", time: "1:47.313", attempt: 1 }
       ] },
-    "7": { image: "", results: [] },
+    "7": { image: "/images/ta/vol3_rd7_cover.jpg", results: [] },
     "8": { image: "", results: [] }
   }
 };

@@ -643,7 +643,7 @@ export const rankingData = {
         25,
         25,
         25,
-        null,
+        15,
         null
       ]
     },
@@ -658,7 +658,37 @@ export const rankingData = {
         25,
         25,
         18,
+        25,
+        null
+      ]
+    },
+    {
+      "id": 30,
+      "rank": 99,
+      "name": "H MOS",
+      "points": [
         null,
+        12,
+        8,
+        15,
+        15,
+        15,
+        18,
+        null
+      ]
+    },
+    {
+      "id": 31,
+      "rank": 99,
+      "name": "Rapid Tuyopon",
+      "points": [
+        4,
+        2,
+        6,
+        15,
+        12,
+        10,
+        25,
         null
       ]
     },
@@ -678,17 +708,17 @@ export const rankingData = {
       ]
     },
     {
-      "id": 30,
+      "id": 50,
       "rank": 99,
-      "name": "H MOS",
+      "name": "yas mishi",
       "points": [
-        null,
+        0,
+        0,
+        6,
         12,
+        18,
         8,
         15,
-        15,
-        15,
-        null,
         null
       ]
     },
@@ -704,6 +734,21 @@ export const rankingData = {
         null,
         null,
         null,
+        null
+      ]
+    },
+    {
+      "id": 104,
+      "rank": 99,
+      "name": "Salios SON",
+      "points": [
+        10,
+        null,
+        12,
+        null,
+        null,
+        15,
+        18,
         null
       ]
     },
@@ -733,21 +778,6 @@ export const rankingData = {
         null,
         null,
         null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 31,
-      "rank": 99,
-      "name": "Rapid Tuyopon",
-      "points": [
-        4,
-        2,
-        6,
-        15,
-        12,
-        10,
         null,
         null
       ]
@@ -783,21 +813,6 @@ export const rankingData = {
       ]
     },
     {
-      "id": 50,
-      "rank": 99,
-      "name": "yas mishi",
-      "points": [
-        0,
-        0,
-        6,
-        12,
-        18,
-        8,
-        null,
-        null
-      ]
-    },
-    {
       "id": 25,
       "rank": 99,
       "name": "Naofumi Ishida",
@@ -828,17 +843,47 @@ export const rankingData = {
       ]
     },
     {
-      "id": 104,
+      "id": 26,
       "rank": 99,
-      "name": "Salios SON",
+      "name": "Kei Sagawa",
       "points": [
+        null,
+        null,
+        4,
         10,
+        6,
+        null,
+        12,
+        null
+      ]
+    },
+    {
+      "id": 111,
+      "rank": 99,
+      "name": "Keizo Hori",
+      "points": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        18,
+        10,
+        null
+      ]
+    },
+    {
+      "id": 109,
+      "rank": 99,
+      "name": "GC Eight",
+      "points": [
+        6,
+        1,
         null,
         12,
         null,
         null,
-        15,
-        null,
+        8,
         null
       ]
     },
@@ -913,51 +958,6 @@ export const rankingData = {
         null,
         8,
         10,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 26,
-      "rank": 99,
-      "name": "Kei Sagawa",
-      "points": [
-        null,
-        null,
-        4,
-        10,
-        6,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 109,
-      "rank": 99,
-      "name": "GC Eight",
-      "points": [
-        6,
-        1,
-        null,
-        12,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 111,
-      "rank": 99,
-      "name": "Keizo Hori",
-      "points": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        18,
         null,
         null
       ]

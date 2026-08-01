@@ -2789,6 +2789,98 @@ export const raceResults = {
                 "gap": "-",
                 "best": "1:50.160"
             }
+        ],
+        "7": [
+            {
+                "pos": "1",
+                "driver": "Rapid Tuyopon",
+                "team": "Rapid Tuyopon",
+                "car": "#122 Porsche 963",
+                "category": "Hypercar",
+                "time": "31:57.358",
+                "gap": "-",
+                "best": "2:03.362"
+            },
+            {
+                "pos": "2",
+                "driver": "H MOS",
+                "team": "H MOS",
+                "car": "#27 BMW M Hybrid V8",
+                "category": "Hypercar",
+                "time": "+14.540",
+                "gap": "-",
+                "best": "2:03.461"
+            },
+            {
+                "pos": "3",
+                "driver": "Muhi Tamaki",
+                "team": "Muhi Tamaki",
+                "car": "#33 Chevrolet Corvette Z06 LMGT3.R",
+                "category": "LMGT3",
+                "time": "+1 lap  +2:44.920",
+                "gap": "-",
+                "best": "2:21.674"
+            },
+            {
+                "pos": "4",
+                "driver": "Salios SON",
+                "team": "Salios SON",
+                "car": "#178 Lexus RCF LMGT3",
+                "category": "LMGT3",
+                "time": "+1 lap  +2:57.760",
+                "gap": "-",
+                "best": "2:20.025"
+            },
+            {
+                "pos": "5",
+                "driver": "Koki Yamamoto",
+                "team": "Koki Yamamoto",
+                "car": "#4 Chevrolet Corvette Z06 LMGT3.R",
+                "category": "LMGT3",
+                "time": "+1 lap  +4:53.360",
+                "gap": "-",
+                "best": "2:21.889"
+            },
+            {
+                "pos": "6",
+                "driver": "Kei Sagawa",
+                "team": "Kei Sagawa",
+                "car": "#364 McLaren 720S LMGT3 Evo",
+                "category": "LMGT3",
+                "time": "+2 laps  +9.840",
+                "gap": "-",
+                "best": "2:21.889"
+            },
+            {
+                "pos": "7",
+                "driver": "Keizo Hori",
+                "team": "Keizo Hori",
+                "car": "#404 McLaren 720S LMGT3 Evo",
+                "category": "LMGT3",
+                "time": "+2 laps  +24.520",
+                "gap": "-",
+                "best": "2:22.122"
+            },
+            {
+                "pos": "8",
+                "driver": "yas mishi",
+                "team": "yas mishi",
+                "car": "#7 Toyota GR010",
+                "category": "Hypercar",
+                "time": "DNF",
+                "gap": "-",
+                "best": "2:04.061"
+            },
+            {
+                "pos": "9",
+                "driver": "GC Eight",
+                "team": "GC Eight",
+                "car": "#48 Ferrari 296 LMGT3",
+                "category": "LMGT3",
+                "time": "DNF",
+                "gap": "-",
+                "best": "2:22.728"
+            }
         ]
     }
 };

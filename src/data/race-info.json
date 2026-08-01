@@ -8,13 +8,13 @@
     "broadcastLink": "https://youtube.com/live/MipWXRbh9mA?feature=share",
     "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 7 Spa 実況生中継",
     "specialStream": {
-        "label": "LAST RACE ARCHIVE",
-        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 6 Sebring 実況生中継",
-        "date": "2026/07/18 (SAT)",
+        "label": "PRACTICE & TA REPORT",
+        "title": "【LeMans Ultimate】WEC Sprint Series Season 3 Round 8 Sarthe 公式プラクティス＆TimeAttack中間結果発表",
+        "date": "2026/08/15 (SAT)",
         "time": "21:50〜",
-        "description": "第6戦の舞台はアメリカ、セブリング・インターナショナル・レースウェイ！バンピーな路面と特徴的なレイアウトが待ち受ける伝統のコース。決勝レースのアーカイブはこちらから！",
-        "image": "/images/next_race_rd6.jpg",
-        "link": "https://youtube.com/live/hO8f_nSJs2I?feature=share",
-        "btnLabel": "Watch Archive"
+        "description": "ついに迎える最終戦！舞台はフランスのサルト・サーキット（ル・マン）。決勝レースに向けた公式プラクティスの模様と、Time Attackの中間結果発表をライブ配信でお届けします！",
+        "image": "/images/latest_news_rd8_practice.jpg",
+        "link": "https://youtube.com/live/3iaZOM-eQxg?feature=share",
+        "btnLabel": "Watch Live"
     }
 }

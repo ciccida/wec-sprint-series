@@ -76,6 +76,8 @@ export const timeAttackData = {
         { name: "Koki Yamamoto", class: "HYPERCAR", car: "Toyota TR010", time: "1:47.313", attempt: 1 }
       ] },
     "7": { image: "/images/ta/vol3_rd7_cover.jpg", results: [] },
-    "8": { image: "/images/ta/vol3_rd8_cover.jpg", results: [] }
+    "8": { image: "/images/ta/vol3_rd8_cover.jpg", results: [
+        { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "3:58.565", attempt: 1 }
+      ] }
   }
 };

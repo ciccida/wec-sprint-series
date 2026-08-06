@@ -157,12 +157,12 @@ async function updateTAFromSheets() {
       `        { name: "${r.name}", class: "${r.class}", car: "${r.car}", time: "${r.time}", attempt: ${r.attempt} }`
     ).join(',\n');
 
-    const resultsSectionRegex = new RegExp(`("${round}":\\s*{\\s*image:\\s*"[^"]*",\\s*results:\\s*\\[)([\\s\\S]*?)(\\s*\\].*},)`);
+    const resultsSectionRegex = new RegExp(`("${round}":\\s*{\\s*image:\\s*"[^"]*",\\s*results:\\s*\\[)([\\s\\S]*?)(\\s*\\]\\s*},?)`);
     
     if (resultsSectionRegex.test(content)) {
         content = content.replace(resultsSectionRegex, `$1\n${resultsStr}\n      $3`);
     } else {
-        content = content.replace(/results: \[[\s\S]*?\]/, `results: [\n${resultsStr}\n        ]`);
+        console.error(`[Error] Failed to match results section for round ${round}.`);
     }
 
     fs.writeFileSync(taDataPath, content);

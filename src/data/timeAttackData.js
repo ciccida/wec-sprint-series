@@ -77,7 +77,8 @@ export const timeAttackData = {
       ] },
     "7": { image: "/images/ta/vol3_rd7_cover.jpg", results: [] },
     "8": { image: "/images/ta/vol3_rd8_cover.jpg", results: [
-        { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "3:58.565", attempt: 1 }
+        { name: "Rapid Tuyopon", class: "LMGT3", car: "BMW M4 LMGT3 Evo", time: "3:58.565", attempt: 1 },
+        { name: "KH-AE86KMS", class: "HYPERCAR", car: "Porsche 963 LMDh", time: "3:32.476", attempt: 1 }
       ] }
   }
 };

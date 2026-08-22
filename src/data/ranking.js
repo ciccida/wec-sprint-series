@@ -858,21 +858,6 @@ export const rankingData = {
       ]
     },
     {
-      "id": 103,
-      "rank": 99,
-      "name": "Kazu Hashi (KH-AE KMS)",
-      "points": [
-        0,
-        1,
-        1,
-        null,
-        8,
-        10,
-        null,
-        12
-      ]
-    },
-    {
       "id": 26,
       "rank": 99,
       "name": "Kei Sagawa",
@@ -960,6 +945,21 @@ export const rankingData = {
         null,
         null,
         null
+      ]
+    },
+    {
+      "id": 103,
+      "rank": 99,
+      "name": "Kazu Hashi (KH-AE KMS)",
+      "points": [
+        0,
+        1,
+        1,
+        null,
+        8,
+        10,
+        null,
+        0
       ]
     },
     {

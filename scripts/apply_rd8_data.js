@@ -45,7 +45,7 @@ async function run() {
 
             const p = i + 1;
             let points = POINTS_SYSTEM[p] || 0;
-            if (timeStr === 'DQ') points = 0;
+            if (timeStr === 'DQ' || timeStr === 'DNS' || timeStr === 'Bug') points = 0;
             
             const normName = r.driver.toLowerCase().replace(/\s/g, '');
             if (existingDrivers.has(normName)) {

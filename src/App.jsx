@@ -71,11 +71,11 @@ function AppContent() {
                 return;
             }
 
-            // Target closure time: August 23, 2026, 16:00 JST
-            const closureTime = new Date('2026-08-23T16:00:00+09:00').getTime();
+            // Target closure time: POSTPONED (was August 23, 2026, 16:00 JST)
+            const closureTime = new Date('2099-12-31T23:59:59+09:00').getTime();
             const now = new Date().getTime();
 
-            if (now >= closureTime || searchParams.get('preview') === 'closed') {
+            if (searchParams.get('preview') === 'closed') {
                 setIsClosed(true);
             }
         };

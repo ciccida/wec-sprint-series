@@ -68,7 +68,7 @@ export const rankingData = {
     { "id": 12, "rank": 22, "name": "ziggy Katsuya", "points": [0, 2, null, null, null, null, null, null] },
     { "id": 24, "rank": 24, "name": "milfoil strike", "points": [1, 0, null, null, null, null, null, null] },
     { "id": 105, "rank": 24, "name": "Yat Lam Law", "points": [1, 0, null, null, null, null, null, null] },
-    { "id": 103, "rank": 26, "name": "Kazu Hashi", "points": [0, 1, null, null, null, null, null, null] },
+    { "id": 103, "rank": 26, "name": "Kazu Hashi (KH-AE KMS)", "points": [0, 1, null, null, null, null, null, null] },
     { "id": 51, "rank": 27, "name": "Seiken Xa", "points": [0, 0, null, null, null, null, null, null] },
     { "id": 50, "rank": 27, "name": "yas mishi", "points": [0, 0, null, null, null, null, null, null] },
     { "id": 11, "rank": 27, "name": "Shingen Mochi", "points": [0, 0, null, null, null, null, null, null] },

@@ -860,7 +860,7 @@ export const rankingData = {
     {
       "id": 103,
       "rank": 99,
-      "name": "Kazu Hashi",
+      "name": "Kazu Hashi (KH-AE KMS)",
       "points": [
         0,
         1,

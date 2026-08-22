@@ -395,8 +395,8 @@ export const raceResults = {
             },
             {
                 "pos": "23",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 911 GT3 R LMGT3",
                 "category": "LMGT3",
                 "time": "+3 laps  +14.960",
@@ -657,8 +657,8 @@ export const raceResults = {
             },
             {
                 "pos": "21",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 963",
                 "category": "Hypercar",
                 "time": "DNF",
@@ -881,8 +881,8 @@ export const raceResults = {
             },
             {
                 "pos": "8",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 963",
                 "category": "Hypercar",
                 "time": "+1:26.120",
@@ -1143,8 +1143,8 @@ export const raceResults = {
             },
             {
                 "pos": "9",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 963",
                 "category": "Hypercar",
                 "time": "+1 lap",
@@ -1657,8 +1657,8 @@ export const raceResults = {
             },
             {
                 "pos": "18",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 911 GT3 R LMGT3",
                 "category": "LMGT3",
                 "time": "Suspension",
@@ -1911,8 +1911,8 @@ export const raceResults = {
             },
             {
                 "pos": "24",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 911 GT3 R LMGT3",
                 "category": "LMGT3",
                 "time": "+2 laps",
@@ -2153,8 +2153,8 @@ export const raceResults = {
             },
             {
                 "pos": "20",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 911 GT3 R LMGT3",
                 "category": "LMGT3",
                 "time": "+3 laps  +0.000",
@@ -2305,8 +2305,8 @@ export const raceResults = {
             },
             {
                 "pos": "10",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 963",
                 "category": "Hypercar",
                 "time": "+2:01.440",
@@ -2649,8 +2649,8 @@ export const raceResults = {
             },
             {
                 "pos": "10",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 911 GT3 R LMGT3",
                 "category": "LMGT3",
                 "time": "+2 laps  +1:52.140",
@@ -2761,8 +2761,8 @@ export const raceResults = {
             },
             {
                 "pos": "10",
-                "driver": "KH-AE KMS",
-                "team": "KH-AE KMS",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
                 "car": "#86 Porsche 911 GT3 R LMGT3",
                 "category": "LMGT3",
                 "time": "+3 laps  +1:04.020",
@@ -2880,6 +2880,78 @@ export const raceResults = {
                 "time": "DNF",
                 "gap": "-",
                 "best": "2:22.728"
+            }
+        ],
+        "8": [
+            {
+                "pos": "1",
+                "driver": "Koki Yamamoto",
+                "team": "Koki Yamamoto",
+                "car": "#4 Genesis GMR001",
+                "category": "Hypercar",
+                "time": "32:00.277",
+                "gap": "-",
+                "best": "3:25.998"
+            },
+            {
+                "pos": "2",
+                "driver": "Keizo Hori",
+                "team": "Keizo Hori",
+                "car": "#444 Glickenhaus SCG007",
+                "category": "Hypercar",
+                "time": "+1:43.720",
+                "gap": "-",
+                "best": "3:31.068"
+            },
+            {
+                "pos": "3",
+                "driver": "Salios SON",
+                "team": "Salios SON",
+                "car": "#178 Lexus RCF LMGT3",
+                "category": "LMGT3",
+                "time": "+1 lap  +50.760",
+                "gap": "-",
+                "best": "3:58.749"
+            },
+            {
+                "pos": "4",
+                "driver": "yas mishi",
+                "team": "yas mishi",
+                "car": "#7 Lexus RCF LMGT3",
+                "category": "LMGT3",
+                "time": "+1 lap  +1:35.120",
+                "gap": "-",
+                "best": "4:00.395"
+            },
+            {
+                "pos": "5",
+                "driver": "Rapid Tuyopon",
+                "team": "Rapid Tuyopon",
+                "car": "#32 BMW M4 LMGT3",
+                "category": "LMGT3",
+                "time": "+2 laps  +2:49.820",
+                "gap": "-",
+                "best": "3:58.774"
+            },
+            {
+                "pos": "6",
+                "driver": "Muhi Tamaki",
+                "team": "Muhi Tamaki",
+                "car": "#33 Toyota GR010",
+                "category": "Hypercar",
+                "time": "DNF",
+                "gap": "-",
+                "best": "-"
+            },
+            {
+                "pos": "7",
+                "driver": "Kazu Hashi",
+                "team": "Kazu Hashi",
+                "car": "#86 Porsche 963",
+                "category": "Hypercar",
+                "time": "Bug",
+                "gap": "-",
+                "best": "-"
             }
         ]
     }

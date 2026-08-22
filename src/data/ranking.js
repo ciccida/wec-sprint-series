@@ -644,7 +644,7 @@ export const rankingData = {
         25,
         25,
         15,
-        null
+        25
       ]
     },
     {
@@ -659,7 +659,22 @@ export const rankingData = {
         25,
         18,
         25,
-        null
+        15
+      ]
+    },
+    {
+      "id": 31,
+      "rank": 99,
+      "name": "Rapid Tuyopon",
+      "points": [
+        4,
+        2,
+        6,
+        15,
+        12,
+        10,
+        25,
+        15
       ]
     },
     {
@@ -678,18 +693,33 @@ export const rankingData = {
       ]
     },
     {
-      "id": 31,
+      "id": 104,
       "rank": 99,
-      "name": "Rapid Tuyopon",
+      "name": "Salios SON",
       "points": [
-        4,
-        2,
-        6,
-        15,
-        12,
         10,
-        25,
-        null
+        null,
+        12,
+        null,
+        null,
+        15,
+        18,
+        25
+      ]
+    },
+    {
+      "id": 50,
+      "rank": 99,
+      "name": "yas mishi",
+      "points": [
+        0,
+        0,
+        6,
+        12,
+        18,
+        8,
+        15,
+        18
       ]
     },
     {
@@ -708,21 +738,6 @@ export const rankingData = {
       ]
     },
     {
-      "id": 50,
-      "rank": 99,
-      "name": "yas mishi",
-      "points": [
-        0,
-        0,
-        6,
-        12,
-        18,
-        8,
-        15,
-        null
-      ]
-    },
-    {
       "id": 106,
       "rank": 99,
       "name": "Ryoma Miyamoto",
@@ -734,21 +749,6 @@ export const rankingData = {
         null,
         null,
         null,
-        null
-      ]
-    },
-    {
-      "id": 104,
-      "rank": 99,
-      "name": "Salios SON",
-      "points": [
-        10,
-        null,
-        12,
-        null,
-        null,
-        15,
-        18,
         null
       ]
     },
@@ -798,6 +798,21 @@ export const rankingData = {
       ]
     },
     {
+      "id": 111,
+      "rank": 99,
+      "name": "Keizo Hori",
+      "points": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        18,
+        10,
+        18
+      ]
+    },
+    {
       "id": 38,
       "rank": 99,
       "name": "Fusahiro Endo",
@@ -843,6 +858,21 @@ export const rankingData = {
       ]
     },
     {
+      "id": 103,
+      "rank": 99,
+      "name": "Kazu Hashi",
+      "points": [
+        0,
+        1,
+        1,
+        null,
+        8,
+        10,
+        null,
+        12
+      ]
+    },
+    {
       "id": 26,
       "rank": 99,
       "name": "Kei Sagawa",
@@ -854,21 +884,6 @@ export const rankingData = {
         6,
         null,
         12,
-        null
-      ]
-    },
-    {
-      "id": 111,
-      "rank": 99,
-      "name": "Keizo Hori",
-      "points": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        18,
-        10,
         null
       ]
     },
@@ -943,21 +958,6 @@ export const rankingData = {
         null,
         null,
         null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 103,
-      "rank": 99,
-      "name": "KH-AE KMS",
-      "points": [
-        0,
-        1,
-        1,
-        null,
-        8,
-        10,
         null,
         null
       ]
